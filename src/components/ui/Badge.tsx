@@ -21,11 +21,11 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const variantStyles = {
-    brand: 'bg-sky-500/10 text-sky-300 border border-sky-500/30 shadow-sm',
-    gold: 'bg-amber-500/15 text-amber-300 border border-amber-500/40 shadow-glow-gold',
-    success: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30',
-    neutral: 'bg-white/5 text-slate-300 border border-white/10',
-    outline: 'bg-transparent text-slate-300 border border-white/20',
+    brand: 'bg-sky-50 text-sky-700 border border-sky-200 shadow-xs',
+    gold: 'bg-amber-50 text-amber-800 border border-amber-200 shadow-xs font-semibold',
+    success: 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-xs',
+    neutral: 'bg-slate-100 text-slate-700 border border-slate-200 shadow-xs',
+    outline: 'bg-white text-slate-700 border border-slate-300 shadow-xs',
   };
 
   return (

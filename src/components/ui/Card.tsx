@@ -22,10 +22,10 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const variantStyles = {
-    default: 'glass-card rounded-2xl',
-    hoverable: 'glass-card glass-card-hover rounded-2xl cursor-pointer',
-    glow: 'glass-card rounded-2xl border-sky-500/30 shadow-glow-sm relative overflow-hidden',
-    subtle: 'bg-navy-900/40 border border-white/5 rounded-2xl backdrop-blur-md',
+    default: 'bg-white border border-slate-200/90 shadow-card rounded-2xl',
+    hoverable: 'bg-white border border-slate-200/90 shadow-card hover:shadow-elevated hover:border-sky-300 transition-all duration-300 rounded-2xl cursor-pointer',
+    glow: 'bg-white border border-sky-200 shadow-card rounded-2xl relative overflow-hidden',
+    subtle: 'bg-slate-50 border border-slate-200/70 rounded-2xl',
   };
 
   return (

@@ -27,23 +27,23 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
         <Badge variant="gold" size="md" icon={<Sparkles className="w-3.5 h-3.5" />}>
           Transparent Pricing
         </Badge>
-        <h1 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-display font-bold text-slate-900 tracking-tight">
           Simple, Honest Pricing.
         </h1>
-        <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+        <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
           No hidden fees or unexpected surcharges. Choose monthly flexibility or maximize savings with our annual offer.
         </p>
       </div>
 
       {/* 35-Day Trial Banner */}
-      <div className="max-w-3xl mx-auto p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-sky-500/10 to-transparent border border-emerald-500/30 flex items-center justify-between flex-wrap gap-4">
+      <div className="max-w-3xl mx-auto p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200 flex items-center justify-between flex-wrap gap-4 shadow-subtle">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400">
+          <div className="p-2.5 rounded-xl bg-emerald-100 text-emerald-700">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <h4 className="text-white font-semibold text-sm">35-Day Full-Featured Free Trial</h4>
-            <p className="text-xs text-slate-400">Experience the entire software on Desktop and Android before choosing a plan.</p>
+            <h4 className="text-slate-900 font-semibold text-sm">35-Day Full-Featured Free Trial</h4>
+            <p className="text-xs text-slate-600">Experience the entire software on Desktop and Android before choosing a plan.</p>
           </div>
         </div>
         <Button
@@ -61,24 +61,24 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
         <Card variant="hoverable" padding="lg" className="flex flex-col justify-between">
           <div className="space-y-6">
             <div>
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">Monthly Flexible</span>
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">Monthly Flexible</span>
               <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-4xl font-display font-bold text-white">
+                <span className="text-4xl font-display font-bold text-slate-900">
                   ₹{siteConfig.pricing.monthly.price}
                 </span>
-                <span className="text-slate-400 text-xs">{siteConfig.pricing.monthly.periodLabel}</span>
+                <span className="text-slate-500 text-xs">{siteConfig.pricing.monthly.periodLabel}</span>
               </div>
-              <p className="text-xs text-slate-400 mt-2">
+              <p className="text-xs text-slate-600 mt-2">
                 Pay month-to-month with standard flexibility.
               </p>
             </div>
 
-            <div className="pt-4 border-t border-white/10 space-y-3">
-              <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Included:</span>
-              <ul className="space-y-2 text-xs text-slate-300">
+            <div className="pt-4 border-t border-slate-100 space-y-3">
+              <span className="text-xs font-semibold text-slate-800 uppercase tracking-wider">Included:</span>
+              <ul className="space-y-2 text-xs text-slate-600">
                 {verifiedFeatures.map((feat) => (
                   <li key={feat} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-sky-400 shrink-0" />
+                    <Check className="w-4 h-4 text-sky-600 shrink-0" />
                     <span>{feat}</span>
                   </li>
                 ))}
@@ -86,7 +86,7 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <div className="pt-6 mt-6 border-t border-white/5">
+          <div className="pt-6 mt-6 border-t border-slate-100">
             <Button
               variant="outline"
               size="md"
@@ -99,7 +99,7 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
         </Card>
 
         {/* Annual Offer Plan */}
-        <Card variant="glow" padding="lg" className="flex flex-col justify-between border-amber-500/40 relative">
+        <Card padding="lg" className="flex flex-col justify-between border-2 border-amber-400 shadow-elevated relative bg-white">
           <div className="absolute top-4 right-4">
             <Badge variant="gold" size="sm">
               Save ₹{siteConfig.pricing.annual.savings}/yr
@@ -108,27 +108,27 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
 
           <div className="space-y-6">
             <div>
-              <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
+              <span className="text-xs font-mono uppercase tracking-wider text-amber-700 font-bold">
                 {siteConfig.pricing.annual.badgeText}
               </span>
               <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-4xl font-display font-bold text-white">
+                <span className="text-4xl font-display font-bold text-slate-900">
                   ₹{siteConfig.pricing.annual.offerPrice}
                 </span>
-                <span className="text-slate-400 text-xs">{siteConfig.pricing.annual.periodLabel}</span>
+                <span className="text-slate-500 text-xs">{siteConfig.pricing.annual.periodLabel}</span>
               </div>
               <div className="mt-1 flex items-center gap-2 text-xs">
-                <span className="text-slate-500 line-through">Regular ₹{siteConfig.pricing.annual.regularPrice}/year</span>
-                <span className="text-amber-400 font-medium font-mono">Current Offer</span>
+                <span className="text-slate-400 line-through">Regular ₹{siteConfig.pricing.annual.regularPrice}/year</span>
+                <span className="text-amber-700 font-bold font-mono">Save ₹{siteConfig.pricing.annual.savings}</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-white/10 space-y-3">
-              <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider">Included:</span>
-              <ul className="space-y-2 text-xs text-slate-300">
+            <div className="pt-4 border-t border-slate-100 space-y-3">
+              <span className="text-xs font-semibold text-slate-800 uppercase tracking-wider">Included:</span>
+              <ul className="space-y-2 text-xs text-slate-600">
                 {verifiedFeatures.map((feat) => (
                   <li key={feat} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                    <Check className="w-4 h-4 text-amber-600 shrink-0" />
                     <span>{feat}</span>
                   </li>
                 ))}
@@ -136,7 +136,7 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <div className="pt-6 mt-6 border-t border-white/5">
+          <div className="pt-6 mt-6 border-t border-slate-100">
             <Button
               variant="gold"
               size="md"

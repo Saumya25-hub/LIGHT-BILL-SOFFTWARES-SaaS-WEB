@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
   
   html {
@@ -15,7 +15,7 @@
   }
 
   body {
-    @apply bg-navy-950 text-slate-200 font-sans antialiased selection:bg-brand-500 selection:text-white;
+    @apply bg-slate-50 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -27,52 +27,35 @@
   }
   
   .glass-card {
-    @apply bg-navy-900/80 backdrop-blur-xl border border-white/10 shadow-2xl;
+    @apply bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-card;
   }
   
   .glass-card-hover {
-    @apply transition-all duration-300 hover:border-brand-500/30 hover:bg-navy-850/90 hover:shadow-glow-sm hover:-translate-y-0.5;
+    @apply transition-all duration-300 hover:border-sky-300 hover:shadow-elevated hover:-translate-y-0.5;
   }
   
   .glass-pill {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
-  }
-
-  .glow-border {
-    position: relative;
-  }
-
-  .glow-border::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(to bottom, rgba(56, 189, 248, 0.4), rgba(56, 189, 248, 0.05));
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+    @apply bg-slate-100/90 backdrop-blur-sm border border-slate-200/70;
   }
 }
 
-/* Custom subtle scrollbar */
+/* Custom subtle scrollbar for light theme */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #06090E;
+  background: #F8FAFC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E294B;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2A3B69;
+  background: #94A3B8;
 }
 
 /* Respect user motion preferences */

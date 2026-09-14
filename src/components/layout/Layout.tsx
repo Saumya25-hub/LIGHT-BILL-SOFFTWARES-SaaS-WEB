@@ -10,13 +10,13 @@ export interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ currentPath, onNavigate, children }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100 relative selection:bg-sky-500 selection:text-white">
-      {/* Subtle ambient lighting layers */}
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 relative selection:bg-sky-500 selection:text-white">
+      {/* Subtle ambient lighting layers for light theme */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-sky-600/15 via-brand-600/5 to-transparent blur-3xl opacity-70" />
-        <div className="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-cyan-600/10 blur-[140px] opacity-40 rounded-full" />
-        <div className="absolute top-2/3 -right-40 w-[600px] h-[600px] bg-brand-700/10 blur-[140px] opacity-40 rounded-full" />
-        <div className="absolute inset-0 bg-subtle-grid bg-grid-sm opacity-20" />
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1100px] h-[500px] bg-gradient-to-b from-sky-100/50 via-slate-100/30 to-transparent blur-3xl opacity-80" />
+        <div className="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-sky-100/30 blur-[140px] opacity-40 rounded-full" />
+        <div className="absolute top-2/3 -right-40 w-[600px] h-[600px] bg-blue-100/30 blur-[140px] opacity-40 rounded-full" />
+        <div className="absolute inset-0 bg-subtle-grid bg-grid-sm opacity-40" />
       </div>
 
       {/* Sticky Navigation */}
