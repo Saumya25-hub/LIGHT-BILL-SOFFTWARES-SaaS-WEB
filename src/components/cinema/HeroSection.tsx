@@ -78,13 +78,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
       ref={heroRef}
       className="relative w-full h-screen min-h-[680px] max-h-[1080px] overflow-hidden bg-transparent select-none"
     >
-      {/* 2. Base Atmospheric Backdrop Artwork (David & Black Hole preserved, static code masked out) */}
+      {/* 2. Base Atmospheric Backdrop Artwork (Pristine David, Black Hole & Clean Starry Space) */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center opacity-90 mix-blend-screen pointer-events-none transition-transform duration-700 ease-out"
         style={{
           backgroundImage: `url('/assets/hero_cosmic_david.png')`,
-          WebkitMaskImage: `linear-gradient(to right, transparent 0%, black 14%, black 60%, rgba(0,0,0,0.15) 75%, transparent 88%)`,
-          maskImage: `linear-gradient(to right, transparent 0%, black 14%, black 60%, rgba(0,0,0,0.15) 75%, transparent 88%)`,
         }}
       />
 
