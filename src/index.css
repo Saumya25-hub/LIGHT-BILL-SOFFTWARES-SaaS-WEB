@@ -37,6 +37,29 @@
   .glass-pill {
     @apply bg-slate-100/90 backdrop-blur-sm border border-slate-200/70;
   }
+
+  .glass-dark {
+    background: rgba(8, 7, 22, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-dark-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-dark-hover:hover {
+    border-color: rgba(192, 132, 252, 0.4);
+    box-shadow: 0 0 35px -5px rgba(168, 85, 247, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .glow-lavender {
+    text-shadow: 0 0 25px rgba(192, 132, 252, 0.6), 0 0 50px rgba(168, 85, 247, 0.3);
+  }
+
+  .glow-white {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  }
 }
 
 /* Custom subtle scrollbar for light theme */

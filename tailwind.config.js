@@ -27,12 +27,25 @@ export default {
           'emerald-bg': '#ECFDF5',
           cyan: '#0891B2',
           'cyan-bg': '#ECFEFF',
+        },
+        cosmic: {
+          950: '#030014',
+          900: '#070719',
+          850: '#0c0b24',
+          800: '#131133',
+        },
+        lavender: {
+          200: '#e9d5ff',
+          300: '#d8b4fe',
+          400: '#c084fc',
+          500: '#a855f7',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        display: ['Syne', 'Outfit', 'sans-serif'],
+        syne: ['Syne', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
         'subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
