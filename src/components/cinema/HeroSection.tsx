@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowDown } from 'lucide-react';
+import { CosmicCanvas3D } from './CosmicCanvas3D';
 
 interface HeroSectionProps {
   onNavigate?: (path: string) => void;
@@ -7,18 +8,60 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreClick }) => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // Cursor position for spotlight reveal and 3D parallax
+  const [cursor, setCursor] = useState({ x: -1000, y: -1000 });
+  const [isHovering, setIsHovering] = useState(false);
+  const heroRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    const heroEl = heroRef.current;
+    if (!heroEl) return;
+
+    let targetX = -1000;
+    let targetY = -1000;
+    let currentX = -1000;
+    let currentY = -1000;
+    let animId: number;
+
     const handleMouseMove = (e: MouseEvent) => {
-      // Subtle normalized mouse coordinates for gentle parallax
-      const x = (e.clientX / window.innerWidth - 0.5) * 15;
-      const y = (e.clientY / window.innerHeight - 0.5) * 15;
-      setMousePos({ x, y });
+      const rect = heroEl.getBoundingClientRect();
+      if (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      ) {
+        targetX = e.clientX - rect.left;
+        targetY = e.clientY - rect.top;
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setIsHovering(false);
+      targetX = -1000;
+      targetY = -1000;
+    };
+
+    // Smooth lerp loop for spotlight cursor
+    const loop = () => {
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+      setCursor({ x: currentX, y: currentY });
+      animId = requestAnimationFrame(loop);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    heroEl.addEventListener('mouseleave', handleMouseLeave);
+    animId = requestAnimationFrame(loop);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      heroEl.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(animId);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -31,39 +74,56 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[680px] max-h-[1080px] overflow-hidden bg-black select-none">
-      {/* Background Image: High-res Cosmic David with Black Hole Accretion Disk */}
+    <section 
+      ref={heroRef}
+      className="relative w-full h-screen min-h-[680px] max-h-[1080px] overflow-hidden bg-[#03020c] select-none"
+    >
+      {/* 1. Real 3D WebGL Canvas Layer (Fixed rotating galaxy & black hole accretion disk) */}
+      <CosmicCanvas3D className="absolute inset-0 z-0" />
+
+      {/* 2. Base Atmospheric Backdrop Artwork */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-700 ease-out scale-[1.02]"
+        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-85 mix-blend-screen pointer-events-none transition-transform duration-700 ease-out"
         style={{
           backgroundImage: `url('/assets/hero_cosmic_david.png')`,
-          transform: `translate3d(${mousePos.x * 0.4}px, ${mousePos.y * 0.4}px, 0)`,
         }}
       />
 
-      {/* Atmospheric Soft Feathered Gradient on the Left Side
-          Large, feathered, subtle shadow fading toward center for maximum legibility */}
+      {/* 3. Cursor-Following Character Reveal Spotlight Layer (260px radius feathered mask) */}
+      {isHovering && (
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none z-10 transition-opacity duration-300"
+          style={{
+            backgroundImage: `url('/assets/hero_cosmic_david.png')`,
+            WebkitMaskImage: `radial-gradient(circle 260px at ${cursor.x}px ${cursor.y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%)`,
+            maskImage: `radial-gradient(circle 260px at ${cursor.x}px ${cursor.y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%)`,
+            filter: 'drop-shadow(0 0 40px rgba(168,85,247,0.4)) contrast(1.15)',
+          }}
+        />
+      )}
+
+      {/* 4. Atmospheric Soft Feathered Gradient on the Left Side
+          Keeps original background visible while ensuring typography is razor-sharp */}
       <div 
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-20"
         style={{
-          background: 'radial-gradient(ellipse 70% 85% at 15% 50%, rgba(2, 2, 8, 0.88) 0%, rgba(3, 3, 12, 0.65) 45%, rgba(5, 5, 20, 0.25) 75%, transparent 100%)'
+          background: 'radial-gradient(ellipse 70% 85% at 15% 50%, rgba(3, 2, 12, 0.88) 0%, rgba(4, 3, 16, 0.65) 45%, rgba(6, 5, 24, 0.25) 75%, transparent 100%)'
         }}
       />
 
-      {/* Extra Subtle Vignette */}
+      {/* 5. Subtle Vignette */}
       <div 
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-20"
         style={{
-          background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.6) 100%)'
+          background: 'linear-gradient(to top, rgba(3,2,12,0.95) 0%, transparent 25%, transparent 75%, rgba(3,2,12,0.7) 100%)'
         }}
       />
 
-      {/* Main Content Container */}
-      <div className="relative z-10 w-full h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col justify-between py-8 sm:py-10">
+      {/* 6. Main Interactive UI Layer */}
+      <div className="relative z-30 w-full h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col justify-between py-8 sm:py-10">
         
         {/* Top Navigation Bar */}
         <header className="w-full flex items-center justify-between">
-          {/* Logo */}
           <div 
             onClick={() => onNavigate && onNavigate('/')}
             className="cursor-pointer group flex items-center gap-3"
@@ -72,11 +132,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
               S TOM’S
             </span>
             <span className="hidden sm:inline-block text-[10px] tracking-widest px-2 py-0.5 rounded-full border border-purple-500/30 bg-purple-950/40 text-purple-300 font-mono">
-              STUDIO
+              3D STUDIO
             </span>
           </div>
 
-          {/* Nav Links */}
           <nav className="flex items-center gap-6 sm:gap-10 text-xs sm:text-sm font-medium tracking-wider">
             <button 
               onClick={() => scrollToSection('hero')} 
@@ -111,10 +170,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
           </nav>
         </header>
 
-        {/* Center / Left Main Headline Content */}
+        {/* Center / Left Headline Content */}
         <div className="my-auto max-w-xl sm:max-w-2xl py-6 space-y-6 sm:space-y-8">
           
-          {/* Subtitle Eyebrow with Vertical Line */}
           <div className="flex items-center gap-3">
             <div className="w-[2px] h-5 bg-gradient-to-b from-purple-400 to-indigo-600 rounded-full" />
             <p className="text-[11px] sm:text-xs font-mono font-medium tracking-[0.2em] text-slate-300 uppercase">
@@ -122,7 +180,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
             </p>
           </div>
 
-          {/* Master Heading */}
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-white drop-shadow-2xl">
             Where Creativity <br />
             Meets <br />
@@ -131,24 +188,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
             </span>
           </h1>
 
-          {/* Description Paragraph */}
           <p className="text-slate-300/90 text-sm sm:text-base font-light leading-relaxed max-w-lg">
-            Where creativity meets technology and elevate experienced formats — architecting next-generation commercial suites, immersive visual tools, and high-performance software.
+            Where creativity meets technology and elevate experienced formats — architecting next-generation commercial suites, 3D WebGL spatial interfaces, and high-performance software.
           </p>
 
-          {/* Circular-Arrow CTA Button */}
           <div className="pt-2">
             <button
               onClick={() => scrollToSection('works')}
               className="group inline-flex items-center gap-4 text-white hover:text-purple-200 transition-all cursor-pointer"
             >
-              {/* Circular Icon with Arrow */}
               <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-purple-600/30 group-hover:border-purple-400 group-hover:scale-110 transition-all duration-300 shadow-lg">
                 <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-md group-hover:blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               
-              {/* Button Text */}
               <span className="font-display text-sm sm:text-base font-semibold tracking-wide">
                 View My Work
               </span>
@@ -158,8 +211,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
 
         {/* Bottom Bar: Scroll Indicator on Left, Rotated Category Label on Right */}
         <div className="w-full flex items-end justify-between text-slate-400 text-xs font-mono">
-          
-          {/* Bottom Left: SCROLL TO EXPLORE */}
           <button 
             onClick={() => scrollToSection('process')}
             className="group flex flex-col items-start gap-2 hover:text-white transition-colors cursor-pointer"
@@ -170,7 +221,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
             <ArrowDown className="w-4 h-4 text-purple-400 animate-bounce group-hover:translate-y-1 transition-transform" />
           </button>
 
-          {/* Bottom / Side Right: Vertical Rotated Label */}
           <div className="hidden md:flex items-center gap-3 select-none">
             <div className="w-12 h-[1px] bg-slate-700" />
             <span className="text-[11px] tracking-[0.3em] font-mono text-slate-400 uppercase">
@@ -181,8 +231,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
 
       </div>
 
-      {/* Floating Vertical Label on Far Right matching reference */}
-      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
+      {/* Floating Vertical Label on Far Right */}
+      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
         <div className="rotate-90 origin-right text-[11px] tracking-[0.35em] font-mono text-slate-400/80 uppercase">
           AI / 3D / MOTION / WEB
         </div>
