@@ -13,7 +13,7 @@ export const CurvedCodeWaves: React.FC<CurvedCodeWavesProps> = ({ className = ''
   useEffect(() => {
     let animId: number;
     let currentOffsets = [0, 25, 50, 75];
-    const speeds = [0.09, 0.14, 0.07, 0.11]; // Different wave speeds for depth
+    const speeds = [0.08, 0.12, 0.06, 0.10]; // Diverse wave velocities
 
     const animate = () => {
       currentOffsets = currentOffsets.map((off, idx) => (off + speeds[idx]) % 100);
@@ -24,8 +24,8 @@ export const CurvedCodeWaves: React.FC<CurvedCodeWavesProps> = ({ className = ''
     animId = requestAnimationFrame(animate);
 
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 24;
-      const y = (e.clientY / window.innerHeight - 0.5) * 24;
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
       setMouseParallax({ x, y });
     };
 
@@ -61,59 +61,59 @@ export const CurvedCodeWaves: React.FC<CurvedCodeWavesProps> = ({ className = ''
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
         <defs>
-          {/* Wave 1: Primary Arch across right side into the deep galaxy */}
+          {/* Wave 1: Upper celestial stream arching high into the deep galaxy */}
           <path
             id="code-wave-path-1"
-            d="M 440 850 C 620 740, 780 580, 880 390 S 1120 180, 1440 60"
+            d="M 760 360 C 860 250, 980 150, 1120 90 S 1320 45, 1440 15"
             fill="none"
           />
 
-          {/* Wave 2: Sweeping S-Curve undulating around the character */}
+          {/* Wave 2: Sweeping galactic arc flowing gracefully across the open right space */}
           <path
             id="code-wave-path-2"
-            d="M 400 920 C 640 820, 840 680, 960 490 S 1220 280, 1440 180"
+            d="M 800 520 C 920 400, 1050 280, 1180 180 S 1340 110, 1440 70"
             fill="none"
           />
 
-          {/* Wave 3: Upper celestial stream arching through the stars */}
+          {/* Wave 3: Mid-level undulating cyber wave */}
           <path
             id="code-wave-path-3"
-            d="M 480 620 C 660 520, 820 380, 980 240 S 1260 110, 1440 15"
+            d="M 840 680 C 960 560, 1100 420, 1220 310 S 1360 210, 1440 160"
             fill="none"
           />
 
-          {/* Wave 4: Deep cosmic undertow flowing toward lower sections */}
+          {/* Wave 4: Lower cyber undertow sweeping along the lower galaxy */}
           <path
             id="code-wave-path-4"
-            d="M 380 980 C 680 900, 920 780, 1060 620 S 1320 440, 1440 320"
+            d="M 880 840 C 1000 730, 1140 600, 1260 480 S 1380 370, 1440 280"
             fill="none"
           />
         </defs>
 
-        {/* Ambient Glowing Track Lines */}
+        {/* Ambient Glowing Track Lines beneath the code streams */}
         <path
-          d="M 440 850 C 620 740, 780 580, 880 390 S 1120 180, 1440 60"
+          d="M 760 360 C 860 250, 980 150, 1120 90 S 1320 45, 1440 15"
           fill="none"
-          stroke="rgba(192, 132, 252, 0.25)"
-          strokeWidth="1.5"
+          stroke="rgba(192, 132, 252, 0.2)"
+          strokeWidth="1.2"
           strokeDasharray="8 16"
         />
         <path
-          d="M 400 920 C 640 820, 840 680, 960 490 S 1220 280, 1440 180"
+          d="M 800 520 C 920 400, 1050 280, 1180 180 S 1340 110, 1440 70"
           fill="none"
-          stroke="rgba(56, 189, 248, 0.2)"
-          strokeWidth="1.5"
+          stroke="rgba(56, 189, 248, 0.18)"
+          strokeWidth="1.2"
           strokeDasharray="6 20"
         />
 
-        {/* WAVE 1: Main Lavender-Cyan Streaming Code Arc */}
+        {/* WAVE 1: Radiant Lavender-Cyan High Stream */}
         <text
           fontFamily="'JetBrains Mono', 'Fira Code', monospace"
-          fontSize="14"
+          fontSize="13.5"
           fontWeight="bold"
           letterSpacing="0.08em"
           fill="#d8b4fe"
-          style={{ filter: 'drop-shadow(0 0 10px rgba(192, 132, 252, 0.9))' }}
+          style={{ filter: 'drop-shadow(0 0 10px rgba(192, 132, 252, 0.95))' }}
         >
           <textPath
             href="#code-wave-path-1"
@@ -134,11 +134,11 @@ export const CurvedCodeWaves: React.FC<CurvedCodeWavesProps> = ({ className = ''
         {/* WAVE 2: Electric Cyan-Emerald Flowing Cyber Wave */}
         <text
           fontFamily="'JetBrains Mono', 'Fira Code', monospace"
-          fontSize="13.5"
+          fontSize="13"
           fontWeight="bold"
           letterSpacing="0.06em"
           fill="#38bdf8"
-          style={{ filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.9))' }}
+          style={{ filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.95))' }}
         >
           <textPath
             href="#code-wave-path-2"
@@ -156,14 +156,14 @@ export const CurvedCodeWaves: React.FC<CurvedCodeWavesProps> = ({ className = ''
           </textPath>
         </text>
 
-        {/* WAVE 3: Upper Purple-Pink Celestial Code Stream */}
+        {/* WAVE 3: Purple-Pink Celestial Code Stream */}
         <text
           fontFamily="'JetBrains Mono', 'Fira Code', monospace"
-          fontSize="13"
+          fontSize="12.5"
           fontWeight="600"
           letterSpacing="0.07em"
           fill="#c084fc"
-          style={{ filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.8))' }}
+          style={{ filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.85))' }}
         >
           <textPath
             href="#code-wave-path-3"
@@ -184,11 +184,11 @@ export const CurvedCodeWaves: React.FC<CurvedCodeWavesProps> = ({ className = ''
         {/* WAVE 4: Lower Cyber Undertow Wave */}
         <text
           fontFamily="'JetBrains Mono', 'Fira Code', monospace"
-          fontSize="12.5"
+          fontSize="12"
           fontWeight="600"
           letterSpacing="0.06em"
           fill="#4ade80"
-          style={{ filter: 'drop-shadow(0 0 8px rgba(74, 222, 128, 0.8))' }}
+          style={{ filter: 'drop-shadow(0 0 8px rgba(74, 222, 128, 0.85))' }}
         >
           <textPath
             href="#code-wave-path-4"
@@ -206,11 +206,11 @@ export const CurvedCodeWaves: React.FC<CurvedCodeWavesProps> = ({ className = ''
           </textPath>
         </text>
 
-        {/* Glowing Data Pulse Nodes riding along the waves */}
-        <circle cx="880" cy="390" r="4.5" fill="#ffffff" style={{ filter: 'drop-shadow(0 0 8px #38bdf8)' }} />
-        <circle cx="1120" cy="180" r="3.5" fill="#38bdf8" style={{ filter: 'drop-shadow(0 0 8px #38bdf8)' }} />
-        <circle cx="780" cy="580" r="4" fill="#c084fc" style={{ filter: 'drop-shadow(0 0 8px #c084fc)' }} />
-        <circle cx="960" cy="490" r="3.5" fill="#4ade80" style={{ filter: 'drop-shadow(0 0 8px #4ade80)' }} />
+        {/* Glowing Data Pulse Nodes riding along the waves in deep space */}
+        <circle cx="1120" cy="90" r="4" fill="#ffffff" style={{ filter: 'drop-shadow(0 0 8px #38bdf8)' }} />
+        <circle cx="1340" cy="110" r="3.5" fill="#38bdf8" style={{ filter: 'drop-shadow(0 0 8px #38bdf8)' }} />
+        <circle cx="1220" cy="310" r="3.5" fill="#c084fc" style={{ filter: 'drop-shadow(0 0 8px #c084fc)' }} />
+        <circle cx="1260" cy="480" r="3" fill="#4ade80" style={{ filter: 'drop-shadow(0 0 8px #4ade80)' }} />
       </svg>
     </div>
   );
