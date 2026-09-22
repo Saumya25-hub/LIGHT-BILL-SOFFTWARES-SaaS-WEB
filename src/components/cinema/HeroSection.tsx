@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowDown } from 'lucide-react';
+import { CurvedCodeWaves } from './CurvedCodeWaves';
 
 interface HeroSectionProps {
   onNavigate?: (path: string) => void;
@@ -77,18 +78,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
       ref={heroRef}
       className="relative w-full h-screen min-h-[680px] max-h-[1080px] overflow-hidden bg-transparent select-none"
     >
-      {/* 2. Base Atmospheric Backdrop Artwork (Blends with global 3D space canvas) */}
+      {/* 2. Base Atmospheric Backdrop Artwork (David & Black Hole preserved, static code masked out) */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-85 mix-blend-screen pointer-events-none transition-transform duration-700 ease-out"
+        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-90 mix-blend-screen pointer-events-none transition-transform duration-700 ease-out"
         style={{
           backgroundImage: `url('/assets/hero_cosmic_david.png')`,
+          WebkitMaskImage: `linear-gradient(to right, transparent 0%, black 14%, black 60%, rgba(0,0,0,0.15) 75%, transparent 88%)`,
+          maskImage: `linear-gradient(to right, transparent 0%, black 14%, black 60%, rgba(0,0,0,0.15) 75%, transparent 88%)`,
         }}
       />
+
+      {/* 2b. DYNAMIC 3D FLOWING CURVED CODE WAVES
+          Replaces the static stuck code with living, undulating cyber streams flowing through space */}
+      <CurvedCodeWaves className="z-10" />
 
       {/* 3. Cursor-Following Character Reveal Spotlight Layer (260px radius feathered mask) */}
       {isHovering && (
         <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none z-10 transition-opacity duration-300"
+          className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none z-15 transition-opacity duration-300"
           style={{
             backgroundImage: `url('/assets/hero_cosmic_david.png')`,
             WebkitMaskImage: `radial-gradient(circle 260px at ${cursor.x}px ${cursor.y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%)`,
@@ -104,15 +111,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
         className="absolute inset-0 pointer-events-none z-20"
         style={{
           background: 'radial-gradient(ellipse 70% 85% at 15% 50%, rgba(3, 2, 12, 0.88) 0%, rgba(4, 3, 16, 0.65) 45%, rgba(6, 5, 24, 0.25) 75%, transparent 100%)'
-        }}
-      />
-
-      {/* 4b. Atmospheric Soft Feathered Gradient on the Right Side
-          Dissolves the static stuck 2D code wallpaper so the live 3D flowing curved code waves and stars shine through */}
-      <div 
-        className="absolute inset-0 pointer-events-none z-20"
-        style={{
-          background: 'radial-gradient(ellipse 65% 85% at 88% 50%, rgba(3, 2, 12, 0.90) 0%, rgba(4, 3, 16, 0.65) 45%, transparent 100%)'
         }}
       />
 
