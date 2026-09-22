@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ArrowDown } from 'lucide-react';
-import { CosmicCanvas3D } from './CosmicCanvas3D';
 
 interface HeroSectionProps {
   onNavigate?: (path: string) => void;
@@ -76,12 +75,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
   return (
     <section 
       ref={heroRef}
-      className="relative w-full h-screen min-h-[680px] max-h-[1080px] overflow-hidden bg-[#03020c] select-none"
+      className="relative w-full h-screen min-h-[680px] max-h-[1080px] overflow-hidden bg-transparent select-none"
     >
-      {/* 1. Real 3D WebGL Canvas Layer (Fixed rotating galaxy & black hole accretion disk) */}
-      <CosmicCanvas3D className="absolute inset-0 z-0" />
-
-      {/* 2. Base Atmospheric Backdrop Artwork */}
+      {/* 2. Base Atmospheric Backdrop Artwork (Blends with global 3D space canvas) */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center opacity-85 mix-blend-screen pointer-events-none transition-transform duration-700 ease-out"
         style={{

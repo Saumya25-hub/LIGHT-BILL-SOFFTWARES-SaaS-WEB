@@ -8,7 +8,7 @@ interface CinematicFooterProps {
 
 export const CinematicFooter: React.FC<CinematicFooterProps> = ({ onNavigate }) => {
   return (
-    <footer id="contact" className="relative w-full bg-black text-white pt-24 pb-12 px-6 sm:px-10 lg:px-14 overflow-hidden border-t border-white/10">
+    <footer id="contact" className="relative w-full bg-transparent text-white pt-24 pb-12 px-6 sm:px-10 lg:px-14 overflow-hidden border-t border-white/10">
       
       {/* Ambient Cosmic Lights in Footer */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-purple-900/25 via-indigo-950/15 to-transparent blur-[140px] pointer-events-none rounded-full" />

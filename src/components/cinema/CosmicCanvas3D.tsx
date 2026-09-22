@@ -13,81 +13,84 @@ export const CosmicCanvas3D: React.FC<CosmicCanvas3DProps> = ({ className = '' }
     if (!container) return;
 
     let animationFrameId: number;
-    let width = container.clientWidth || window.innerWidth;
-    let height = container.clientHeight || window.innerHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
 
-    // 1. Scene, Camera, Renderer
+    // 1. Scene, Camera, WebGL Renderer
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 2000);
-    camera.position.set(0, 0, 450);
+    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 4000);
+    camera.position.set(0, 0, 520);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true, 
+      antialias: true, 
+      powerPreference: 'high-performance' 
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0); // Transparent background to blend seamlessly
+    renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // 2. Cosmic Galaxy Particle Swirl (3,500 Stars)
-    const galaxyCount = 3500;
-    const galaxyGeo = new THREE.BufferGeometry();
-    const galaxyPositions = new Float32Array(galaxyCount * 3);
-    const galaxyColors = new Float32Array(galaxyCount * 3);
-    const galaxyScales = new Float32Array(galaxyCount);
-
-    const colorPalette = [
-      new THREE.Color('#c084fc'), // Lavender purple
-      new THREE.Color('#818cf8'), // Indigo
-      new THREE.Color('#38bdf8'), // Sky blue
-      new THREE.Color('#f472b6'), // Soft rose
-      new THREE.Color('#ffffff'), // Pure star white
-    ];
-
-    for (let i = 0; i < galaxyCount; i++) {
-      const i3 = i * 3;
-      // Spiral galaxy distribution
-      const radius = Math.pow(Math.random(), 1.5) * 800 + 30;
-      const spinAngle = radius * 0.005;
-      const branchAngle = ((i % 4) * ((2 * Math.PI) / 4)) + spinAngle;
-
-      const randomX = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 60;
-      const randomY = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 60;
-      const randomZ = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 60;
-
-      galaxyPositions[i3] = Math.cos(branchAngle) * radius + randomX;
-      galaxyPositions[i3 + 1] = randomY * 1.5;
-      galaxyPositions[i3 + 2] = Math.sin(branchAngle) * radius + randomZ;
-
-      const mixedColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-      galaxyColors[i3] = mixedColor.r;
-      galaxyColors[i3 + 1] = mixedColor.g;
-      galaxyColors[i3 + 2] = mixedColor.b;
-
-      galaxyScales[i] = Math.random() * 2.5 + 0.5;
-    }
-
-    galaxyGeo.setAttribute('position', new THREE.BufferAttribute(galaxyPositions, 3));
-    galaxyGeo.setAttribute('color', new THREE.BufferAttribute(galaxyColors, 3));
-
-    // Particle sprite using canvas texture
+    // 2. High-Quality Radial Particle Texture Generator
     const createStarTexture = () => {
       const c = document.createElement('canvas');
-      c.width = 32;
-      c.height = 32;
+      c.width = 64;
+      c.height = 64;
       const ctx = c.getContext('2d')!;
-      const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+      const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
       grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      grad.addColorStop(0.3, 'rgba(200, 180, 255, 0.8)');
-      grad.addColorStop(0.8, 'rgba(120, 80, 255, 0.2)');
+      grad.addColorStop(0.2, 'rgba(232, 210, 255, 0.9)');
+      grad.addColorStop(0.5, 'rgba(168, 85, 247, 0.45)');
+      grad.addColorStop(0.8, 'rgba(99, 102, 241, 0.15)');
       grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 32, 32);
+      ctx.fillRect(0, 0, 64, 64);
       return new THREE.CanvasTexture(c);
     };
 
     const starTexture = createStarTexture();
 
-    const galaxyMaterial = new THREE.PointsMaterial({
-      size: 4.5,
+    // 3. Volumetric Deep-Space Starfield (Spanning full vertical scroll range: Y: +800 to -2800)
+    const starCount = 6500;
+    const starGeo = new THREE.BufferGeometry();
+    const starPositions = new Float32Array(starCount * 3);
+    const starColors = new Float32Array(starCount * 3);
+
+    const colorPalette = [
+      new THREE.Color('#c084fc'), // Lavender purple
+      new THREE.Color('#a855f7'), // Deep purple
+      new THREE.Color('#818cf8'), // Indigo
+      new THREE.Color('#38bdf8'), // Electric cyan
+      new THREE.Color('#f472b6'), // Rose
+      new THREE.Color('#fbbf24'), // Warm gold
+      new THREE.Color('#ffffff'), // Pure white
+      new THREE.Color('#4ade80'), // Emerald spark
+    ];
+
+    for (let i = 0; i < starCount; i++) {
+      const i3 = i * 3;
+      
+      // Distribute stars in a wide spiral column around the vertical axis
+      const verticalY = (Math.random() * 3800) - 2800; // From +1000 down to -2800
+      const radius = Math.pow(Math.random(), 1.2) * 1100 + 60;
+      const angle = Math.random() * Math.PI * 2;
+      const zPos = (Math.random() - 0.5) * 2200;
+
+      starPositions[i3] = Math.cos(angle) * radius;
+      starPositions[i3 + 1] = verticalY;
+      starPositions[i3 + 2] = zPos;
+
+      const c = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      starColors[i3] = c.r;
+      starColors[i3 + 1] = c.g;
+      starColors[i3 + 2] = c.b;
+    }
+
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+    const starMaterial = new THREE.PointsMaterial({
+      size: 5.2,
       map: starTexture,
       vertexColors: true,
       transparent: true,
@@ -95,60 +98,56 @@ export const CosmicCanvas3D: React.FC<CosmicCanvas3DProps> = ({ className = '' }
       depthWrite: false,
     });
 
-    const galaxyPoints = new THREE.Points(galaxyGeo, galaxyMaterial);
-    galaxyPoints.position.set(-80, 20, -100);
-    galaxyPoints.rotation.x = 0.45;
-    galaxyPoints.rotation.z = -0.25;
-    scene.add(galaxyPoints);
+    const starPoints = new THREE.Points(starGeo, starMaterial);
+    scene.add(starPoints);
 
-    // 3. Black Hole Accretion Disk (Relativistic Rotating Glowing Plasma Rings)
+    // 4. Black Hole Accretion Disk (Positioned at Hero level, Y: 40)
     const diskGroup = new THREE.Group();
-    // Position it at the left coordinates matching the artwork's black hole
-    diskGroup.position.set(-220, 40, 20);
+    diskGroup.position.set(-230, 40, 30);
     diskGroup.rotation.x = 0.52;
     diskGroup.rotation.y = 0.65;
     diskGroup.rotation.z = -0.35;
     scene.add(diskGroup);
 
-    // Event Horizon (Pure Black Void Sphere)
-    const horizonGeo = new THREE.SphereGeometry(38, 32, 32);
+    // Event Horizon Void
+    const horizonGeo = new THREE.SphereGeometry(40, 32, 32);
     const horizonMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
     const horizonMesh = new THREE.Mesh(horizonGeo, horizonMat);
     diskGroup.add(horizonMesh);
 
-    // Photon Sphere & Gravitational Lensing Halo
-    const haloGeo = new THREE.RingGeometry(39, 48, 64);
+    // Glowing Photon Sphere Ring
+    const haloGeo = new THREE.RingGeometry(42, 54, 64);
     const haloMat = new THREE.MeshBasicMaterial({
-      color: 0xffaa44,
+      color: 0xffaa33,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.95,
       blending: THREE.AdditiveBlending,
     });
     const haloMesh = new THREE.Mesh(haloGeo, haloMat);
     diskGroup.add(haloMesh);
 
-    // Outer Swirling Accretion Particles (1,800 High-Speed Plasma Sparks)
-    const plasmaCount = 1800;
+    // Swirling High-Speed Plasma Sparks
+    const plasmaCount = 2200;
     const plasmaGeo = new THREE.BufferGeometry();
     const plasmaPos = new Float32Array(plasmaCount * 3);
     const plasmaColors = new Float32Array(plasmaCount * 3);
     const plasmaVelocities = new Float32Array(plasmaCount);
 
     const plasmaPalette = [
-      new THREE.Color('#ff4500'), // Fiery orange red
-      new THREE.Color('#ffa500'), // Glowing amber
-      new THREE.Color('#ffd700'), // Hot plasma gold
-      new THREE.Color('#ff8c00'), // Dark orange
-      new THREE.Color('#ffffff'), // Relativistic blue/white edge
+      new THREE.Color('#ff4500'),
+      new THREE.Color('#ffa500'),
+      new THREE.Color('#ffd700'),
+      new THREE.Color('#ff8c00'),
+      new THREE.Color('#ffffff'),
     ];
 
     for (let i = 0; i < plasmaCount; i++) {
       const i3 = i * 3;
       const angle = Math.random() * Math.PI * 2;
-      const r = Math.random() * 110 + 44; // From horizon to outer disk
+      const r = Math.random() * 125 + 46;
       plasmaPos[i3] = Math.cos(angle) * r;
-      plasmaPos[i3 + 1] = (Math.random() - 0.5) * (r * 0.12); // Disc thickness
+      plasmaPos[i3 + 1] = (Math.random() - 0.5) * (r * 0.15);
       plasmaPos[i3 + 2] = Math.sin(angle) * r;
 
       const c = plasmaPalette[Math.floor(Math.random() * plasmaPalette.length)];
@@ -156,15 +155,14 @@ export const CosmicCanvas3D: React.FC<CosmicCanvas3DProps> = ({ className = '' }
       plasmaColors[i3 + 1] = c.g;
       plasmaColors[i3 + 2] = c.b;
 
-      // Keplerian relativistic orbital speed: closer = faster!
-      plasmaVelocities[i] = (1 / Math.sqrt(r)) * 1.8;
+      plasmaVelocities[i] = (1 / Math.sqrt(r)) * 2.1;
     }
 
     plasmaGeo.setAttribute('position', new THREE.BufferAttribute(plasmaPos, 3));
     plasmaGeo.setAttribute('color', new THREE.BufferAttribute(plasmaColors, 3));
 
     const plasmaMaterial = new THREE.PointsMaterial({
-      size: 5.0,
+      size: 5.5,
       map: starTexture,
       vertexColors: true,
       transparent: true,
@@ -176,56 +174,76 @@ export const CosmicCanvas3D: React.FC<CosmicCanvas3DProps> = ({ className = '' }
     const plasmaPoints = new THREE.Points(plasmaGeo, plasmaMaterial);
     diskGroup.add(plasmaPoints);
 
-    // 4. Floating 3D Code Streams on Left and Right (Matrix Columns in 3D Space)
-    const codeGroup = new THREE.Group();
-    scene.add(codeGroup);
+    // 5. Floating 3D Geometric Space Nodes along the vertical descent
+    const icosaGroup = new THREE.Group();
+    scene.add(icosaGroup);
 
-    const createCodeColumn = (x: number, y: number, z: number, count: number) => {
-      const geo = new THREE.BufferGeometry();
-      const pos = new Float32Array(count * 3);
-      const cols = new Float32Array(count * 3);
-
-      for (let i = 0; i < count; i++) {
-        pos[i * 3] = x + (Math.random() - 0.5) * 8;
-        pos[i * 3 + 1] = y - i * 14;
-        pos[i * 3 + 2] = z + (Math.random() - 0.5) * 8;
-
-        const isLead = i % 18 === 0;
-        cols[i * 3] = isLead ? 1 : 0.6;
-        cols[i * 3 + 1] = isLead ? 1 : 0.8;
-        cols[i * 3 + 2] = isLead ? 1 : 1.0;
-      }
-
-      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-      geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
-
-      const mat = new THREE.PointsMaterial({
-        size: 3.2,
-        map: starTexture,
-        vertexColors: true,
+    const createWireframeNode = (x: number, y: number, z: number, size: number, color: string) => {
+      const geo = new THREE.IcosahedronGeometry(size, 1);
+      const wireframe = new THREE.WireframeGeometry(geo);
+      const mat = new THREE.LineBasicMaterial({
+        color: new THREE.Color(color),
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.35,
         blending: THREE.AdditiveBlending,
       });
-
-      return new THREE.Points(geo, mat);
+      const mesh = new THREE.LineSegments(wireframe, mat);
+      mesh.position.set(x, y, z);
+      return mesh;
     };
 
-    const columns: THREE.Points[] = [];
-    // Right side dense code streams (matching artwork)
-    for (let c = 0; c < 14; c++) {
-      const col = createCodeColumn(180 + c * 22, 280 + Math.random() * 80, -20 - c * 15, 45);
-      codeGroup.add(col);
-      columns.push(col);
-    }
-    // Left side subtle code streams
-    for (let c = 0; c < 8; c++) {
-      const col = createCodeColumn(-380 + c * 20, 240 + Math.random() * 60, -40 - c * 20, 35);
-      codeGroup.add(col);
-      columns.push(col);
+    // Node 1: Process section level (upper)
+    const node1 = createWireframeNode(280, -350, -250, 56, '#c084fc');
+    // Node 2: Process section level (middle)
+    const node2 = createWireframeNode(-320, -780, -350, 68, '#38bdf8');
+    // Node 3: Process section level (lower)
+    const node3 = createWireframeNode(290, -1200, -300, 62, '#4ade80');
+    // Node 4: Selected Works level
+    const node4 = createWireframeNode(-280, -1700, -400, 75, '#f472b6');
+    // Node 5: Playground & Footer level
+    const node5 = createWireframeNode(250, -2300, -350, 80, '#fbbf24');
+    icosaGroup.add(node1, node2, node3, node4, node5);
+
+    // 6. Secondary Nebula Swirl at Footer/Playground Level (Y: -2200)
+    const nebulaGroup = new THREE.Group();
+    nebulaGroup.position.set(200, -2200, -200);
+    scene.add(nebulaGroup);
+
+    const nebulaCount = 1200;
+    const nebulaGeo = new THREE.BufferGeometry();
+    const nebulaPos = new Float32Array(nebulaCount * 3);
+    const nebulaColors = new Float32Array(nebulaCount * 3);
+
+    for (let i = 0; i < nebulaCount; i++) {
+      const i3 = i * 3;
+      const angle = Math.random() * Math.PI * 2;
+      const r = Math.pow(Math.random(), 0.8) * 350;
+      nebulaPos[i3] = Math.cos(angle) * r;
+      nebulaPos[i3 + 1] = (Math.random() - 0.5) * 80;
+      nebulaPos[i3 + 2] = Math.sin(angle) * r;
+
+      const c = i % 2 === 0 ? new THREE.Color('#818cf8') : new THREE.Color('#c084fc');
+      nebulaColors[i3] = c.r;
+      nebulaColors[i3 + 1] = c.g;
+      nebulaColors[i3 + 2] = c.b;
     }
 
-    // 5. Mouse Parallax & Scroll Physics (Kinetic Inertia like kage)
+    nebulaGeo.setAttribute('position', new THREE.BufferAttribute(nebulaPos, 3));
+    nebulaGeo.setAttribute('color', new THREE.BufferAttribute(nebulaColors, 3));
+
+    const nebulaMat = new THREE.PointsMaterial({
+      size: 6.0,
+      map: starTexture,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.65,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const nebulaPoints = new THREE.Points(nebulaGeo, nebulaMat);
+    nebulaGroup.add(nebulaPoints);
+
+    // 7. Dynamic Mouse Parallax & Continuous Full-Page Scroll Tracking
     let mouseX = 0;
     let mouseY = 0;
     let targetRotationX = 0;
@@ -233,91 +251,101 @@ export const CosmicCanvas3D: React.FC<CosmicCanvas3DProps> = ({ className = '' }
     let currentRotationX = 0;
     let currentRotationY = 0;
     let scrollY = 0;
-    let targetCameraZ = 450;
-    let currentCameraZ = 450;
+    let targetCameraY = 0;
+    let currentCameraY = 0;
+    let targetCameraZ = 520;
+    let currentCameraZ = 520;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = (e.clientX / window.innerWidth) * 2 - 1;
       mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-
-      targetRotationY = mouseX * 0.45; // Camera yaw
-      targetRotationX = mouseY * 0.35; // Camera pitch
+      targetRotationY = mouseX * 0.35;
+      targetRotationX = mouseY * 0.25;
     };
 
     const handleScroll = () => {
       scrollY = window.scrollY || window.pageYOffset;
-      // As user scrolls, travel deeper into space
-      targetCameraZ = 450 - scrollY * 0.22;
+      const maxScroll = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        window.innerHeight
+      ) - window.innerHeight;
+
+      const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
+      // Smoothly travel camera down the deep-space coordinate system
+      targetCameraY = -progress * 2400;
+      targetCameraZ = 520 - progress * 150;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Resize Handler
     const handleResize = () => {
-      if (!container) return;
-      width = container.clientWidth || window.innerWidth;
-      height = container.clientHeight || window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
+      handleScroll();
     };
 
     window.addEventListener('resize', handleResize);
+    handleScroll();
 
-    // 6. Animation Loop (60 FPS WebGL Runtime)
+    // 8. Animation Loop (Continuous 60 FPS WebGL Motion Across Whole Page)
     let clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
       const delta = clock.getDelta();
 
-      // Smooth inertia lerp for 3D camera
-      currentRotationX += (targetRotationX - currentRotationX) * 0.045;
-      currentRotationY += (targetRotationY - currentRotationY) * 0.045;
-      currentCameraZ += (targetCameraZ - currentCameraZ) * 0.05;
+      // Smooth inertia interpolation
+      currentRotationX += (targetRotationX - currentRotationX) * 0.05;
+      currentRotationY += (targetRotationY - currentRotationY) * 0.05;
+      currentCameraY += (targetCameraY - currentCameraY) * 0.08;
+      currentCameraZ += (targetCameraZ - currentCameraZ) * 0.08;
 
+      camera.position.y = currentCameraY + currentRotationX * 50;
+      camera.position.x = currentRotationY * 70;
       camera.position.z = currentCameraZ;
-      camera.position.x = currentRotationY * 90;
-      camera.position.y = currentRotationX * 60;
-      camera.lookAt(0, 0, 0);
+      camera.lookAt(0, currentCameraY - 30, currentCameraZ - 500);
 
-      // Continuous 3D Galaxy Rotation
-      galaxyPoints.rotation.y += delta * 0.08;
-      galaxyPoints.rotation.z += delta * 0.02;
+      // Continuous 3D Starfield Rotation (Universe spins non-stop!)
+      starPoints.rotation.y += delta * 0.05;
+      starPoints.rotation.x += delta * 0.012;
 
-      // Relativistic Black Hole Accretion Disk Rotation
+      // Relativistic Black Hole Rotation
       diskGroup.rotation.z += delta * 0.35;
       haloMesh.rotation.z -= delta * 0.2;
 
-      // Plasma particle orbital motion
+      // Lower Nebula Rotation
+      nebulaGroup.rotation.y += delta * 0.12;
+
+      // Geometric Nodes Tumble
+      node1.rotation.x += delta * 0.35;
+      node1.rotation.y += delta * 0.25;
+      node2.rotation.y += delta * 0.3;
+      node2.rotation.z += delta * 0.2;
+      node3.rotation.x -= delta * 0.25;
+      node3.rotation.z += delta * 0.35;
+      node4.rotation.y += delta * 0.22;
+      node5.rotation.x += delta * 0.28;
+
+      // Keplerian Plasma Orbit
       const pPositions = plasmaGeo.attributes.position.array as Float32Array;
       for (let i = 0; i < plasmaCount; i++) {
         const i3 = i * 3;
         const vel = plasmaVelocities[i];
-        let currentX = pPositions[i3];
-        let currentZ = pPositions[i3 + 2];
-        const r = Math.sqrt(currentX * currentX + currentZ * currentZ);
-        let curAngle = Math.atan2(currentZ, currentX);
+        let curX = pPositions[i3];
+        let curZ = pPositions[i3 + 2];
+        const r = Math.sqrt(curX * curX + curZ * curZ);
+        let curAngle = Math.atan2(curZ, curX);
 
-        curAngle += vel * delta * 2.2;
+        curAngle += vel * delta * 2.4;
         pPositions[i3] = Math.cos(curAngle) * r;
         pPositions[i3 + 2] = Math.sin(curAngle) * r;
       }
       plasmaGeo.attributes.position.needsUpdate = true;
-
-      // Cascading Code Streams downward flow
-      columns.forEach((col, idx) => {
-        const cPos = col.geometry.attributes.position.array as Float32Array;
-        const speed = 1.2 + (idx % 5) * 0.6;
-        for (let i = 0; i < cPos.length / 3; i++) {
-          cPos[i * 3 + 1] -= speed;
-          if (cPos[i * 3 + 1] < -350) {
-            cPos[i * 3 + 1] = 300 + Math.random() * 40;
-          }
-        }
-        col.geometry.attributes.position.needsUpdate = true;
-      });
 
       renderer.render(scene, camera);
     };
@@ -333,10 +361,11 @@ export const CosmicCanvas3D: React.FC<CosmicCanvas3DProps> = ({ className = '' }
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
-      galaxyGeo.dispose();
-      galaxyMaterial.dispose();
+      starGeo.dispose();
+      starMaterial.dispose();
       plasmaGeo.dispose();
       plasmaMaterial.dispose();
+      starTexture.dispose();
     };
   }, []);
 

@@ -85,7 +85,7 @@ export const SelectedWorksSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="works" className="relative w-full py-28 px-6 sm:px-10 lg:px-14 bg-black text-white overflow-hidden">
+    <section id="works" className="relative w-full py-28 px-6 sm:px-10 lg:px-14 bg-transparent text-white overflow-hidden">
       {/* Subtle backdrop illumination */}
       <div className="absolute top-1/3 left-10 w-[500px] h-[500px] bg-purple-950/20 blur-[150px] pointer-events-none rounded-full" />
       <div className="absolute bottom-1/3 right-10 w-[600px] h-[600px] bg-indigo-950/20 blur-[150px] pointer-events-none rounded-full" />

@@ -132,7 +132,7 @@ export const ExperimentsPlayground: React.FC = () => {
     : experiments.filter(e => e.category === activeCategory);
 
   return (
-    <section id="experiments" className="relative w-full py-28 px-6 sm:px-10 lg:px-14 bg-[#040312] text-white overflow-hidden">
+    <section id="experiments" className="relative w-full py-28 px-6 sm:px-10 lg:px-14 bg-transparent text-white overflow-hidden">
       
       {/* Background radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-purple-950/25 blur-[160px] pointer-events-none rounded-full" />

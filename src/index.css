@@ -60,6 +60,88 @@
   .glow-white {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
   }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .card-3d-left {
+    transform: perspective(1200px) rotateY(7deg) rotateX(3deg);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+  }
+  .card-3d-left:hover {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02);
+  }
+
+  .card-3d-right {
+    transform: perspective(1200px) rotateY(-7deg) rotateX(3deg);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+  }
+  .card-3d-right:hover {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02);
+  }
+
+  .hologram-purple {
+    box-shadow: 0 0 50px -10px rgba(168, 85, 247, 0.35), inset 0 0 25px rgba(168, 85, 247, 0.15);
+  }
+
+  .hologram-cyan {
+    box-shadow: 0 0 50px -10px rgba(56, 189, 248, 0.35), inset 0 0 25px rgba(56, 189, 248, 0.15);
+  }
+
+  .hologram-emerald {
+    box-shadow: 0 0 50px -10px rgba(34, 197, 94, 0.35), inset 0 0 25px rgba(34, 197, 94, 0.15);
+  }
+}
+
+/* 3D Floating & Cosmic Hologram Keyframe Animations */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-1.5deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.35; filter: blur(25px); }
+  50% { opacity: 0.85; filter: blur(45px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 18s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
 }
 
 /* Custom subtle scrollbar for light theme */
