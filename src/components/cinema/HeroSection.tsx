@@ -107,6 +107,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
         }}
       />
 
+      {/* 4b. Atmospheric Soft Feathered Gradient on the Right Side
+          Dissolves the static stuck 2D code wallpaper so the live 3D flowing curved code waves and stars shine through */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-20"
+        style={{
+          background: 'radial-gradient(ellipse 65% 85% at 88% 50%, rgba(3, 2, 12, 0.90) 0%, rgba(4, 3, 16, 0.65) 45%, transparent 100%)'
+        }}
+      />
+
       {/* 5. Subtle Vignette */}
       <div 
         className="absolute inset-0 pointer-events-none z-20"
