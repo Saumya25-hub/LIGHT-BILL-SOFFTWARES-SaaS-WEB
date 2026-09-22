@@ -78,22 +78,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
       ref={heroRef}
       className="relative w-full h-screen min-h-[680px] max-h-[1080px] overflow-hidden bg-transparent select-none"
     >
-      {/* 2. Base Atmospheric Backdrop Artwork (Pristine David, Black Hole & Clean Starry Space) */}
+      {/* 2. Base Atmospheric Backdrop Artwork (Pristine Black Hole & Starry Cosmic Space) */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-90 mix-blend-screen pointer-events-none transition-transform duration-700 ease-out"
+        className="absolute inset-0 w-full h-full bg-cover bg-center opacity-90 mix-blend-screen pointer-events-none transition-transform duration-700 ease-out z-0"
         style={{
           backgroundImage: `url('/assets/hero_cosmic_david.png')`,
         }}
       />
 
       {/* 2b. DYNAMIC 3D FLOWING CURVED CODE WAVES
-          Replaces the static stuck code with living, undulating cyber streams flowing through space */}
+          Flows strictly BEHIND the character in the deep cosmic galaxy */}
       <CurvedCodeWaves className="z-10" />
+
+      {/* 2c. FOREGROUND OCCLUSION LAYER: David sitting calmly with coffee and newspaper
+          Ensures the code streams pass BEHIND David, zero text on his body or newspaper! */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none transition-transform duration-700 ease-out z-20"
+        style={{
+          backgroundImage: `url('/assets/david_foreground.png')`,
+        }}
+      />
 
       {/* 3. Cursor-Following Character Reveal Spotlight Layer (260px radius feathered mask) */}
       {isHovering && (
         <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none z-15 transition-opacity duration-300"
+          className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none z-25 transition-opacity duration-300"
           style={{
             backgroundImage: `url('/assets/hero_cosmic_david.png')`,
             WebkitMaskImage: `radial-gradient(circle 260px at ${cursor.x}px ${cursor.y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%)`,
@@ -106,7 +115,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
       {/* 4. Atmospheric Soft Feathered Gradient on the Left Side
           Keeps original background visible while ensuring typography is razor-sharp */}
       <div 
-        className="absolute inset-0 pointer-events-none z-20"
+        className="absolute inset-0 pointer-events-none z-25"
         style={{
           background: 'radial-gradient(ellipse 70% 85% at 15% 50%, rgba(3, 2, 12, 0.88) 0%, rgba(4, 3, 16, 0.65) 45%, rgba(6, 5, 24, 0.25) 75%, transparent 100%)'
         }}
@@ -114,7 +123,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
 
       {/* 5. Subtle Vignette */}
       <div 
-        className="absolute inset-0 pointer-events-none z-20"
+        className="absolute inset-0 pointer-events-none z-25"
         style={{
           background: 'linear-gradient(to top, rgba(3,2,12,0.95) 0%, transparent 25%, transparent 75%, rgba(3,2,12,0.7) 100%)'
         }}
@@ -174,10 +183,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
         {/* Center / Left Headline Content */}
         <div className="my-auto max-w-xl sm:max-w-2xl py-6 space-y-6 sm:space-y-8">
           
-          <div className="flex items-center gap-3">
-            <div className="w-[2px] h-5 bg-gradient-to-b from-purple-400 to-indigo-600 rounded-full" />
-            <p className="text-[11px] sm:text-xs font-mono font-medium tracking-[0.2em] text-slate-300 uppercase">
-              DIGITAL ARTIST / CREATIVE TECHNOLOGIST
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/40 bg-purple-950/60 text-purple-300 font-mono text-[10px] sm:text-xs tracking-widest uppercase shadow-[0_0_20px_rgba(168,85,247,0.3)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+              VISION // TIME = FREEDOM OF LIFE
+            </div>
+            <p className="hidden sm:inline-block text-[11px] font-mono tracking-[0.2em] text-slate-400 uppercase">
+              S TOM'S 3D STUDIO
             </p>
           </div>
 
@@ -190,7 +202,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
           </h1>
 
           <p className="text-slate-300/90 text-sm sm:text-base font-light leading-relaxed max-w-lg">
-            Where creativity meets technology and elevate experienced formats — architecting next-generation commercial suites, 3D WebGL spatial interfaces, and high-performance software.
+            Where creativity meets technology to liberate the modern entrepreneur. We architect 0ms offline-first ERP engines and companion mobile intelligence — absorbing 80% of enterprise friction so you reclaim the luxury of your time.
           </p>
 
           <div className="pt-2">
