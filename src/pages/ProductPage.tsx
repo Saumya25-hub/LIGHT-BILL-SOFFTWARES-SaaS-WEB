@@ -6,7 +6,7 @@ import { Button } from '../components/ui/Button';
 import { siteConfig } from '../config/siteConfig';
 import { FileText, ShoppingCart, Package, Users, BarChart3, BookOpen, ShieldCheck, ArrowRight } from 'lucide-react';
 
-export const ProductPage: React.FC<PageProps> = ({ onNavigate }) => {
+export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   const verifiedDesktopModules = [
     {
       title: "GST Sales Billing",
@@ -77,9 +77,7 @@ export const ProductPage: React.FC<PageProps> = ({ onNavigate }) => {
         <div className="inline-flex p-3 rounded-2xl bg-sky-50 text-sky-600 border border-sky-100">
           <ShieldCheck className="w-8 h-8" />
         </div>
-        <h3 className="text-xl font-bold text-slate-900">Ready to streamline your business?</h3>
-        <p className="text-xs text-slate-600">Experience all desktop & companion mobile capabilities during your 35-day trial.</p>
-        <div className="pt-2">
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
           <Button
             variant="primary"
             size="md"
@@ -88,6 +86,13 @@ export const ProductPage: React.FC<PageProps> = ({ onNavigate }) => {
             onClick={() => onNavigate('/pricing')}
           >
             Start Free 35-Day Trial
+          </Button>
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => (onLaunchDemo ? onLaunchDemo() : onNavigate('/demo'))}
+          >
+            🚀 Try Live Simulator (Sandbox)
           </Button>
         </div>
       </div>

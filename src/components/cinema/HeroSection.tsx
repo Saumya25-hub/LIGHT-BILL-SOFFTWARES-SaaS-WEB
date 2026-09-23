@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight, ArrowDown, Zap } from 'lucide-react';
 import { CurvedCodeWaves } from './CurvedCodeWaves';
 
 interface HeroSectionProps {
   onNavigate?: (path: string) => void;
   onExploreClick?: () => void;
+  onLaunchDemo?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreClick }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ 
+  onNavigate, 
+  onExploreClick, 
+  onLaunchDemo 
+}) => {
   // Cursor position for spotlight reveal and 3D parallax
   const [cursor, setCursor] = useState({ x: -1000, y: -1000 });
   const [isHovering, setIsHovering] = useState(false);
@@ -146,12 +151,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
             </span>
           </div>
 
-          <nav className="flex items-center gap-6 sm:gap-10 text-xs sm:text-sm font-medium tracking-wider">
+          <nav className="flex items-center gap-4 sm:gap-7 text-xs sm:text-sm font-medium tracking-wider">
             <button 
               onClick={() => scrollToSection('hero')} 
               className="text-white hover:text-purple-300 transition-colors border-b-2 border-purple-400 pb-0.5"
             >
               Home
+            </button>
+            <button 
+              onClick={() => (onLaunchDemo ? onLaunchDemo() : onNavigate && onNavigate('/demo'))} 
+              className="relative group px-3 py-1 rounded-full border border-purple-400/50 bg-gradient-to-r from-purple-950/90 to-indigo-950/90 hover:border-purple-300 text-purple-200 hover:text-white transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)] flex items-center gap-1.5 cursor-pointer"
+            >
+              <Zap className="w-3 h-3 text-yellow-300 animate-pulse" />
+              <span className="font-semibold text-xs">Live Demo</span>
+            </button>
+            <button 
+              onClick={() => onNavigate && onNavigate('/product')} 
+              className="text-slate-300 hover:text-white transition-colors"
+            >
+              Products
             </button>
             <button 
               onClick={() => scrollToSection('process')} 
@@ -167,13 +185,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
             </button>
             <button 
               onClick={() => scrollToSection('experiments')} 
-              className="text-slate-300 hover:text-white transition-colors hidden sm:inline-block"
+              className="text-slate-300 hover:text-white transition-colors hidden md:inline-block"
             >
               Playground
             </button>
             <button 
               onClick={() => scrollToSection('contact')} 
-              className="text-slate-300 hover:text-white transition-colors"
+              className="text-slate-300 hover:text-white transition-colors hidden sm:inline-block"
             >
               Contact
             </button>
@@ -205,17 +223,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onExploreC
             Where creativity meets technology to liberate the modern entrepreneur. We architect 0ms offline-first ERP engines and companion mobile intelligence — absorbing 80% of enterprise friction so you reclaim the luxury of your time.
           </p>
 
-          <div className="pt-2">
+          <div className="pt-2 flex flex-wrap items-center gap-4">
+            {/* Primary Action: Launch Live Simulator */}
+            <button
+              onClick={() => (onLaunchDemo ? onLaunchDemo() : onNavigate && onNavigate('/demo'))}
+              className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 sm:px-7 sm:py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-white font-display font-bold text-xs sm:text-sm tracking-wide shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 border border-purple-400/30 cursor-pointer overflow-hidden"
+            >
+              <Zap className="w-4 h-4 text-yellow-300 animate-pulse" />
+              <span>LAUNCH LIVE DEMO</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            {/* Secondary Action: View My Work */}
             <button
               onClick={() => scrollToSection('works')}
-              className="group inline-flex items-center gap-4 text-white hover:text-purple-200 transition-all cursor-pointer"
+              className="group inline-flex items-center gap-3 text-white hover:text-purple-200 transition-all cursor-pointer px-4 py-3 rounded-2xl hover:bg-white/5"
             >
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-purple-600/30 group-hover:border-purple-400 group-hover:scale-110 transition-all duration-300 shadow-lg">
-                <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
+              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-purple-600/30 group-hover:border-purple-400 group-hover:scale-110 transition-all duration-300 shadow-lg">
+                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-md group-hover:blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               
-              <span className="font-display text-sm sm:text-base font-semibold tracking-wide">
+              <span className="font-display text-xs sm:text-sm font-semibold tracking-wide">
                 View My Work
               </span>
             </button>

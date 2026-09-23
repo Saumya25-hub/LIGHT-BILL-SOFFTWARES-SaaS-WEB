@@ -8,6 +8,7 @@ import { DownloadPage } from './pages/DownloadPage';
 import { AboutPage } from './pages/AboutPage';
 import { SupportPage } from './pages/SupportPage';
 import { PrivacyPage } from './pages/PrivacyPage';
+import { CosmicWarpSplash } from './components/cinema/CosmicWarpSplash';
 import { siteConfig } from './config/siteConfig';
 
 export function App() {
@@ -20,6 +21,13 @@ export function App() {
   };
 
   const [currentPath, setCurrentPath] = useState<string>(getInitialPath);
+  const [isWarping, setIsWarping] = useState(false);
+  const [warpTarget, setWarpTarget] = useState<string>('/demo');
+
+  const triggerWarpToDemo = (target = '/demo') => {
+    setWarpTarget(target);
+    setIsWarping(true);
+  };
 
   useEffect(() => {
     const handlePopState = () => {
@@ -54,9 +62,19 @@ export function App() {
   const renderCurrentPage = () => {
     switch (currentPath) {
       case '/':
-        return <HomePage onNavigate={handleNavigate} />;
+        return (
+          <HomePage 
+            onNavigate={handleNavigate} 
+            onLaunchDemo={() => triggerWarpToDemo('/demo')} 
+          />
+        );
       case '/product':
-        return <ProductPage onNavigate={handleNavigate} />;
+        return (
+          <ProductPage 
+            onNavigate={handleNavigate} 
+            onLaunchDemo={() => triggerWarpToDemo('/demo')} 
+          />
+        );
       case '/pricing':
         return <PricingPage onNavigate={handleNavigate} />;
       case '/demo':
@@ -70,14 +88,36 @@ export function App() {
       case '/privacy':
         return <PrivacyPage onNavigate={handleNavigate} />;
       default:
-        return <HomePage onNavigate={handleNavigate} />;
+        return (
+          <HomePage 
+            onNavigate={handleNavigate} 
+            onLaunchDemo={() => triggerWarpToDemo('/demo')} 
+          />
+        );
     }
   };
 
   return (
-    <Layout currentPath={currentPath} onNavigate={handleNavigate}>
-      {renderCurrentPage()}
-    </Layout>
+    <>
+      <Layout currentPath={currentPath} onNavigate={handleNavigate}>
+        {renderCurrentPage()}
+      </Layout>
+
+      {/* Ultra-Cinematic Cosmic Hyperspace Warp Loading Splash ("Paisa Vasool Animation") */}
+      <CosmicWarpSplash
+        isOpen={isWarping}
+        targetPath={warpTarget}
+        onComplete={() => {
+          handleNavigate(warpTarget);
+          setIsWarping(false);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }}
+        onCancel={() => {
+          handleNavigate(warpTarget);
+          setIsWarping(false);
+        }}
+      />
+    </>
   );
 }
 

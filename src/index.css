@@ -172,3 +172,144 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   COMPONINE LUXURY DESIGN SYSTEM (Awwwards Caliber)
+   ========================================================================== */
+
+/* 1. Character-by-Character Rolling Text Micro-Interaction */
+.rolling-text {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.rolling-char-wrapper {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1.25em;
+  line-height: 1.25em;
+}
+
+.rolling-char-inner {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--char-index, 0) * 18ms);
+  will-change: transform;
+}
+
+/* Trigger roll on hover on any parent container with group or self hover */
+.group:hover .rolling-char-inner,
+button:hover .rolling-char-inner,
+a:hover .rolling-char-inner,
+.rolling-trigger:hover .rolling-char-inner {
+  transform: translateY(-50%);
+}
+
+.rolling-char-top,
+.rolling-char-bottom {
+  display: block;
+  height: 1.25em;
+  line-height: 1.25em;
+  text-align: center;
+}
+
+/* 2. Infinite Brand & Technology Marquee Track */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* 3. Componine Halftone Radial Mask Movement */
+@keyframes halftone-orbit {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.6; }
+  50% { transform: scale(1.3) translate(4px, -4px); opacity: 1; }
+  100% { transform: scale(1) translate(0, 0); opacity: 0.6; }
+}
+
+.animate-halftone {
+  animation: halftone-orbit 4s ease-in-out infinite;
+}
+
+/* 4. Luxury Golden Atmospheric Glows & Edge Shimmers */
+.glow-gold {
+  text-shadow: 0 0 25px rgba(245, 158, 11, 0.5), 0 0 50px rgba(217, 119, 6, 0.3);
+}
+
+.box-glow-gold {
+  box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.3), inset 0 0 20px rgba(245, 158, 11, 0.1);
+}
+
+.box-glow-amber {
+  box-shadow: 0 0 35px -5px rgba(217, 119, 6, 0.25);
+}
+
+/* 5. Componine Framed Corner Cards (.frame-corner) */
+.frame-corner-card {
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, rgba(30, 26, 20, 0.7) 0%, rgba(13, 12, 10, 0.95) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.frame-corner-card:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 15px 45px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(245, 158, 11, 0.15);
+  transform: translateY(-3px);
+}
+
+.frame-corner-ornament {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.frame-corner-top-left {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #F59E0B;
+  border-left: 2px solid #F59E0B;
+}
+
+.frame-corner-top-right {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid #F59E0B;
+  border-right: 2px solid #F59E0B;
+}
+
+.frame-corner-bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid #F59E0B;
+  border-left: 2px solid #F59E0B;
+}
+
+.frame-corner-bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #F59E0B;
+  border-right: 2px solid #F59E0B;
+}
+
