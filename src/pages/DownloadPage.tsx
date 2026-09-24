@@ -6,7 +6,7 @@ import { Button } from '../components/ui/Button';
 import { siteConfig } from '../config/siteConfig';
 import { Laptop, Smartphone, Download, ShieldCheck, Clock } from 'lucide-react';
 
-export const DownloadPage: React.FC<PageProps> = ({ onNavigate }) => {
+export const DownloadPage: React.FC<PageProps> = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       {/* Header */}
@@ -60,15 +60,20 @@ export const DownloadPage: React.FC<PageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="pt-6 mt-6 border-t border-slate-100 space-y-3">
-            <Button
-              variant="primary"
-              size="lg"
-              fullWidth
-              icon={<Download className="w-4 h-4" />}
-              onClick={() => onNavigate('/support')}
+            <a
+              href={siteConfig.download.desktop.directDownloadUrl}
+              download={siteConfig.download.desktop.installerFileName}
+              className="block w-full no-underline"
             >
-              Download Windows Installer
-            </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                fullWidth
+                icon={<Download className="w-4 h-4" />}
+              >
+                Download Windows Installer
+              </Button>
+            </a>
             <p className="text-[11px] text-center text-slate-500">
               Safe Inno Setup package • No third-party bundleware
             </p>

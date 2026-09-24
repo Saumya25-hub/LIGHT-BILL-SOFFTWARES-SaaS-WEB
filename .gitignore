@@ -39,4 +39,6 @@ dist-ssr
 
 # Raw heavy media source directory
 PHOTO/
+*.exe
+public/*.exe
 

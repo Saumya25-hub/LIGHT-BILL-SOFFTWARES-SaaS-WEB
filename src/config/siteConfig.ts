@@ -123,13 +123,13 @@ export const siteConfig: SiteConfig = {
   },
   download: {
     desktop: {
-      version: "1.0.0",
-      releaseDate: "August 2026",
+      version: "1.0.1",
+      releaseDate: "September 2026",
       installerFileName: "SIGNATURES-BILL-Setup.exe",
-      fileSizeBytes: 53662833,
-      fileSizeFormatted: "53.6 MB",
+      fileSizeBytes: 127496080,
+      fileSizeFormatted: "127 MB",
       osSupport: "Windows 10 / 11 (64-bit)",
-      directDownloadUrl: "#download-desktop",
+      directDownloadUrl: "https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v1.0.1/SIGNATURES-BILL-Setup.exe",
       sha256Checksum: "Verified Production Binary",
     },
     android: {
