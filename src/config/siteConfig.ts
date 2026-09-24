@@ -129,7 +129,7 @@ export const siteConfig: SiteConfig = {
       fileSizeBytes: 127496080,
       fileSizeFormatted: "127 MB",
       osSupport: "Windows 10 / 11 (64-bit)",
-      directDownloadUrl: "https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v1.0.1/SIGNATURES-BILL-Setup.exe",
+      directDownloadUrl: "https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/download/v1.0.1/SIGNATURES-BILL-Setup.exe",
       sha256Checksum: "Verified Production Binary",
     },
     android: {
