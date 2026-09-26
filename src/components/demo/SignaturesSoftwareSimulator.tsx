@@ -608,7 +608,7 @@ export const SignaturesSoftwareSimulator: React.FC = () => {
   const headerBgClass = isNightMode ? 'bg-[#131C2E]' : 'bg-white';
 
   return (
-    <div className="w-full my-6 select-none font-sans">
+    <div className={`w-full my-6 select-none font-sans ${isNightMode ? 'dark' : ''}`}>
       {/* Outer Windows Container (Exact Window Style with blue glow shadow) */}
       <div className={`w-full rounded-2xl overflow-hidden shadow-2xl border ${borderClass} ${bgClass} transition-colors duration-200`}>
         
