@@ -26,12 +26,15 @@ export const AmbientSpatialMotionLayer: React.FC<{ className?: string }> = ({ cl
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
+    const isMobile = width < 768;
+
     const runes = ['0', '1', 'λ', '⚡', '0ms', 'Σ', '{ }', 'GPU', 'C#', 'SQL'];
-    const particleCount = Math.min(55, Math.floor(width / 32));
+    // On mobile, use only 16 lightweight particles for 120Hz performance; desktop uses 45
+    const particleCount = isMobile ? 16 : Math.min(48, Math.floor(width / 36));
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
-      const isRune = Math.random() < 0.22;
+      const isRune = !isMobile && Math.random() < 0.22;
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -62,6 +65,7 @@ export const AmbientSpatialMotionLayer: React.FC<{ className?: string }> = ({ cl
     };
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (isMobile) return;
       targetMouseX = e.clientX;
       targetMouseY = e.clientY;
     };
@@ -69,53 +73,51 @@ export const AmbientSpatialMotionLayer: React.FC<{ className?: string }> = ({ cl
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const delta = currentScrollY - lastScrollY;
-      scrollSpeed = Math.min(15, Math.abs(delta) * 0.25);
+      scrollSpeed = Math.min(12, Math.abs(delta) * 0.2);
       lastScrollY = currentScrollY;
     };
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    }
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const render = () => {
       frame++;
-      // Decay scroll burst speed smoothly
       scrollSpeed *= 0.92;
 
-      // Mouse inertia
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
+      // Mouse parallax only on desktop
+      if (!isMobile) {
+        mouseX += (targetMouseX - mouseX) * 0.05;
+        mouseY += (targetMouseY - mouseY) * 0.05;
+      }
 
-      const parallaxX = (mouseX / width - 0.5) * 40;
-      const parallaxY = (mouseY / height - 0.5) * 40;
+      const parallaxX = isMobile ? 0 : (mouseX / width - 0.5) * 35;
+      const parallaxY = isMobile ? 0 : (mouseY / height - 0.5) * 35;
 
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Motion physics + depth multiplier
         p.x += p.vx * p.z;
-        p.y += (p.vy - scrollSpeed * 0.4) * p.z;
+        p.y += (p.vy - scrollSpeed * 0.35) * p.z;
 
-        // Wrap around boundaries
         if (p.x < -20) p.x = width + 20;
         if (p.x > width + 20) p.x = -20;
         if (p.y < -20) p.y = height + 20;
         if (p.y > height + 20) p.y = -20;
 
-        // Visual position with 3D parallax offset
         const drawX = p.x + parallaxX * p.z;
         const drawY = p.y + parallaxY * p.z;
 
-        // Pulsing glow
         const currentAlpha = Math.max(
           0.1,
           p.alpha * (0.6 + 0.4 * Math.sin(frame * p.pulseSpeed + p.pulseOffset))
         );
 
         if (p.type === 'ember') {
-          // Soft golden star / cosmic ember
           const radius = p.size * p.z;
           const gradient = ctx.createRadialGradient(
             drawX,
@@ -133,14 +135,10 @@ export const AmbientSpatialMotionLayer: React.FC<{ className?: string }> = ({ cl
           ctx.beginPath();
           ctx.arc(drawX, drawY, radius * 2.8, 0, Math.PI * 2);
           ctx.fill();
-        } else if (p.text) {
-          // Floating 3D holographic code rune
+        } else if (p.text && !isMobile) {
           ctx.font = `${Math.round(p.size * p.z)}px monospace`;
           ctx.fillStyle = `rgba(245, 158, 11, ${currentAlpha * 0.75})`;
-          ctx.shadowColor = 'rgba(245, 158, 11, 0.6)';
-          ctx.shadowBlur = 8 * p.z;
           ctx.fillText(p.text, drawX, drawY);
-          ctx.shadowBlur = 0; // reset
         }
       }
 

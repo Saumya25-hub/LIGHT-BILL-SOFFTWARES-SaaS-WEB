@@ -104,14 +104,19 @@ export const ComponineNavbar: React.FC<ComponineNavbarProps> = ({
           if (onLaunchDemo) onLaunchDemo();
           else onNavigate('/demo');
         }}
-        className="group relative overflow-hidden flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-600 text-black font-grotesk font-bold text-xs sm:text-xs tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.4)] hover:shadow-[0_0_35px_rgba(245,158,11,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer border border-amber-300/40"
+        className="group relative overflow-hidden flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-600 text-black font-grotesk font-bold text-xs tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.4)] hover:shadow-[0_0_35px_rgba(245,158,11,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer border border-amber-300/40 shrink-0"
       >
         {/* Halftone Mask Layer */}
         <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#000_1.5px,transparent_1.5px)] [background-size:6px_6px] animate-halftone" />
         
         <Zap className="w-3.5 h-3.5 text-black fill-black animate-pulse" />
         <span className="relative z-10 font-bold uppercase tracking-wider text-[11px] sm:text-xs">
-          <RollingText text="Launch Simulator" charClassName="font-extrabold text-black" />
+          <span className="hidden sm:inline">
+            <RollingText text="Launch Simulator" charClassName="font-extrabold text-black" />
+          </span>
+          <span className="sm:hidden font-extrabold text-black">
+            Demo
+          </span>
         </span>
       </button>
 

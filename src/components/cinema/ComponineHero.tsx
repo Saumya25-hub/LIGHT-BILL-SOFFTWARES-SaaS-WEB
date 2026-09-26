@@ -181,8 +181,68 @@ export const ComponineHero: React.FC<ComponineHeroProps> = ({
 
           </div>
 
-          {/* Right Column: 100% Open Space so David on the right has completely unobstructed view! */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 pointer-events-none" />
+          {/* Right Column: Premium Desktop Engine Interactive Preview */}
+          <div className="hidden lg:flex lg:col-span-5 flex-col justify-center">
+            <div className="frame-corner-card relative rounded-3xl p-6 sm:p-7 shadow-[0_25px_60px_rgba(0,0,0,0.85)] border border-amber-500/30 backdrop-blur-xl bg-gradient-to-b from-[#16120d]/90 to-[#0a0806]/95">
+              {/* 4 Golden Corner Ornaments */}
+              <div className="frame-corner-ornament frame-corner-top-left" />
+              <div className="frame-corner-ornament frame-corner-top-right" />
+              <div className="frame-corner-ornament frame-corner-bottom-left" />
+              <div className="frame-corner-ornament frame-corner-bottom-right" />
+
+              {/* Window Header */}
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                  <span className="ml-2 font-mono text-[10px] text-amber-300 tracking-wider">
+                    SIGNATURES_ENGINE_V1.EXE
+                  </span>
+                </div>
+                <span className="font-mono text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 animate-pulse">
+                  ● 0MS READY
+                </span>
+              </div>
+
+              {/* Software Metrics Grid */}
+              <div className="space-y-2.5 font-mono text-xs">
+                <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                  <span className="text-neutral-400">Database Engine</span>
+                  <span className="text-amber-300 font-semibold">SQLite 3.45 (Air-Gapped)</span>
+                </div>
+                <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                  <span className="text-neutral-400">Thermal Print Engine</span>
+                  <span className="text-emerald-400 font-semibold">80mm ESC/POS (0ms Blit)</span>
+                </div>
+                <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                  <span className="text-neutral-400">Panchang Calendar</span>
+                  <span className="text-amber-200 font-semibold">2026–2040 Almanac</span>
+                </div>
+                <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
+                  <span className="text-neutral-400">RAM Footprint</span>
+                  <span className="text-cyan-400 font-semibold">&lt; 24 MB Memory</span>
+                </div>
+              </div>
+
+              {/* Launch Action */}
+              <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-neutral-400 font-mono">No Install Needed</span>
+                  <span className="text-xs font-semibold text-white">Full In-Browser Simulator</span>
+                </div>
+                <button
+                  onClick={() => {
+                    if (onLaunchDemo) onLaunchDemo();
+                    else if (onNavigate) onNavigate('/demo');
+                  }}
+                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-grotesk font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(245,158,11,0.4)] cursor-pointer"
+                >
+                  Test Demo →
+                </button>
+              </div>
+            </div>
+          </div>
 
         </div>
 

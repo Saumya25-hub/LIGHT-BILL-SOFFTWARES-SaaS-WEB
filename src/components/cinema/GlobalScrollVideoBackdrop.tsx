@@ -17,21 +17,59 @@ export const GlobalScrollVideoBackdrop: React.FC<GlobalScrollVideoBackdropProps>
     const video = videoRef.current;
     if (!video) return;
 
+    // Detect touch / mobile device for targeted 60fps/120fps hardware acceleration
+    const isMobile =
+      typeof window !== 'undefined' &&
+      (window.innerWidth < 768 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        (navigator.maxTouchPoints > 0 && window.innerWidth < 1024));
+
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
+    video.loop = true;
+
+    // =========================================================================
+    // MOBILE STRATEGY: Smooth 60fps continuous ambient loop (Zero touch-seek lag)
+    // =========================================================================
+    if (isMobile) {
+      video.playbackRate = 1.0; // 100% full native 30 FPS, silky smooth!
+
+      const handleMobileReady = () => {
+        setIsVideoReady(true);
+        video.play().catch(() => {});
+      };
+
+      video.addEventListener('loadedmetadata', handleMobileReady);
+      video.addEventListener('canplay', handleMobileReady);
+      if (video.readyState >= 2) {
+        handleMobileReady();
+      }
+
+      return () => {
+        video.removeEventListener('loadedmetadata', handleMobileReady);
+        video.removeEventListener('canplay', handleMobileReady);
+      };
+    }
+
+    // =========================================================================
+    // DESKTOP STRATEGY: Responsive Scrubbing + FULL 1.0x FPS Idle Playback (No 0.4x lag!)
+    // =========================================================================
+    video.playbackRate = 1.0; // Silky smooth 30 FPS at all times!
 
     const handleLoadedMetadata = () => {
       setIsVideoReady(true);
       if (video.duration) {
         video.currentTime = 0;
-        // Start initial ambient drift so the page is alive immediately on arrival
-        video.playbackRate = 0.4;
         video.play().catch(() => {});
       }
     };
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('canplay', handleLoadedMetadata);
+    if (video.readyState >= 2) {
+      handleLoadedMetadata();
+    }
 
     let targetProgress = 0;
     let currentProgress = 0;
@@ -40,8 +78,8 @@ export const GlobalScrollVideoBackdrop: React.FC<GlobalScrollVideoBackdropProps>
     let animId: number;
     let isSeeking = false;
     let pendingTargetTime: number | null = null;
+    let lastScrollY = window.scrollY;
 
-    // Direct hardware seek engine with seek queue (eliminates micro-stutter and decoder stalls)
     const performSeek = (time: number) => {
       if (!video || !video.duration || isNaN(video.duration)) return;
 
@@ -77,35 +115,37 @@ export const GlobalScrollVideoBackdrop: React.FC<GlobalScrollVideoBackdropProps>
     video.addEventListener('seeked', handleSeeked);
 
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const delta = Math.abs(currentScrollY - lastScrollY);
+
+      // Filter out micro 1px jitter
+      if (delta < 2) return;
+      lastScrollY = currentScrollY;
+
       isUserScrolling = true;
-      video.pause(); // Pause ambient drift immediately upon user scroll action
+      video.pause(); // Pause ambient playback while actively wheeling
 
       const docHeight = document.documentElement.scrollHeight;
       const winHeight = window.innerHeight;
       const maxScroll = Math.max(docHeight - winHeight, 1);
-      targetProgress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+      targetProgress = Math.min(1, Math.max(0, currentScrollY / maxScroll));
 
-      // After user stops scrolling for 400ms, seamlessly resume ambient slow-motion drift
+      // After user stops scrolling for 250ms, resume smooth 1.0x native playback!
       clearTimeout(idleTimer);
       idleTimer = setTimeout(() => {
         isUserScrolling = false;
-        video.playbackRate = 0.4;
+        video.playbackRate = 1.0; // Full 30 FPS! No more 0.4x slideshow stutter!
         video.play().catch(() => {});
-      }, 400);
+      }, 250);
     };
 
     const updateFrame = () => {
       if (video.duration && !isNaN(video.duration)) {
         if (isUserScrolling) {
-          // Actively scrub with responsive 0.22 lerp (responsive, zero sluggishness)
-          currentProgress += (targetProgress - currentProgress) * 0.22;
+          // Responsive 0.25 lerp for snappy, instant tracking
+          currentProgress += (targetProgress - currentProgress) * 0.25;
           const targetTime = currentProgress * video.duration;
           performSeek(targetTime);
-        } else {
-          // Ambient loop guard: if video reaches near end during idle, softly wrap around
-          if (video.currentTime >= video.duration - 0.15) {
-            video.currentTime = 0.1;
-          }
         }
       }
 
@@ -119,6 +159,7 @@ export const GlobalScrollVideoBackdrop: React.FC<GlobalScrollVideoBackdropProps>
     return () => {
       window.removeEventListener('scroll', handleScroll);
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('canplay', handleLoadedMetadata);
       video.removeEventListener('seeked', handleSeeked);
       clearTimeout(idleTimer);
       cancelAnimationFrame(animId);
@@ -136,11 +177,11 @@ export const GlobalScrollVideoBackdrop: React.FC<GlobalScrollVideoBackdropProps>
         muted
         playsInline
         preload="auto"
-        className={`w-full h-full object-cover object-center transition-opacity duration-700 ${
+        className={`w-full h-full object-cover object-[65%_center] sm:object-center transition-opacity duration-700 ${
           isVideoReady ? 'opacity-85' : 'opacity-0'
         }`}
         style={{
-          filter: 'contrast(1.15) brightness(0.82) saturate(1.18)',
+          filter: 'contrast(1.15) brightness(0.84) saturate(1.18)',
           transform: 'scale(1.035) translateZ(0)',
           willChange: 'transform',
         }}

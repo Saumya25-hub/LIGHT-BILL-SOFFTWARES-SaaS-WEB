@@ -1,5 +1,5 @@
 import React from 'react';
-import { GlobalScrollVideoBackdrop } from '../components/cinema/GlobalScrollVideoBackdrop';
+import { PremiumSpaceBackdrop } from '../components/cinema/PremiumSpaceBackdrop';
 import { ComponineNavbar } from '../components/layout/ComponineNavbar';
 import { ComponineHero } from '../components/cinema/ComponineHero';
 import { CosmicDemoPortal } from '../components/cinema/CosmicDemoPortal';
@@ -18,8 +18,8 @@ export const HomePage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   return (
     <div className="relative w-full min-h-screen bg-[#070605] text-white selection:bg-amber-500 selection:text-black font-grotesk">
       
-      {/* 00. Global Video Scroll Engine (Fixed full-screen backdrop, scrubs forward/backward smoothly with page scroll) */}
-      <GlobalScrollVideoBackdrop />
+      {/* 00. Clean Luxury Space Backdrop (Deep Cosmic Nebulae + Micro Starfield - 120 FPS, 0ms load, Zero Lag) */}
+      <PremiumSpaceBackdrop />
 
       {/* 01. Floating Capsule Navbar (Componine Rolling Text & Halftone Mask CTA) */}
       <ComponineNavbar 

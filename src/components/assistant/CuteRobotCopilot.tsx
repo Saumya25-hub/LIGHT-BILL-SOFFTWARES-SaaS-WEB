@@ -223,7 +223,7 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
         {/* Contextual Speech Bubble (Reacts to Scroll & Sections) */}
         {showSpeechBubble && !isOpen && (
           <div 
-            className="mb-3 mr-2 max-w-[240px] sm:max-w-[280px] bg-[#120f0b]/95 backdrop-blur-md border border-amber-500/40 rounded-2xl p-3 shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_15px_rgba(245,158,11,0.2)] text-xs text-neutral-200 animate-in fade-in slide-in-from-bottom-2 duration-300 relative"
+            className="mb-2 mr-1 sm:mr-2 max-w-[210px] sm:max-w-[280px] bg-[#120f0b]/95 backdrop-blur-md border border-amber-500/40 rounded-2xl p-2.5 sm:p-3 shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_15px_rgba(245,158,11,0.2)] text-[11px] sm:text-xs text-neutral-200 animate-in fade-in slide-in-from-bottom-2 duration-300 relative"
           >
             <button 
               onClick={(e) => {
@@ -243,18 +243,18 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
             </div>
 
             {/* Bubble Tail */}
-            <div className="absolute -bottom-1.5 right-12 w-3 h-3 bg-[#120f0b] border-r border-b border-amber-500/40 rotate-45" />
+            <div className="absolute -bottom-1.5 right-8 sm:right-12 w-3 h-3 bg-[#120f0b] border-r border-b border-amber-500/40 rotate-45" />
           </div>
         )}
 
-        {/* The Capsule AI Copilot Dock: ~240px wide, completely concealing watermark */}
+        {/* The Capsule AI Copilot Dock: Compact on mobile, full width on desktop */}
         <div 
           onClick={() => {
             playSciFiBlip(isOpen ? 440 : 880);
             setIsOpen(!isOpen);
             setShowSpeechBubble(false);
           }}
-          className="group relative cursor-pointer flex items-center gap-3.5 pl-3.5 pr-6 py-2.5 rounded-full bg-[#110e0b]/98 hover:bg-[#1a1611] border border-amber-500/50 shadow-[0_15px_45px_rgba(0,0,0,0.95),0_0_30px_rgba(245,158,11,0.25)] hover:border-amber-400 hover:shadow-[0_15px_50px_rgba(0,0,0,0.98),0_0_40px_rgba(245,158,11,0.45)] transition-all duration-300 backdrop-blur-2xl"
+          className="group relative cursor-pointer flex items-center gap-2 sm:gap-3.5 p-2 sm:pl-3.5 sm:pr-6 sm:py-2.5 rounded-full bg-[#110e0b]/98 hover:bg-[#1a1611] border border-amber-500/50 shadow-[0_15px_45px_rgba(0,0,0,0.95),0_0_30px_rgba(245,158,11,0.25)] hover:border-amber-400 hover:shadow-[0_15px_50px_rgba(0,0,0,0.98),0_0_40px_rgba(245,158,11,0.45)] transition-all duration-300 backdrop-blur-2xl"
           title="Signatures AI Copilot"
         >
           {/* Ambient Dark Levitation Under-Shield that blankets the watermark */}
@@ -273,7 +273,7 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
 
             {/* Robot Head Body */}
             <div 
-              className="relative w-12 h-12 rounded-2xl p-0.5 bg-gradient-to-br from-amber-400/50 via-neutral-800 to-[#120f0b] border border-amber-500/60 shadow-md transition-transform duration-200"
+              className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl p-0.5 bg-gradient-to-br from-amber-400/50 via-neutral-800 to-[#120f0b] border border-amber-500/60 shadow-md transition-transform duration-200"
               style={{
                 transform: `translate(${headTilt.x}px, ${headTilt.y}px)`,
               }}
@@ -284,29 +284,29 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
                 <div className="absolute -right-0.5 w-1 h-3 rounded-full bg-amber-500/60 shadow-[0_0_6px_#f59e0b]" />
 
                 {/* Visor Screen */}
-                <div className="relative w-full h-6 rounded-lg bg-black/95 border border-amber-500/30 flex items-center justify-center gap-1.5 px-1 shadow-inner overflow-hidden">
+                <div className="relative w-full h-5 sm:h-6 rounded-lg bg-black/95 border border-amber-500/30 flex items-center justify-center gap-1.5 px-1 shadow-inner overflow-hidden">
                   {/* Left Eye */}
                   <div 
                     className={`rounded-full bg-gradient-to-tr from-amber-400 to-yellow-200 shadow-[0_0_10px_#f59e0b] transition-all duration-150 ${
                       isBlinking 
-                        ? 'h-0.5 w-2.5 my-1 bg-amber-300' 
+                        ? 'h-0.5 w-2 sm:w-2.5 my-1 bg-amber-300' 
                         : scrollReaction === 'down' 
-                          ? 'w-2.5 h-2.5 translate-y-0.5' 
+                          ? 'w-2 sm:w-2.5 h-2 sm:h-2.5 translate-y-0.5' 
                           : scrollReaction === 'up'
-                            ? 'w-2.5 h-2.5 -translate-y-0.5'
-                            : 'w-2.5 h-2.5'
+                            ? 'w-2 sm:w-2.5 h-2 sm:h-2.5 -translate-y-0.5'
+                            : 'w-2 sm:w-2.5 h-2 sm:h-2.5'
                     }`}
                   />
                   {/* Right Eye */}
                   <div 
                     className={`rounded-full bg-gradient-to-tr from-amber-400 to-yellow-200 shadow-[0_0_10px_#f59e0b] transition-all duration-150 ${
                       isBlinking 
-                        ? 'h-0.5 w-2.5 my-1 bg-amber-300' 
+                        ? 'h-0.5 w-2 sm:w-2.5 my-1 bg-amber-300' 
                         : scrollReaction === 'down' 
-                          ? 'w-2.5 h-2.5 translate-y-0.5' 
+                          ? 'w-2 sm:w-2.5 h-2 sm:h-2.5 translate-y-0.5' 
                           : scrollReaction === 'up'
-                            ? 'w-2.5 h-2.5 -translate-y-0.5'
-                            : 'w-2.5 h-2.5'
+                            ? 'w-2 sm:w-2.5 h-2 sm:h-2.5 -translate-y-0.5'
+                            : 'w-2 sm:w-2.5 h-2 sm:h-2.5'
                     }`}
                   />
                 </div>
@@ -314,8 +314,8 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
             </div>
           </div>
 
-          {/* Text Info Inside Capsule Dock */}
-          <div className="flex flex-col pr-1">
+          {/* Text Info Inside Capsule Dock (Hidden on mobile to preserve screen width, visible on sm+) */}
+          <div className="hidden sm:flex flex-col pr-1">
             <div className="flex items-center gap-2">
               <span className="font-grotesk font-bold text-xs text-white tracking-wide group-hover:text-amber-300 transition-colors">
                 Siggy Copilot
@@ -337,7 +337,7 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
       {/* ========================================================================= */}
       {isOpen && (
         <div 
-          className="fixed bottom-24 right-4 sm:bottom-28 sm:right-6 z-50 w-[92vw] max-w-[380px] h-[520px] max-h-[82vh] rounded-3xl bg-[#0f0d0a]/95 backdrop-blur-xl border border-amber-500/40 shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(245,158,11,0.2)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 select-none font-grotesk text-white"
+          className="fixed bottom-20 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-28 z-50 w-auto sm:w-[380px] max-w-[380px] h-[480px] sm:h-[520px] max-h-[80vh] rounded-3xl bg-[#0f0d0a]/95 backdrop-blur-xl border border-amber-500/40 shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(245,158,11,0.2)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 select-none font-grotesk text-white"
         >
           {/* Header */}
           <div className="p-4 border-b border-amber-500/20 bg-gradient-to-r from-amber-950/40 via-[#18140f] to-amber-950/40 flex items-center justify-between">
