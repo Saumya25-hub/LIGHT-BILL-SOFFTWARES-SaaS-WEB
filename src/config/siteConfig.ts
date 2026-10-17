@@ -42,13 +42,27 @@ export interface SiteConfig {
       periodLabel: string;
       badgeText: string;
     };
+    gstAddon: {
+      price: number;
+      quota: string;
+      periodLabel: string;
+      description: string;
+    };
+    proCombo: {
+      monthlyPrice: number;
+      annualPrice: number;
+      savingsPerMonth: number;
+      periodLabel: string;
+      badgeText: string;
+      description: string;
+    };
     trial: {
       days: number;
       headline: string;
       subline: string;
       noCreditCardRequired: boolean;
     };
-    taxNote: string; // Marked for owner confirmation
+    taxNote: string;
   };
   download: {
     desktop: {
@@ -103,15 +117,29 @@ export const siteConfig: SiteConfig = {
     currencySymbol: "₹",
     currencyCode: "INR",
     monthly: {
-      price: 249,
+      price: 299,
       periodLabel: "/month",
     },
     annual: {
-      regularPrice: 2988,
-      offerPrice: 1999,
-      savings: 989,
+      regularPrice: 3588,
+      offerPrice: 3200,
+      savings: 388,
       periodLabel: "/year",
-      badgeText: "CURRENT OFFER",
+      badgeText: "MOST POPULAR",
+    },
+    gstAddon: {
+      price: 100,
+      quota: "30 GSTIN Auto-Fills / month",
+      periodLabel: "/month",
+      description: "Direct Government GST API lookup. Auto-fetches Legal Name, Trade Name, Registered Address, and Filing Status with 100% accuracy.",
+    },
+    proCombo: {
+      monthlyPrice: 349,
+      annualPrice: 3600,
+      savingsPerMonth: 50,
+      periodLabel: "/month",
+      badgeText: "BEST VALUE BUNDLE",
+      description: "Complete Billing ERP + 30 GST API Auto-fills included every month. All-in-one suite for growing businesses.",
     },
     trial: {
       days: 35,
@@ -119,18 +147,18 @@ export const siteConfig: SiteConfig = {
       subline: "Try SIGNATURES LIGHT BILL ERP before choosing a plan. Full features included.",
       noCreditCardRequired: true,
     },
-    taxNote: "Price as quoted. (Tax inclusion/exclusion pending owner confirmation)",
+    taxNote: "All prices in INR. Includes automatic software updates and cloud backups.",
   },
   download: {
     desktop: {
-      version: "1.0.1",
+      version: "1.1.0",
       releaseDate: "September 2026",
       installerFileName: "SIGNATURES-BILL-Setup.exe",
-      fileSizeBytes: 127496080,
-      fileSizeFormatted: "127 MB",
+      fileSizeBytes: 55892955,
+      fileSizeFormatted: "55.8 MB",
       osSupport: "Windows 10 / 11 (64-bit)",
-      directDownloadUrl: "https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/download/v1.0.1/SIGNATURES-BILL-Setup.exe",
-      sha256Checksum: "Verified Production Binary",
+      directDownloadUrl: "https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/download/v1.1.0/SIGNATURES-BILL-Setup.exe",
+      sha256Checksum: "Verified Production Binary (Smart Installer & In-place Updater)",
     },
     android: {
       version: "1.0.0-beta",

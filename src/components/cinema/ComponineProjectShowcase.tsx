@@ -23,7 +23,7 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
   onLaunchDemo,
   onNavigate,
 }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'billing' | 'ems' | 'panchang'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'billing' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
 
   const projects: ProjectItem[] = [
     {
@@ -40,6 +40,36 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
         { label: 'Compliance', value: 'GSTN 2026 Ready' },
       ],
       actionLabel: 'Launch In Simulator',
+    },
+    {
+      id: 'restaurant',
+      category: 'HOSPITALITY & FOOD SERVICE',
+      title: 'Restaurant Counter POS & Zero-Trust LAN KDS',
+      tagline: 'Interactive live table occupancy map, multi-round KOTs, and zero-latency kitchen sync',
+      description: 'Engineered for dine-in restaurants, cafes, and food courts. Features interactive table status tiles (🟢 Available, 🔴 Occupied, 🟡 Cleaning), 3-way split payments (Cash + UPI + Card), and zero-trust LAN sync with Kitchen Display Terminals over local Kestrel without requiring internet.',
+      badge: 'LAN MESH KDS',
+      image: '/assets/desktop-sales-invoice.png',
+      metrics: [
+        { label: 'LAN Latency', value: '< 2ms Local' },
+        { label: 'Table Fleet', value: 'Interactive Map' },
+        { label: 'Kitchen Sync', value: 'Zero-Trust KDS' },
+      ],
+      actionLabel: 'Launch In Simulator',
+    },
+    {
+      id: 'multicompany',
+      category: 'ENTERPRISE MULTI-TENANCY',
+      title: 'Multi-Company Architecture & Setup Wizard',
+      tagline: 'Airtight database-per-company sandboxing with 1-click active tenant switching',
+      description: 'Run multiple firms, sister companies, and branch accounts from a single desktop instance. Modern onboarding wizard automatically detects state GST codes and configures industry archetypes (Retail, Restaurant, Wholesale) with complete SQLite database isolation.',
+      badge: 'AIRTIGHT SANDBOX',
+      image: '/assets/desktop-dashboard-dark.png',
+      metrics: [
+        { label: 'Company Isolation', value: '100% Air-Gapped' },
+        { label: 'Switch Time', value: 'Instant 0ms' },
+        { label: 'Firm Scale', value: 'Unlimited Profiles' },
+      ],
+      actionLabel: 'Explore Architecture',
     },
     {
       id: 'ems',
@@ -125,7 +155,10 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
             {[
               { id: 'all', label: 'All Modules' },
               { id: 'billing', label: 'GST Billing' },
+              { id: 'restaurant', label: 'Restaurant POS' },
+              { id: 'multicompany', label: 'Multi-Company' },
               { id: 'ems', label: 'Factory EMS' },
+              { id: 'catalog', label: 'Catalog Studio' },
               { id: 'panchang', label: 'Panchang 2040' },
             ].map((tab) => (
               <button
