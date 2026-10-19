@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://signaturesbill.com/sitemap.xml
+Sitemap: https://light-bill-sofftwares-saa-s-web.vercel.app/sitemap.xml
