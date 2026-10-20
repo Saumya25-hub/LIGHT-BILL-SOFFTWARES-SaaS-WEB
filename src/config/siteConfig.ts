@@ -154,11 +154,11 @@ export const siteConfig: SiteConfig = {
       version: "2.0.0",
       releaseDate: "October 2026",
       installerFileName: "SIGNATURES-BILL-Setup.exe",
-      fileSizeBytes: 63135072,
+      fileSizeBytes: 63133112,
       fileSizeFormatted: "60.2 MB",
       osSupport: "Windows 10 / 11 (64-bit)",
       directDownloadUrl: "https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/download/v2.0.0/SIGNATURES-BILL-Setup.exe",
-      sha256Checksum: "5F976B43677A477C8ADF265D96C64C31D70A3ED393F1999AC042BF3517D8DEFE",
+      sha256Checksum: "43746ED636748F40B9ACDEE83D707233EFA17679EED196A16E54A89CA35F6174",
     },
     android: {
       version: "1.0.0-beta",
