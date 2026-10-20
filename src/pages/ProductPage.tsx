@@ -23,13 +23,15 @@ import {
   Database
 } from 'lucide-react';
 
+import { MultiCompanySyncSection } from '../components/product/MultiCompanySyncSection';
+
 export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   const verifiedDesktopModules = [
     {
-      title: "Multi-Company Architecture & Setup Wizard",
-      desc: "Run unlimited business firms and sister companies on one PC with 100% database-per-company isolation. Includes an automated onboarding wizard with GST state code detection.",
+      title: "Multi-Company & Universal Master Sync",
+      desc: "Run unlimited business firms and sister branches with 100% database-per-company isolation. Real-time Universal Master Sync replicates products and parties across all firms, keeping stock and accounting ledgers completely air-gapped.",
       icon: <Building2 className="w-5 h-5 text-indigo-600" />,
-      tag: "NEW Enterprise",
+      tag: "NEW Universal Sync",
     },
     {
       title: "Restaurant POS & Live Table Management",
@@ -145,6 +147,9 @@ export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) =
           </Card>
         ))}
       </div>
+
+      {/* Deep-Dive Spotlight: Multi-Company Architecture & Universal Master Sync */}
+      <MultiCompanySyncSection onLaunchDemo={onLaunchDemo} onNavigate={onNavigate} />
 
       <div className="bg-white border border-slate-200 shadow-card rounded-2xl p-6 sm:p-8 text-center space-y-4 max-w-2xl mx-auto">
         <div className="inline-flex p-3 rounded-2xl bg-sky-50 text-sky-600 border border-sky-100">

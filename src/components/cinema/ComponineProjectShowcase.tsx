@@ -59,17 +59,17 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
     {
       id: 'multicompany',
       category: 'ENTERPRISE MULTI-TENANCY',
-      title: 'Multi-Company Architecture & Setup Wizard',
-      tagline: 'Airtight database-per-company sandboxing with 1-click active tenant switching',
-      description: 'Run multiple firms, sister companies, and branch accounts from a single desktop instance. Modern onboarding wizard automatically detects state GST codes and configures industry archetypes (Retail, Restaurant, Wholesale) with complete SQLite database isolation.',
-      badge: 'AIRTIGHT SANDBOX',
+      title: 'Multi-Company Architecture & Universal Master Sync',
+      tagline: 'Database-per-company sandboxing with real-time cross-company catalog synchronization',
+      description: 'Run multiple firms, sister companies, and branch accounts from a single desktop instance. Modern onboarding wizard automatically detects state GST codes. With Universal Master Sync enabled, adding a product or party in one company automatically syncs across all sister firms, while physical stock, invoices, and accounting ledgers remain 100% strictly air-gapped.',
+      badge: 'UNIVERSAL MASTER SYNC',
       image: '/assets/desktop-dashboard-dark.png',
       metrics: [
-        { label: 'Company Isolation', value: '100% Air-Gapped' },
-        { label: 'Switch Time', value: 'Instant 0ms' },
-        { label: 'Firm Scale', value: 'Unlimited Profiles' },
+        { label: 'Master Sync', value: 'Real-Time Auto' },
+        { label: 'Stock & Ledgers', value: '100% Isolated' },
+        { label: 'Company Switcher', value: 'Instant 0ms' },
       ],
-      actionLabel: 'Explore Architecture',
+      actionLabel: 'Explore Master Sync',
     },
     {
       id: 'ems',
@@ -249,8 +249,17 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
                   {/* Secondary Action with Rolling Text */}
                   <button
                     onClick={() => {
-                      if (onLaunchDemo) onLaunchDemo();
-                      else if (onNavigate) onNavigate('/demo');
+                      if (project.id === 'multicompany' && onNavigate) {
+                        onNavigate('/product');
+                        setTimeout(() => {
+                          const el = document.getElementById('multicompany');
+                          if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        }, 120);
+                      } else if (onLaunchDemo) {
+                        onLaunchDemo();
+                      } else if (onNavigate) {
+                        onNavigate('/demo');
+                      }
                     }}
                     className="group/btn relative inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-amber-500/15 hover:bg-amber-500 text-amber-300 hover:text-black font-grotesk font-bold text-xs tracking-wider uppercase border border-amber-400/40 hover:border-amber-300 transition-all duration-300 shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)] cursor-pointer"
                   >

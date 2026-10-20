@@ -182,6 +182,12 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
         botResponse = '🖨️ Yes! Supports all standard 80mm (3-inch) and 58mm (2-inch) ESC/POS USB, Bluetooth, and LAN thermal receipt printers with instant 0-second auto-cut blit printing and bilingual Indian regional font support.';
       } else if (query.includes('gst') || query.includes('tax')) {
         botResponse = '📑 100% compliant with GSTN 2026 rules! Handles CGST/SGST/IGST, reverse charge, HSN auto-lookup, and one-click JSON e-way bill export.';
+      } else if (query.includes('multi') || query.includes('company') || query.includes('sync') || query.includes('branch') || query.includes('firm')) {
+        botResponse = '🏢 Signatures Bill features Multi-Company Architecture with Universal Master Sync! Run unlimited sister firms and branches on 1 PC. Add products or parties once—they automatically sync across all companies in real-time. Crucially, Stock Quantities, Invoices, and Ledgers remain 100% strictly isolated per company so there is zero confusion!';
+        actions = [
+          { label: '🏢 Explore Multi-Company Sync', action: () => onNavigate?.('/product') },
+          { label: '🚀 Test In Simulator', action: () => onLaunchDemo?.() },
+        ];
       } else {
         botResponse = `✨ Thanks for asking! Signatures Bill ERP is engineered for Surat & pan-India textile traders, retail marts, and manufacturers. Let me know if you want to explore the live demo or download installer.`;
         actions = [
@@ -432,6 +438,12 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
               className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer"
             >
               💰 Pricing
+            </button>
+            <button 
+              onClick={() => handleSendPrompt('How does Multi-Company & Universal Master Sync work?')}
+              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer"
+            >
+              🏢 Multi-Company Sync
             </button>
             <button 
               onClick={() => handleSendPrompt('Explain GST and thermal printer features')}

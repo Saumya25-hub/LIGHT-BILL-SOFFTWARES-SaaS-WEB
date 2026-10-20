@@ -11,7 +11,8 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
 
   const coreBillingFeatures = [
     "Complete GST Sales Invoicing (CGST, SGST, IGST)",
-    "Multi-Company Architecture & Setup Wizard (Isolated DBs)",
+    "Multi-Company & Universal Master Sync (Shared Catalogs, Isolated Stock & Ledgers)",
+    "1-Click Master Catch-Up & 0ms Company Switcher",
     "Restaurant POS Counter with Live Interactive Table Layout",
     "Zero-Trust LAN KDS (Kitchen Display System) Mesh",
     "SEZ & Zero-Rated Export Compliance (LUT / IGST)",
