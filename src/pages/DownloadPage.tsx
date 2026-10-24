@@ -4,7 +4,7 @@ import { Badge } from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { siteConfig } from '../config/siteConfig';
-import { Laptop, Smartphone, Download, ShieldCheck, Clock } from 'lucide-react';
+import { Laptop, Smartphone, Download, ShieldCheck, Clock, Sparkles } from 'lucide-react';
 
 export const DownloadPage: React.FC<PageProps> = () => {
   return (
@@ -56,6 +56,18 @@ export const DownloadPage: React.FC<PageProps> = () => {
                 <span className="text-slate-500">Trial Period:</span>
                 <span className="text-emerald-700 font-bold">35 Days Free</span>
               </div>
+            </div>
+
+            <div className="p-3 bg-emerald-50/70 rounded-lg border border-emerald-200/60 text-[11px] text-emerald-900 space-y-1">
+              <span className="font-semibold flex items-center gap-1.5 text-emerald-800">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> What's New in v2.0.0:
+              </span>
+              <ul className="list-disc list-inside space-y-0.5 text-emerald-700">
+                <li>Universal Excel Bulk Import with 2-step verification preview</li>
+                <li>Ctrl+P Party Picker & rapid billing shortcuts (Ctrl+N, Ctrl+E)</li>
+                <li>Ultra-smooth sidebar animations optimized for i3 / 4GB RAM PCs</li>
+                <li>Safe In-Place Upgrade: Zero data loss for existing DB & invoices</li>
+              </ul>
             </div>
           </div>
 

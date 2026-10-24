@@ -21,13 +21,27 @@ import {
   Wifi,
   Calendar,
   Database,
-  Sparkles
+  Sparkles,
+  Table,
+  Keyboard
 } from 'lucide-react';
 
 import { MultiCompanySyncSection } from '../components/product/MultiCompanySyncSection';
 
 export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   const verifiedDesktopModules = [
+    {
+      title: "📊 Universal Excel Bulk Import & Verification Engine",
+      desc: "Migrate thousands of parties and products in seconds with standardized Excel (.xlsx) templates. Includes strict schema validation, unique code verification (SIGNATURES-BILL-TEMPLATE-V1), real-time deduplication against existing GST numbers and product names, and modern 2-step verification preview modal.",
+      icon: <Table className="w-5 h-5 text-emerald-600" />,
+      tag: "⚡ NEW Phase 4",
+    },
+    {
+      title: "⌨️ Rapid Billing & Keyboard Shortcut Engine",
+      desc: "Designed for high-speed counter billing. Quick party picker via Ctrl+P in Sales & Purchase, instant Party creation via Ctrl+N, rapid edit via Ctrl+E in directories, and full shortcut key rebinding in System Settings.",
+      icon: <Keyboard className="w-5 h-5 text-amber-600" />,
+      tag: "⚡ NEW Shortcuts",
+    },
     {
       title: "⚡ AI Purchase Bill Import & Scanner",
       desc: "Zero-data-entry vendor purchases: Upload or scan any vendor bill (PDF or photo). High-speed OCR extracts line items, validates GSTIN checksums, resolves party & products, tests 5 Indian GST math recipes, and provides a side-by-side human review screen before posting to stock and ledger.",

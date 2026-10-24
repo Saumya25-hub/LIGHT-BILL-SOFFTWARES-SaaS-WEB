@@ -23,9 +23,24 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
   onLaunchDemo,
   onNavigate,
 }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'excelbulk' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
 
   const projects: ProjectItem[] = [
+    {
+      id: 'excelbulk',
+      category: 'DATA MIGRATION & BULK OPERATIONS',
+      title: '📊 Universal Excel Bulk Import & Verification Engine',
+      tagline: 'Standardized Excel templates, 2-step preview verification, and intelligent deduplication',
+      description: 'Migrate thousands of customers, suppliers, and inventory products in seconds. Features standardized branded templates with human instruction rows, automatic template signature verification (SIGNATURES-BILL-TEMPLATE-V1), smart deduplication checking existing GST numbers and product names, and modern 2-step preview modals.',
+      badge: 'BULK IMPORT ENGINE',
+      image: '/assets/desktop-sales-invoice.png',
+      metrics: [
+        { label: 'Import Speed', value: '1,000+ rows/sec' },
+        { label: 'Validation Mode', value: '2-Step Preview' },
+        { label: 'Deduplication', value: 'GSTIN & Name Lock' },
+      ],
+      actionLabel: 'Explore Excel Import',
+    },
     {
       id: 'aibill',
       category: 'AI SCANNING & PURCHASE AUTOMATION',
@@ -169,6 +184,7 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
           <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-[#121110] border border-amber-500/25">
             {[
               { id: 'all', label: 'All Modules' },
+              { id: 'excelbulk', label: '📊 Excel Import' },
               { id: 'aibill', label: '⚡ AI Bill Import' },
               { id: 'billing', label: 'GST Billing' },
               { id: 'restaurant', label: 'Restaurant POS' },

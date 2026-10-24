@@ -182,6 +182,14 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
         botResponse = '🖨️ Yes! Supports all standard 80mm (3-inch) and 58mm (2-inch) ESC/POS USB, Bluetooth, and LAN thermal receipt printers with instant 0-second auto-cut blit printing and bilingual Indian regional font support.';
       } else if (query.includes('gst') || query.includes('tax')) {
         botResponse = '📑 100% compliant with GSTN 2026 rules! Handles CGST/SGST/IGST, reverse charge, HSN auto-lookup, and one-click JSON e-way bill export.';
+      } else if (query.includes('excel') || query.includes('import') || query.includes('bulk')) {
+        botResponse = '📊 Yes! v2.0.0 features our Universal Excel Bulk Import & Verification Engine! Download our standardized branded Excel template, fill your customer or product rows, and click Verify. The software checks the template signature (SIGNATURES-BILL-TEMPLATE-V1), deduplicates against existing GST numbers and product names, and presents a 2-step review modal before saving!';
+        actions = [
+          { label: '📥 Download Windows Installer v2.0.0', action: () => onNavigate?.('/download') },
+          { label: 'Explore All Features', action: () => onNavigate?.('/product') },
+        ];
+      } else if (query.includes('shortcut') || query.includes('keyboard') || query.includes('fast') || query.includes('ctrl')) {
+        botResponse = '⌨️ Rapid Billing Engine: Press Ctrl+P inside Sales/Purchase to open the fast Party Picker, Ctrl+N to add new parties or products, and Ctrl+E to edit them directly inside directory cards. You can also rebind and customize your favorite shortcuts in Settings!';
       } else if (query.includes('multi') || query.includes('company') || query.includes('sync') || query.includes('branch') || query.includes('firm')) {
         botResponse = '🏢 Signatures Bill features Multi-Company Architecture with Universal Master Sync! Run unlimited sister firms and branches on 1 PC. Add products or parties once—they automatically sync across all companies in real-time. Crucially, Stock Quantities, Invoices, and Ledgers remain 100% strictly isolated per company so there is zero confusion!';
         actions = [
