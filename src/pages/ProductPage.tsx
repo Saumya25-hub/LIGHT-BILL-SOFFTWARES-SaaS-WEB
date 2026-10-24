@@ -20,13 +20,20 @@ import {
   UtensilsCrossed,
   Wifi,
   Calendar,
-  Database
+  Database,
+  Sparkles
 } from 'lucide-react';
 
 import { MultiCompanySyncSection } from '../components/product/MultiCompanySyncSection';
 
 export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   const verifiedDesktopModules = [
+    {
+      title: "⚡ AI Purchase Bill Import & Scanner",
+      desc: "Zero-data-entry vendor purchases: Upload or scan any vendor bill (PDF or photo). High-speed OCR extracts line items, validates GSTIN checksums, resolves party & products, tests 5 Indian GST math recipes, and provides a side-by-side human review screen before posting to stock and ledger.",
+      icon: <Sparkles className="w-5 h-5 text-indigo-600" />,
+      tag: "⚡ NEW AI Import",
+    },
     {
       title: "Multi-Company & Universal Master Sync",
       desc: "Run unlimited business firms and sister branches with 100% database-per-company isolation. Real-time Universal Master Sync replicates products and parties across all firms, keeping stock and accounting ledgers completely air-gapped.",

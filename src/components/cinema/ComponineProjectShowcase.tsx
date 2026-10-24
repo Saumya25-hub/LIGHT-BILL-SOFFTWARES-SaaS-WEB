@@ -23,9 +23,24 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
   onLaunchDemo,
   onNavigate,
 }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'billing' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
 
   const projects: ProjectItem[] = [
+    {
+      id: 'aibill',
+      category: 'AI SCANNING & PURCHASE AUTOMATION',
+      title: '⚡ AI Purchase Bill Import & Deterministic OCR Engine',
+      tagline: 'Upload vendor bills (PDF or photo) — AI reads, C# engine decides & validates math',
+      description: 'Zero manual data entry for vendor purchases. Features high-speed structured vision OCR, Mod-36 GSTIN checksum verification, anti-collision Purchase vs Sale intent check, 5 pluggable Indian GST math recipes, automatic party & product fuzzy matching, and a side-by-side human review approval screen before posting to stock and ledger.',
+      badge: 'AI + C# MATH ENGINE',
+      image: '/assets/desktop-sales-invoice.png',
+      metrics: [
+        { label: 'OCR Extraction', value: '< 2.5s Flash' },
+        { label: 'Math Validation', value: '5 GST Recipes' },
+        { label: 'Human Review', value: '100% Side-by-Side' },
+      ],
+      actionLabel: 'Launch In Simulator',
+    },
     {
       id: 'billing',
       category: 'ENTERPRISE ERP CORE',
@@ -154,6 +169,7 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
           <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-[#121110] border border-amber-500/25">
             {[
               { id: 'all', label: 'All Modules' },
+              { id: 'aibill', label: '⚡ AI Bill Import' },
               { id: 'billing', label: 'GST Billing' },
               { id: 'restaurant', label: 'Restaurant POS' },
               { id: 'multicompany', label: 'Multi-Company' },
