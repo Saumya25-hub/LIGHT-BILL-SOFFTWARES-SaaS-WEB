@@ -23,9 +23,24 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
   onLaunchDemo,
   onNavigate,
 }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'excelbulk' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'eway' | 'excelbulk' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
 
   const projects: ProjectItem[] = [
+    {
+      id: 'eway',
+      category: 'GOVERNMENT COMPLIANCE & LOGISTICS',
+      title: '🚚 BOS E-Way Bill & Dispatch Engine',
+      tagline: 'Statutory Rule 138 validation, NIC JSON generation, WebView2 automation & batch dispatch',
+      description: 'Fully automated E-Way Bill workflow for interstate & intrastate dispatches. Features statutory transport validation (distance, vehicle format, transporter ID), official NIC schema payload export, assisted portal automation via embedded WebView2, SHA-256 cryptographic PDF vault with tamper detection, 7-point financial reconciliation, and batch multi-invoice processing from Sales register.',
+      badge: 'GOVERNMENT E-WAY ENGINE',
+      image: '/assets/desktop-sales-invoice.png',
+      metrics: [
+        { label: 'Portal Engine', value: 'WebView2 Direct' },
+        { label: 'Integrity Vault', value: 'SHA-256 Validated' },
+        { label: 'Batch Dispatch', value: 'Multi-Invoice' },
+      ],
+      actionLabel: 'Explore E-Way Engine',
+    },
     {
       id: 'excelbulk',
       category: 'DATA MIGRATION & BULK OPERATIONS',
@@ -184,6 +199,7 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
           <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-[#121110] border border-amber-500/25">
             {[
               { id: 'all', label: 'All Modules' },
+              { id: 'eway', label: '🚚 E-Way Bill' },
               { id: 'excelbulk', label: '📊 Excel Import' },
               { id: 'aibill', label: '⚡ AI Bill Import' },
               { id: 'billing', label: 'GST Billing' },

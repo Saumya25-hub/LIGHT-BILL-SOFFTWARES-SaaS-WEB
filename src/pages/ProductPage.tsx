@@ -23,13 +23,27 @@ import {
   Database,
   Sparkles,
   Table,
-  Keyboard
+  Keyboard,
+  Truck,
+  Cpu
 } from 'lucide-react';
 
 import { MultiCompanySyncSection } from '../components/product/MultiCompanySyncSection';
 
 export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   const verifiedDesktopModules = [
+    {
+      title: "🚚 BOS E-Way Bill & Dispatch Engine",
+      desc: "Full statutory Rule 138 automation: 1-click official NIC JSON payload generation, embedded WebView2 portal automation with captcha assistance, cryptographic SHA-256 PDF vault verification, multi-field financial reconciliation, and multi-invoice batch dispatch directly from Sales register.",
+      icon: <Truck className="w-5 h-5 text-sky-600" />,
+      tag: "⚡ NEW v2.1.0",
+    },
+    {
+      title: "🧠 Visual Node Engine (BNVE)",
+      desc: "Drag-and-drop node graph formula system for complex multi-tier manufacturing calculations, textile weight-to-meters conversions, dynamic chemical batch equations, and PIN-protected enterprise business rules.",
+      icon: <Cpu className="w-5 h-5 text-purple-600" />,
+      tag: "⚡ NEW v2.1.0",
+    },
     {
       title: "📊 Universal Excel Bulk Import & Verification Engine",
       desc: "Migrate thousands of parties and products in seconds with standardized Excel (.xlsx) templates. Includes strict schema validation, unique code verification (SIGNATURES-BILL-TEMPLATE-V1), real-time deduplication against existing GST numbers and product names, and modern 2-step verification preview modal.",

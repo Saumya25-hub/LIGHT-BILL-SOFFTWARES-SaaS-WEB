@@ -182,6 +182,18 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
         botResponse = '🖨️ Yes! Supports all standard 80mm (3-inch) and 58mm (2-inch) ESC/POS USB, Bluetooth, and LAN thermal receipt printers with instant 0-second auto-cut blit printing and bilingual Indian regional font support.';
       } else if (query.includes('gst') || query.includes('tax')) {
         botResponse = '📑 100% compliant with GSTN 2026 rules! Handles CGST/SGST/IGST, reverse charge, HSN auto-lookup, and one-click JSON e-way bill export.';
+      } else if (query.includes('eway') || query.includes('e-way') || query.includes('dispatch') || query.includes('transport')) {
+        botResponse = '🚚 BOS E-Way Engine v2.1.0 is live! Generate statutory E-Way Bills directly from your Sales invoices. Includes 1-click official NIC JSON payload export, embedded WebView2 portal automation, cryptographic SHA-256 PDF vault storage, 7-point financial reconciliation, and batch multi-invoice dispatch!';
+        actions = [
+          { label: '📥 Download Windows Installer v2.1.0', action: () => onNavigate?.('/download') },
+          { label: 'Explore E-Way Features', action: () => onNavigate?.('/product') },
+        ];
+      } else if (query.includes('node') || query.includes('bnve') || query.includes('formula') || query.includes('manufacturing')) {
+        botResponse = '🧠 Visual Node Engine (BNVE): A visual drag-and-drop math & formula computation system! Perfect for manufacturing, textile weaving/dyeing equations, dynamic density-to-weight conversions, and multi-tier pricing workflows with PIN-protected rules!';
+        actions = [
+          { label: 'Explore Node Engine', action: () => onNavigate?.('/product') },
+          { label: '📥 Download v2.1.0', action: () => onNavigate?.('/download') },
+        ];
       } else if (query.includes('excel') || query.includes('import') || query.includes('bulk')) {
         botResponse = '📊 Yes! v2.0.0 features our Universal Excel Bulk Import & Verification Engine! Download our standardized branded Excel template, fill your customer or product rows, and click Verify. The software checks the template signature (SIGNATURES-BILL-TEMPLATE-V1), deduplicates against existing GST numbers and product names, and presents a 2-step review modal before saving!';
         actions = [

@@ -60,13 +60,14 @@ export const DownloadPage: React.FC<PageProps> = () => {
 
             <div className="p-3 bg-emerald-50/70 rounded-lg border border-emerald-200/60 text-[11px] text-emerald-900 space-y-1">
               <span className="font-semibold flex items-center gap-1.5 text-emerald-800">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> What's New in v2.0.0:
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> What's New in v2.1.0:
               </span>
               <ul className="list-disc list-inside space-y-0.5 text-emerald-700">
-                <li>Universal Excel Bulk Import with 2-step verification preview</li>
-                <li>Ctrl+P Party Picker & rapid billing shortcuts (Ctrl+N, Ctrl+E)</li>
-                <li>Ultra-smooth sidebar animations optimized for i3 / 4GB RAM PCs</li>
-                <li>Safe In-Place Upgrade: Zero data loss for existing DB & invoices</li>
+                <li>🚚 BOS E-Way Bill Engine: 1-Click NIC Portal automation, statutory Rule 138 validation & batch dispatch</li>
+                <li>🧠 Visual Node Engine (BNVE): Drag-and-drop formula graph execution for manufacturing billing</li>
+                <li>📑 GSTR-2B Bill Reconciliation: Smart matching against purchase ledgers & vendor bills</li>
+                <li>📊 Universal Excel Bulk Import with 2-step verification preview & template signing</li>
+                <li>🔒 Safe In-Place Upgrade: 100% zero data loss guarantee for existing SQLite DB & invoices</li>
               </ul>
             </div>
           </div>
