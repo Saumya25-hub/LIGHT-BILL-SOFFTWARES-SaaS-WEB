@@ -115,124 +115,133 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
           </nav>
 
           {/* Action CTAs & Software Suite List Box */}
-          <div className="hidden sm:flex items-center gap-2 xl:gap-2.5">
+          <div className="hidden sm:flex items-center gap-2 xl:gap-2.5 shrink-0">
             {/* Software Types List Box (Placed right between Support & Try Demo as marked by user) */}
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative shrink-0" ref={dropdownRef}>
               <button
                 onClick={() => setSoftwareDropdownOpen(!softwareDropdownOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 border border-slate-700 shadow-sm transition-all cursor-pointer select-none group"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#0F1420] text-white hover:bg-[#182032] border border-slate-700/80 shadow-sm transition-all cursor-pointer select-none whitespace-nowrap shrink-0 group"
                 aria-label="Software Suite Selector"
               >
-                <span className="flex h-2 w-2 relative">
+                <span className="flex h-2 w-2 relative shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span className="text-slate-300 font-semibold">Software:</span>
-                <span className="text-amber-400 font-black">
-                  {currentPath === '/8pm' ? '🎱 8PM Pool' : '🧾 Full ERP'}
+                <span className="text-slate-300 font-medium">Software:</span>
+                <span className="text-amber-400 font-extrabold flex items-center gap-1">
+                  <span>{currentPath === '/8pm' ? '🎱' : '🧾'}</span>
+                  <span>{currentPath === '/8pm' ? '8PM Pool' : 'Full ERP'}</span>
                 </span>
-                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${softwareDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 shrink-0 ${softwareDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {softwareDropdownOpen && (
-                <div 
-                  className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-slate-200 shadow-[0_20px_45px_rgba(0,0,0,0.18)] p-2.5 z-50 animate-fade-in divide-y divide-slate-100"
-                >
-                  <div className="px-2 pb-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black tracking-wider text-slate-400 uppercase">
-                        STOMS Software Ecosystem
-                      </span>
-                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">
-                        2 Live Apps
-                      </span>
+                <>
+                  {/* Subtle backdrop scrim to dismiss on outside click */}
+                  <div 
+                    className="fixed inset-0 z-40 bg-black/15 backdrop-blur-[0.5px]" 
+                    onClick={() => setSoftwareDropdownOpen(false)} 
+                  />
+
+                  <div 
+                    className="absolute right-0 mt-2 w-80 rounded-2xl bg-[#0C101A] border border-slate-700 shadow-[0_25px_60px_rgba(0,0,0,0.6)] p-3 z-50 animate-fade-in divide-y divide-slate-800"
+                  >
+                    <div className="px-2 pb-2.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black tracking-wider text-slate-400 uppercase">
+                          STOMS Software Suite
+                        </span>
+                        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                          2 Active Apps
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 pt-2.5">
+                      {/* 1. Full ERP */}
+                      <div
+                        onClick={() => handleLinkClick('/')}
+                        className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
+                          currentPath !== '/8pm'
+                            ? 'bg-sky-500/15 border border-sky-400/50 shadow-sm'
+                            : 'hover:bg-slate-800/60 border border-transparent'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-base shrink-0">
+                            🧾
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                              <span>1. Full ERP</span>
+                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-sky-400/20 text-sky-300 border border-sky-400/40">Active</span>
+                            </div>
+                            <div className="text-[10.5px] text-slate-400 font-medium">Signatures Light Bill ERP</div>
+                          </div>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-sky-400 shrink-0" />
+                      </div>
+
+                      {/* 2. 8PM Pool Software */}
+                      <div
+                        onClick={() => handleLinkClick('/8pm')}
+                        className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
+                          currentPath === '/8pm'
+                            ? 'bg-emerald-500/20 border border-emerald-400/60 shadow-sm'
+                            : 'hover:bg-emerald-950/40 border border-transparent hover:border-emerald-500/30'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-base shrink-0">
+                            🎱
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-emerald-300 flex items-center gap-1.5">
+                              <span>2. 8PM Pool Software</span>
+                              <span className="text-[9px] font-extrabold px-1.5 py-0.2 rounded bg-emerald-500/30 text-emerald-200 border border-emerald-500/40">v2.3 Pro</span>
+                            </div>
+                            <div className="text-[10.5px] text-slate-400 font-medium">Pool &amp; Snooker Club Suite</div>
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-md border border-emerald-500/40 shrink-0">
+                          Open ➜
+                        </span>
+                      </div>
+
+                      {/* 3. Inventory */}
+                      <div className="flex items-center justify-between p-2.5 rounded-xl opacity-50 cursor-not-allowed bg-slate-900/60 border border-dashed border-slate-800">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-slate-800/60 flex items-center justify-center text-base shrink-0">
+                            📦
+                          </div>
+                          <div>
+                            <div className="text-xs font-medium text-slate-300">3. Inventory Pro</div>
+                            <div className="text-[10.5px] text-slate-500">Warehouse Stock &amp; Barcode</div>
+                          </div>
+                        </div>
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 shrink-0">
+                          Coming Soon
+                        </span>
+                      </div>
+
+                      {/* 4. Gym App */}
+                      <div className="flex items-center justify-between p-2.5 rounded-xl opacity-50 cursor-not-allowed bg-slate-900/60 border border-dashed border-slate-800">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-slate-800/60 flex items-center justify-center text-base shrink-0">
+                            🏋️
+                          </div>
+                          <div>
+                            <div className="text-xs font-medium text-slate-300">4. Gym App</div>
+                            <div className="text-[10.5px] text-slate-500">Fitness Members &amp; Turnstile</div>
+                          </div>
+                        </div>
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 shrink-0">
+                          Coming Soon
+                        </span>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="space-y-1.5 pt-2">
-                    {/* 1. Full ERP */}
-                    <div
-                      onClick={() => handleLinkClick('/')}
-                      className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
-                        currentPath !== '/8pm'
-                          ? 'bg-sky-50/90 border border-sky-200 shadow-xs'
-                          : 'hover:bg-slate-50 border border-transparent'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-base">
-                          🧾
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                            <span>1. Full ERP</span>
-                            <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-sky-100 text-sky-800">Active</span>
-                          </div>
-                          <div className="text-[10.5px] text-slate-500 font-medium">Signatures Light Bill ERP</div>
-                        </div>
-                      </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-sky-600" />
-                    </div>
-
-                    {/* 2. 8PM Pool Software */}
-                    <div
-                      onClick={() => handleLinkClick('/8pm')}
-                      className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
-                        currentPath === '/8pm'
-                          ? 'bg-emerald-50/90 border border-emerald-300 shadow-xs'
-                          : 'hover:bg-amber-50/70 border border-transparent hover:border-amber-200'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-base">
-                          🎱
-                        </div>
-                        <div>
-                          <div className="text-xs font-black text-amber-800 flex items-center gap-1.5">
-                            <span>2. 8PM Pool Software</span>
-                            <span className="text-[9px] font-extrabold px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">v2.3 Pro</span>
-                          </div>
-                          <div className="text-[10.5px] text-slate-500 font-medium">Pool &amp; Snooker Club Suite</div>
-                        </div>
-                      </div>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                        Open ➜
-                      </span>
-                    </div>
-
-                    {/* 3. Inventory */}
-                    <div className="flex items-center justify-between p-2.5 rounded-xl opacity-60 cursor-not-allowed bg-slate-50/60 border border-dashed border-slate-200">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-slate-200/60 flex items-center justify-center text-base">
-                          📦
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold text-slate-700">3. Inventory Pro</div>
-                          <div className="text-[10.5px] text-slate-400">Warehouse Stock &amp; Barcode</div>
-                        </div>
-                      </div>
-                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 border border-slate-200">
-                        Coming Soon
-                      </span>
-                    </div>
-
-                    {/* 4. Gym App */}
-                    <div className="flex items-center justify-between p-2.5 rounded-xl opacity-60 cursor-not-allowed bg-slate-50/60 border border-dashed border-slate-200">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-slate-200/60 flex items-center justify-center text-base">
-                          🏋️
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold text-slate-700">4. Gym App</div>
-                          <div className="text-[10.5px] text-slate-400">Fitness Members &amp; Turnstile</div>
-                        </div>
-                      </div>
-                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 border border-slate-200">
-                        Coming Soon
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                </>
               )}
             </div>
 

@@ -2,22 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 
 /**
  * LuxuryCustomCursor
- * Awwwards-grade Fluid Magnetic Custom Cursor (Trailer).
- * Exactly matches the iconic Black Dot + Floating Coral/Red Ring design:
- * - Center Dot: 0-latency leading pinpoint tip.
- * - Outer Ring: Smooth spring-lerp momentum trailing follower.
- * - Magnetic expansion on buttons, links, cards, & interactive controls.
- * - Tactile spring snap on mousedown / click.
- * - Clean input/textarea passthrough.
- * - Auto-disabled on mobile / touchscreens.
+ * Flawlessly concentric Awwwards-grade custom cursor.
+ * Uses exact pixel offset calculations (x - radius, y - radius)
+ * to guarantee that the Center Dot and Outer Ring are ALWAYS 100% concentric,
+ * with ZERO vertical or horizontal offset!
  */
 export const LuxuryCustomCursor: React.FC = () => {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
-  // Exact mouse coordinates
+  // Exact target mouse coordinates
   const mouse = useRef({ x: -100, y: -100 });
-  // Trailing ring coordinates
+  // Elastic trailing follower coordinates
   const ring = useRef({ x: -100, y: -100 });
   const rafId = useRef<number | null>(null);
 
@@ -27,8 +23,12 @@ export const LuxuryCustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
+  // Radius constants for exact geometric center alignment
+  const DOT_RADIUS = 4; // 8px diameter / 2
+  const RING_RADIUS = 19; // 38px diameter / 2
+
   useEffect(() => {
-    // Check if device is touch-only
+    // Disable on mobile/touch screens
     const checkTouch = () => {
       const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
       setIsTouchDevice(isTouch);
@@ -42,13 +42,14 @@ export const LuxuryCustomCursor: React.FC = () => {
 
       if (!isVisible) {
         setIsVisible(true);
+        // On initial enter, sync ring immediately to prevent flying from corner
         ring.current.x = e.clientX;
         ring.current.y = e.clientY;
       }
 
-      // Instantly position leading dot with zero latency (exact geometric center)
+      // Hardcoded exact center positioning: clientX - radius
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        dotRef.current.style.transform = `translate3d(${e.clientX - DOT_RADIUS}px, ${e.clientY - DOT_RADIUS}px, 0)`;
       }
     };
 
@@ -77,15 +78,16 @@ export const LuxuryCustomCursor: React.FC = () => {
     document.documentElement.addEventListener('mouseleave', onMouseLeave);
     document.documentElement.addEventListener('mouseenter', onMouseEnter);
 
-    // 120 FPS Lerp animation loop for elastic outer ring
+    // 120 FPS Lerp Loop for elastic trailing ring
     const animate = () => {
       // Snappy and exact elastic follow
       const factor = 0.22;
       ring.current.x += (mouse.current.x - ring.current.x) * factor;
       ring.current.y += (mouse.current.y - ring.current.y) * factor;
 
+      // Hardcoded exact center positioning: ring.x - radius
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0) translate(-50%, -50%)`;
+        ringRef.current.style.transform = `translate3d(${ring.current.x - RING_RADIUS}px, ${ring.current.y - RING_RADIUS}px, 0)`;
       }
 
       rafId.current = requestAnimationFrame(animate);
@@ -115,41 +117,57 @@ export const LuxuryCustomCursor: React.FC = () => {
       }`}
       aria-hidden="true"
     >
-      {/* 1. Leading Center Black Dot (Direct Zero-Lag Pinpoint) */}
+      {/* 1. Leading Center Black Dot (8px x 8px, top-left transformed to clientX - 4px) */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none will-change-transform"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '8px',
+          height: '8px',
+          pointerEvents: 'none',
+          willChange: 'transform',
+        }}
       >
         <div
-          className={`rounded-full transition-all duration-150 ${
+          className={`w-full h-full rounded-full transition-all duration-150 ${
             isInput
               ? 'opacity-0 scale-50'
               : isHovered
-              ? 'w-2 h-2 bg-amber-400 border border-black/80 scale-90 shadow-[0_0_8px_rgba(245,158,11,0.9)]'
+              ? 'bg-amber-400 border border-black shadow-[0_0_8px_rgba(245,158,11,0.9)] scale-75'
               : isClicked
-              ? 'w-2 h-2 bg-emerald-400 scale-75'
-              : 'w-2.5 h-2.5 bg-black border border-white/90 shadow-[0_0_4px_rgba(0,0,0,0.8)]'
+              ? 'bg-emerald-400 scale-90'
+              : 'bg-black border border-white/90 shadow-[0_0_4px_rgba(0,0,0,0.8)]'
           }`}
         />
       </div>
 
-      {/* 2. Trailing Follower Coral/Red Ring (Fluid Physics Spring) */}
+      {/* 2. Trailing Follower Coral/Red Ring (38px x 38px, top-left transformed to ring.x - 19px) */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 pointer-events-none will-change-transform"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '38px',
+          height: '38px',
+          pointerEvents: 'none',
+          willChange: 'transform',
+        }}
       >
         <div
-          className={`rounded-full transition-all duration-300 ease-out flex items-center justify-center ${
+          className={`w-full h-full rounded-full border transition-all duration-300 ease-out flex items-center justify-center ${
             isInput
-              ? 'w-6 h-6 border border-slate-400/40 opacity-30 scale-75'
+              ? 'border-slate-400/40 opacity-20 scale-50'
               : isClicked
-              ? 'w-7 h-7 border-[2px] border-emerald-400 bg-emerald-400/20 scale-90 shadow-[0_0_20px_rgba(52,211,153,0.7)]'
+              ? 'border-[2px] border-emerald-400 bg-emerald-400/20 scale-75 shadow-[0_0_20px_rgba(52,211,153,0.7)]'
               : isHovered
-              ? 'w-14 h-14 border-[2px] border-amber-400 bg-amber-500/15 backdrop-blur-[1px] scale-110 shadow-[0_0_25px_rgba(245,158,11,0.5)]'
-              : 'w-10 h-10 border-[1.5px] border-[#ff4742] bg-[#ff4742]/5 shadow-[0_0_15px_rgba(255,71,66,0.4)]'
+              ? 'border-[2px] border-amber-400 bg-amber-500/15 backdrop-blur-[1px] scale-150 shadow-[0_0_25px_rgba(245,158,11,0.5)]'
+              : 'border-[1.5px] border-[#ff4742] bg-[#ff4742]/5 shadow-[0_0_14px_rgba(255,71,66,0.35)] scale-100'
           }`}
         >
-          {/* Micro hover pulse aura */}
+          {/* Micro pulse ring when hovered */}
           {isHovered && (
             <div className="w-full h-full rounded-full border border-amber-300/50 animate-ping opacity-40" />
           )}
