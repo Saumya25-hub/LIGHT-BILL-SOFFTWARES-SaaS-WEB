@@ -8,6 +8,7 @@ import { DownloadPage } from './pages/DownloadPage';
 import { AboutPage } from './pages/AboutPage';
 import { SupportPage } from './pages/SupportPage';
 import { PrivacyPage } from './pages/PrivacyPage';
+import { EightPmPoolPage } from './pages/EightPmPoolPage';
 import { CosmicWarpSplash } from './components/cinema/CosmicWarpSplash';
 import { siteConfig } from './config/siteConfig';
 
@@ -54,6 +55,7 @@ export function App() {
       '/about': `About ${siteConfig.company.masterName} — ${siteConfig.brand.productFamily}`,
       '/support': `Support & Contact — ${siteConfig.brand.productName}`,
       '/privacy': `Privacy Policy — ${siteConfig.brand.productName}`,
+      '/8pm': '8 PM — Elite Pool & Snooker Club Management | By STOMS',
     };
 
     document.title = pageTitles[currentPath] || `${siteConfig.company.masterName} — ${siteConfig.brand.productName}`;
@@ -87,6 +89,8 @@ export function App() {
         return <SupportPage onNavigate={handleNavigate} />;
       case '/privacy':
         return <PrivacyPage onNavigate={handleNavigate} />;
+      case '/8pm':
+        return <EightPmPoolPage onNavigate={handleNavigate} />;
       default:
         return (
           <HomePage 

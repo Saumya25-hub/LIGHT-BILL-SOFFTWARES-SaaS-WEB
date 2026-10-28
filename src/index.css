@@ -61,6 +61,10 @@
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
   }
 
+  .animate-club-drift {
+    animation: slowDrift 30s ease-in-out infinite;
+  }
+
   .perspective-1000 {
     perspective: 1000px;
   }
@@ -311,5 +315,17 @@ a:hover .rolling-char-inner,
   right: -1px;
   border-bottom: 2px solid #F59E0B;
   border-right: 2px solid #F59E0B;
+}
+
+@keyframes slowDrift {
+  0% {
+    transform: scale(1.03) translate(0px, 0px);
+  }
+  50% {
+    transform: scale(1.08) translate(-20px, -12px);
+  }
+  100% {
+    transform: scale(1.03) translate(0px, 0px);
+  }
 }
 

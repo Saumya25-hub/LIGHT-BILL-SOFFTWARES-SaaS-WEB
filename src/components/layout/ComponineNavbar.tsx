@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Layers, Box, Zap, CreditCard, MessageSquare, MoreVertical } from 'lucide-react';
+import { Home, Layers, Box, Zap, CreditCard, MessageSquare, MoreVertical, Disc } from 'lucide-react';
 import { RollingText } from '../ui/RollingText';
 
 interface ComponineNavbarProps {
@@ -32,6 +32,7 @@ export const ComponineNavbar: React.FC<ComponineNavbarProps> = ({
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     } },
     { id: 'modules', label: 'Modules', icon: Box, action: () => { setActiveSection('modules'); onNavigate('/product'); } },
+    { id: '8pm', label: '8PM Pool', icon: Disc, isSpecial: true, isPool: true, action: () => { onNavigate('/8pm'); } },
     { id: 'demo', label: 'Live Demo', icon: Zap, isSpecial: true, action: () => { 
       if (onLaunchDemo) onLaunchDemo();
       else onNavigate('/demo'); 
@@ -76,21 +77,25 @@ export const ComponineNavbar: React.FC<ComponineNavbarProps> = ({
               className={`group relative flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-xs font-grotesk font-medium tracking-wide transition-all duration-300 cursor-pointer ${
                 isActive 
                   ? 'bg-amber-500/20 text-amber-200 border border-amber-400/40 shadow-[0_0_15px_rgba(245,158,11,0.25)]' 
+                  : item.id === '8pm'
+                  ? 'bg-emerald-500/15 text-emerald-300 hover:text-white hover:bg-emerald-500/30 border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.25)]'
                   : item.isSpecial
                   ? 'bg-amber-400/10 text-amber-300 hover:text-white hover:bg-amber-500/25 border border-amber-400/30'
                   : 'text-neutral-400 hover:text-white hover:bg-white/10'
               }`}
             >
               <Icon className={`w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110 ${
-                item.isSpecial ? 'text-amber-400 animate-pulse' : 'text-neutral-400 group-hover:text-amber-300'
+                item.id === '8pm' ? 'text-emerald-400 animate-pulse' : item.isSpecial ? 'text-amber-400 animate-pulse' : 'text-neutral-400 group-hover:text-amber-300'
               }`} />
               
               <span className="hidden sm:inline-block">
                 <RollingText text={item.label} charClassName="font-medium" />
               </span>
 
-              {/* Special Live indicator dot for Live Demo */}
-              {item.isSpecial && (
+              {/* Special Live indicator dot */}
+              {item.id === '8pm' ? (
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping hidden md:inline-block" />
+              ) : item.isSpecial && (
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping hidden md:inline-block" />
               )}
             </button>

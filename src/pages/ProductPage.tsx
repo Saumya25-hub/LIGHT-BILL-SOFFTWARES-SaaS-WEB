@@ -166,6 +166,30 @@ export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) =
         </p>
       </div>
 
+      {/* STOMS Multi-Industry Software Banner: 8PM Pool Software Spotlight */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-950 via-[#0B1516] to-slate-950 border border-emerald-500/40 p-4 sm:p-5 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-2xl shadow-inner shrink-0">
+            🎱
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-extrabold text-sm sm:text-base text-white">8 PM Pool &amp; Snooker Club Management</span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/30 text-emerald-300 border border-emerald-500/50">NEW v2.3 PRO</span>
+            </div>
+            <p className="text-xs text-slate-300 mt-0.5">
+              Need cue sports &amp; club table billing? Dual hourly &amp; per-minute timers, 1v1 to 3v3 loser-pays tournament matching &amp; WhatsApp dues.
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={() => onNavigate('/8pm')}
+          className="shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-extrabold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)] cursor-pointer"
+        >
+          <span>Open 8 PM Club Web ➜</span>
+        </button>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {verifiedDesktopModules.map((module) => (
           <Card key={module.title} variant="hoverable" padding="lg">

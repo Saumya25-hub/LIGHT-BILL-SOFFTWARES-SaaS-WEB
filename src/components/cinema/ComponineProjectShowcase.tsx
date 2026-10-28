@@ -23,9 +23,24 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
   onLaunchDemo,
   onNavigate,
 }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'eway' | 'excelbulk' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | '8pm' | 'eway' | 'excelbulk' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
 
   const projects: ProjectItem[] = [
+    {
+      id: '8pm',
+      category: 'SPORTS & BILLIARD CLUB AUTOMATION',
+      title: '🎱 8 PM Pool & Snooker Club Management Suite',
+      tagline: 'Per-minute table timers, 1v1 to 3v3 loser-pays tournament engine & WhatsApp dues receipts',
+      description: 'Engineered specifically for cue sports clubs to eliminate table timing disputes and streamline membership dues. Features live per-minute and hourly table clocks, 1v1 to 3v3 loser-pays tournament bracket settlements, digital credit ledger with direct WhatsApp billing, and DEV-TOOL offline recovery keys.',
+      badge: 'v2.3 PRO RELEASE',
+      image: '/assets/luxury_vip_pool_club_bg.jpg',
+      metrics: [
+        { label: 'Billing Engine', value: 'Per-Min / Hourly' },
+        { label: 'Tournaments', value: '1v1 - 3v3 Loser-Pays' },
+        { label: 'Club Database', value: 'Offline SQLite Vault' },
+      ],
+      actionLabel: 'Open 8 PM Club Web ➜',
+    },
     {
       id: 'eway',
       category: 'GOVERNMENT COMPLIANCE & LOGISTICS',
@@ -297,7 +312,9 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
                   {/* Secondary Action with Rolling Text */}
                   <button
                     onClick={() => {
-                      if (project.id === 'multicompany' && onNavigate) {
+                      if (project.id === '8pm' && onNavigate) {
+                        onNavigate('/8pm');
+                      } else if (project.id === 'multicompany' && onNavigate) {
                         onNavigate('/product');
                         setTimeout(() => {
                           const el = document.getElementById('multicompany');

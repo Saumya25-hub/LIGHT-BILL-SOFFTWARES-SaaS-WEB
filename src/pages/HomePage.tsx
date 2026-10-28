@@ -2,6 +2,7 @@ import React from 'react';
 import { PremiumSpaceBackdrop } from '../components/cinema/PremiumSpaceBackdrop';
 import { ComponineNavbar } from '../components/layout/ComponineNavbar';
 import { ComponineHero } from '../components/cinema/ComponineHero';
+import { SoftwareSuiteListBox } from '../components/cinema/SoftwareSuiteListBox';
 import { CosmicDemoPortal } from '../components/cinema/CosmicDemoPortal';
 import { ComponineProjectShowcase } from '../components/cinema/ComponineProjectShowcase';
 import { CreativeProcessSection } from '../components/cinema/CreativeProcessSection';
@@ -34,9 +35,17 @@ export const HomePage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
           onNavigate={onNavigate} 
           onLaunchDemo={onLaunchDemo}
           onExploreClick={() => {
-            const el = document.getElementById('works');
+            const el = document.getElementById('software-suite') || document.getElementById('works');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }} 
+        />
+      </div>
+
+      {/* 02.5 STOMS Commercial Software Suite List Box (Full ERP, 8PM Pool, Inventory, Gym App) */}
+      <div id="software-suite" className="relative z-10 border-t border-amber-500/20">
+        <SoftwareSuiteListBox 
+          onNavigate={onNavigate}
+          onLaunchDemo={onLaunchDemo}
         />
       </div>
 
