@@ -415,3 +415,4 @@ export const DeveloperRegistrationPage: React.FC<PageProps> = ({ onNavigate }) =
     </div>
   );
 };
+

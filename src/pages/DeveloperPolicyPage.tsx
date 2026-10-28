@@ -40,7 +40,7 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
         </h1>
 
         <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-          Authoritative internal engineering rules, intellectual property protection, project delivery governance, and professional conduct for all developers, contractors, and technical contributors at <strong className="text-slate-900">{siteConfig.company.masterName}</strong>.
+          Authoritative internal engineering standards, intellectual property protection, delivery governance, and professional conduct for all developers, engineers, and technical contributors at <strong className="text-slate-900">{siteConfig.company.masterName}</strong>.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs text-slate-500 font-medium">
@@ -96,7 +96,7 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
           </span>
         </div>
         <p className="text-xs text-slate-600 leading-relaxed pt-1">
-          Every developer, technical consultant, independent freelancer, and systems partner working on any product under the <strong className="text-slate-900">{siteConfig.company.masterName}</strong> software ecosystem — including <em>{siteConfig.brand.productName}</em>, <em>8 PM Pool &amp; Snooker Club Suite</em>, <em>STOMS Inventory Pro</em>, and internal dev-tools — must adhere strictly to the following 6 binding engineering rules.
+          Every software developer, engineer, technical consultant, independent freelancer, and systems partner working on any product under the <strong className="text-slate-900">{siteConfig.company.masterName}</strong> software ecosystem — including <em>{siteConfig.brand.productName}</em>, <em>8 PM Pool &amp; Snooker Club Suite</em>, <em>STOMS Inventory Pro</em>, and internal developer tools — must adhere strictly to the following six binding engineering rules.
         </p>
       </Card>
 
@@ -120,17 +120,17 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
 
           <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <p className="font-medium text-slate-900">
-              Project Manager (PM) project assign karega, team responsibilities clear hongi, aur developers approved project structure aur dependency hierarchy follow karenge.
+              The Project Manager (PM) assigns all projects and work packages. Team roles and responsibilities are clearly defined, and all developers must strictly follow the approved project structure, coding standards, and dependency hierarchy.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-500 pt-1">
               <li>
-                <strong>Single Source of Assignment:</strong> Koi bhi task, module modification, ya external package integration bina Project Manager / Lead Architect ke written confirmation ke commit nahi kiya jayega.
+                <strong>Single Source of Assignment:</strong> No task, module modification, or third-party dependency may be introduced without prior written approval from the Project Manager or Lead Architect.
               </li>
               <li>
-                <strong>Strict Architectural Hierarchy:</strong> Repository boundaries, database schema contracts (SQLite migrations, foreign keys), aur MVVM architecture guidelines ko strictly follow karna mandatory hai.
+                <strong>Strict Architectural Hierarchy:</strong> Developers must strictly respect repository boundaries, database schema contracts (relational SQLite migrations and foreign keys), and approved design patterns (such as MVVM and Clean Architecture).
               </li>
               <li>
-                <strong>Branching &amp; Commit Discipline:</strong> Direct commits to <code className="bg-slate-100 text-sky-800 px-1 py-0.5 rounded font-mono text-[11px]">main</code> or production branches are blocked. Har change feature-branch aur PR review ke through hi merge hoga.
+                <strong>Branching &amp; Review Discipline:</strong> Direct commits to the <code className="bg-slate-100 text-sky-800 px-1 py-0.5 rounded font-mono text-[11px]">main</code> or production branches are blocked. Every change must be delivered via an isolated feature branch and undergo peer review before merging.
               </li>
             </ul>
           </div>
@@ -153,7 +153,7 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
 
           <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <p className="font-medium text-slate-900">
-              Private repositories, proprietary engine names, internal workflows aur source code ko unauthorized persons ke saath share karna strictly prohibited hoga. Access aur legal consequences written agreements mein clearly defined honge.
+              Private source code repositories, proprietary engine designs, internal workflows, and source files must never be shared with unauthorized persons. Access permissions and legal consequences are governed by binding written agreements.
             </p>
             <div className="p-3 rounded-xl bg-rose-50/70 border border-rose-200 text-xs text-rose-900 space-y-1">
               <div className="flex items-center gap-1.5 font-bold">
@@ -161,12 +161,12 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
                 <span>Zero-Leakage &amp; Non-Disclosure Protocol:</span>
               </div>
               <p>
-                STOMS ke proprietary engines — jisme BOS E-Way Automation Engine, BNVE Visual Graph Node System, Zero-Trust LAN KDS, Quantum Protection Vault, aur DEV-TOOL authority keys shamil hain — 100% company IP hain. Kisi bhi external party ko source code, binaries, tokens, ya architectural documentation share karna legal breach of contract mana jayega.
+                All proprietary STOMS engines — including the BOS E-Way Automation Engine, the BNVE Visual Graph Node System, Zero-Trust LAN KDS, the Relational SQLite Protection Vault, and DEV-TOOL authority keys — are 100% company intellectual property. Sharing source code, compiled binaries, credentials, or architectural designs with any outside party constitutes a direct breach of contract and triggers immediate legal enforcement.
               </p>
             </div>
             <ul className="list-disc pl-5 space-y-1 text-xs text-slate-500 pt-1">
-              <li>Developer access tokens aur credentials personalized honge aur share karna prohibited hai.</li>
-              <li>Unauthorized code export, public repo uploading, ya customer data copy karne par instant contract termination aur legal action enforce hoga.</li>
+              <li>Developer credentials, API keys, and repository access tokens are strictly individual and must never be shared or transferred.</li>
+              <li>Unauthorized code export, public repository publication, or duplication of proprietary assets will result in immediate contract termination and legal prosecution.</li>
             </ul>
           </div>
         </Card>
@@ -188,17 +188,17 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
 
           <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <p className="font-medium text-slate-900">
-              AI tools allowed honge, lekin developers ko generated code samajhna, test karna, security verify karna aur architectural correctness maintain karni hogi. Blind copy-paste acceptable nahi hoga.
+              AI tools and code assistants are permitted, but developers are personally responsible for understanding, thoroughly testing, verifying security, and maintaining architectural correctness for all generated code. Blind copy-pasting is strictly prohibited.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-500 pt-1">
               <li>
-                <strong>Developer Ownership:</strong> Chahe code AI se generate ho ya human se, commit karne wale developer ki 100% personal responsibility hogi ki code bug-free, efficient aur clean ho.
+                <strong>Total Developer Ownership:</strong> Regardless of whether code is generated by AI or written manually, the committing engineer holds complete responsibility for ensuring the code is bug-free, efficient, and robust.
               </li>
               <li>
-                <strong>No Hallucinated Dependencies:</strong> Unverified external npm/NuGet packages jo AI hallucinate kare unhe bina security audit ke project me add karna banned hai.
+                <strong>No Unverified Dependencies:</strong> Developers must never install hallucinated or unverified third-party libraries without prior security, vulnerability, and license verification.
               </li>
               <li>
-                <strong>Architectural Integrity:</strong> Existing code formatting, typing rules, naming conventions aur comments preserve hone chahiye.
+                <strong>Architectural Integrity:</strong> Existing formatting conventions, strict typing contracts, naming standards, and documentation comments must always be respected and preserved.
               </li>
             </ul>
           </div>
@@ -221,17 +221,17 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
 
           <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <p className="font-medium text-slate-900">
-              Project completion ke baad mandatory seven-day testing period hoga. Tester bug list dega aur agreed scope ke defects developer ko fix karne honge. Acceptance criteria aur testing period contract mein pehle se define hone chahiye.
+              Following project or milestone completion, a mandatory seven-day QA testing period applies. The testing team provides verified defect reports, and the developer must resolve all issues within the agreed scope. Acceptance criteria and testing periods must be clearly established in the contract before development begins.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-500 pt-1">
               <li>
-                <strong>Structured QA Cycle:</strong> Feature deliver hone ke baad continuous 7 din tak staging/sandbox testing hogi (edge-cases, load test, UI regressions).
+                <strong>Structured QA Cycle:</strong> Delivered features undergo continuous seven-day testing in a staging or sandbox environment to evaluate edge cases, performance under load, and regression stability.
               </li>
               <li>
-                <strong>Bug Rectification SLA:</strong> Tester dwara report kiye gaye critical aur blocking bugs ko assigned developer agreed delivery timeline ke andar fix karega.
+                <strong>Defect Resolution SLA:</strong> All critical, major, and blocking defects reported by QA must be resolved by the assigned developer within the agreed milestone timeline.
               </li>
               <li>
-                <strong>Sign-off Requirement:</strong> Jab tak QA Lead aur PM formal sign-off report generate nahi karte, tab tak module "Production Ready" consider nahi hoga.
+                <strong>Mandatory Sign-off:</strong> No software release or feature module is approved for production deployment until the QA Lead and Project Manager provide formal sign-off.
               </li>
             </ul>
           </div>
@@ -254,17 +254,17 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
 
           <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <p className="font-medium text-slate-900">
-              Payment project complexity, clean implementation, quality, delivery speed aur measurable output ke basis par calculate hogi. Lekin new features, scope changes aur defect fixes mein kya included hai, ye agreement mein clear hona chahiye.
+              Payment is calculated based on project complexity, clean implementation, code quality, delivery speed, and measurable output. Written agreements must clearly distinguish between baseline deliverables, scope additions, and defect fixes.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-500 pt-1">
               <li>
-                <strong>Transparent Milestone Criteria:</strong> Har milestone ki definition of done (DoD) contract shuru hone se pehle written agreement me freeze hogi.
+                <strong>Transparent Milestone Criteria:</strong> The Definition of Done (DoD) for every milestone is formally documented and agreed upon before work commences.
               </li>
               <li>
-                <strong>Scope Change Governance:</strong> Client ya PM dwara naye features add hone par unka alag se scope estimation aur compensation addendum banega.
+                <strong>Scope Change Governance:</strong> Any new features or architectural modifications requested by management will be estimated separately under a formal scope addendum.
               </li>
               <li>
-                <strong>Defect Fixes vs New Work:</strong> Scope ke andar ke bugs fix karna milestone completion ka hissa hai, jabki new logic additions change-request category me calculate hongi.
+                <strong>Defect Resolution vs. New Work:</strong> Fixing bugs within agreed project requirements is an essential part of completing the milestone, whereas net-new business logic is evaluated as a change request.
               </li>
             </ul>
           </div>
@@ -287,17 +287,17 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
 
           <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <p className="font-medium text-slate-900">
-              Team members respectful Hindi ya English mein communicate karenge. Personal insults, harassment, deliberate misconduct aur repeated serious policy violations ke liye documented disciplinary process hoga.
+              Team members must communicate respectfully and professionally in English (or professional Hindi where appropriate). Personal insults, harassment, deliberate misconduct, or repeated serious policy violations will trigger a documented disciplinary process.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs text-slate-500 pt-1">
               <li>
-                <strong>Healthy &amp; Respectful Communication:</strong> Slack, WhatsApp, PR reviews, aur voice syncs me professional tone maintain karna anivarya hai.
+                <strong>Respectful Communication:</strong> A professional, constructive tone is required across all project communication channels, pull request reviews, and team discussions.
               </li>
               <li>
-                <strong>Zero Tolerance for Toxicity:</strong> Personal attacks, discrimination, ya intentional project delay/sabotage par immediate suspension aur contract termination hoga.
+                <strong>Zero Tolerance for Harassment:</strong> Discrimination, personal insults, hostile behavior, or intentional sabotage will result in immediate suspension and contract termination.
               </li>
               <li>
-                <strong>Transparent Escalation:</strong> Kisi bhi dispute ya clarification ke liye developer seedhe Project Manager ya Chairman Saumya Chaudhari se escalate kar sakta hai.
+                <strong>Direct Escalation Path:</strong> Team members facing blockers, procedural issues, or ethical concerns may directly escalate the matter to the Project Manager or Chairman Saumya Chaudhari.
               </li>
             </ul>
           </div>
@@ -314,7 +314,7 @@ export const DeveloperPolicyPage: React.FC<PageProps> = ({ onNavigate }) => {
           </div>
           <h3 className="text-xl font-bold text-white">Developer Onboarding &amp; Registration</h3>
           <p className="text-xs text-slate-400 max-w-md mt-1">
-            Are you a passionate developer or engineer who thrives under clean architecture and high-performance engineering? Register your profile today.
+            Are you a skilled developer or engineer who thrives under clean architecture and high-performance engineering? Register your profile today.
           </p>
         </div>
 
