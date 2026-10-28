@@ -107,19 +107,34 @@ export const CinematicFooter: React.FC<CinematicFooterProps> = ({ onNavigate }) 
             </ul>
           </div>
 
-          {/* Col 4: Legal & Policy (Crucial for Google Play) */}
+          {/* Col 4: Legal & Policy (Crucial for Google Play & Corporate Standards) */}
           <div className="space-y-3">
             <h4 className="text-slate-200 uppercase tracking-widest font-bold">Compliance & Legal</h4>
             <p className="text-slate-400 text-xs font-sans">
-              Google Play Certified Privacy & Data Governance Standards.
+              Google Play Certified Privacy &amp; Enterprise Governance Standards.
             </p>
-            <div className="pt-1">
+            <div className="pt-1 flex flex-col gap-2">
               <button
                 onClick={() => onNavigate ? onNavigate('/privacy') : window.location.href = '/privacy'}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-emerald-500/30 bg-emerald-950/30 text-emerald-300 hover:bg-emerald-900/40 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-emerald-500/30 bg-emerald-950/30 text-emerald-300 hover:bg-emerald-900/40 transition-colors cursor-pointer w-fit"
               >
                 <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Privacy Policy Page</span>
+                <span>Privacy Policy</span>
+              </button>
+
+              <button
+                onClick={() => onNavigate ? onNavigate('/developer-policy') : window.location.href = '/developer-policy'}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-sky-500/30 bg-sky-950/30 text-sky-300 hover:bg-sky-900/40 transition-colors cursor-pointer w-fit"
+              >
+                <Shield className="w-3.5 h-3.5 text-sky-400" />
+                <span>Engineering Policy</span>
+              </button>
+
+              <button
+                onClick={() => onNavigate ? onNavigate('/developer-registration') : window.location.href = '/developer-registration'}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-purple-500/30 bg-purple-950/30 text-purple-300 hover:bg-purple-900/40 transition-colors cursor-pointer w-fit text-[11px]"
+              >
+                <span>Developer Registration ➜</span>
               </button>
             </div>
           </div>

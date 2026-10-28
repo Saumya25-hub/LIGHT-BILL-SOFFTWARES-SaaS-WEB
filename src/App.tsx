@@ -9,6 +9,8 @@ import { AboutPage } from './pages/AboutPage';
 import { SupportPage } from './pages/SupportPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { EightPmPoolPage } from './pages/EightPmPoolPage';
+import { DeveloperPolicyPage } from './pages/DeveloperPolicyPage';
+import { DeveloperRegistrationPage } from './pages/DeveloperRegistrationPage';
 import { CosmicWarpSplash } from './components/cinema/CosmicWarpSplash';
 import { LuxuryCustomCursor } from './components/ui/LuxuryCustomCursor';
 import { siteConfig } from './config/siteConfig';
@@ -57,6 +59,12 @@ export function App() {
       '/support': `Support & Contact — ${siteConfig.brand.productName}`,
       '/privacy': `Privacy Policy — ${siteConfig.brand.productName}`,
       '/8pm': '8 PM — Elite Pool & Snooker Club Management | By STOMS',
+      '/developer-policy': 'Developer Policy & Engineering Standards — STOMS',
+      '/policy': 'Company Engineering & Code Policy — STOMS',
+      '/engineering-policy': 'Engineering Standards & IP Protection — STOMS',
+      '/developer-registration': 'Developer Registration & Work Inquiries — STOMS',
+      '/join-team': 'Work with STOMS Engineering — Developer Registration',
+      '/apply': 'Developer Intake & Work Inquiry — STOMS',
     };
 
     document.title = pageTitles[currentPath] || `${siteConfig.company.masterName} — ${siteConfig.brand.productName}`;
@@ -92,6 +100,16 @@ export function App() {
         return <PrivacyPage onNavigate={handleNavigate} />;
       case '/8pm':
         return <EightPmPoolPage onNavigate={handleNavigate} />;
+      case '/developer-policy':
+      case '/policy':
+      case '/engineering-policy':
+      case '/company-policy':
+        return <DeveloperPolicyPage onNavigate={handleNavigate} />;
+      case '/developer-registration':
+      case '/join-team':
+      case '/apply':
+      case '/careers':
+        return <DeveloperRegistrationPage onNavigate={handleNavigate} />;
       default:
         return (
           <HomePage 

@@ -128,6 +128,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Privacy Policy
                 </button>
               </li>
+              <li>
+                <button onClick={() => handleNav('/developer-policy')} className="hover:text-slate-900 transition-colors text-slate-600">
+                  Engineering Policy
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNav('/developer-registration')} className="hover:text-sky-600 transition-colors text-slate-600">
+                  Developer Inquiries
+                </button>
+              </li>
             </ul>
           </div>
 
