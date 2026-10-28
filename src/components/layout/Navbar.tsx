@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, ShieldCheck, Sparkles, ChevronDown } from 'lucide-react';
 import { siteConfig } from '../../config/siteConfig';
-import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 
 export interface NavbarProps {
@@ -56,21 +55,21 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200/90 shadow-sm py-3'
-          : 'bg-white/80 backdrop-blur-md border-b border-slate-200/50 py-4'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-3 pointer-events-none transition-all duration-300">
+      <div
+        className={`pointer-events-auto max-w-7xl mx-auto rounded-2xl sm:rounded-full transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/80 backdrop-blur-2xl backdrop-saturate-180 border border-white/85 shadow-[0_16px_36px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.03)] py-2 sm:py-2.5 px-3.5 sm:px-6 ring-1 ring-slate-900/[0.05]'
+            : 'bg-white/70 backdrop-blur-xl backdrop-saturate-150 border border-white/90 shadow-[0_10px_30px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.02)] py-2.5 sm:py-3 px-4 sm:px-6 ring-1 ring-slate-900/[0.03]'
+        }`}
+      >
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
           {/* Brand Identity */}
           <div
             onClick={() => handleLinkClick('/')}
-            className="flex items-center gap-3 cursor-pointer group select-none"
+            className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group select-none shrink-0"
           >
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white border border-slate-200 p-1.5 shadow-sm group-hover:border-sky-400/80 transition-colors">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden bg-white/90 border border-slate-200/80 p-1.5 shadow-xs group-hover:border-sky-400/80 group-hover:scale-105 transition-all">
               <img
                 src="/assets/cube_s_master.png"
                 alt="SIGNATURES Logo"
@@ -78,15 +77,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
               />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-slate-900 text-base tracking-tight group-hover:text-sky-600 transition-colors">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-display font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-sky-600 transition-colors">
                   {siteConfig.brand.productName}
                 </span>
                 <span className="hidden xl:inline-block">
                   <Badge variant="brand" size="sm">ERP</Badge>
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-medium">
+              <div className="flex items-center gap-1 text-[10.5px] sm:text-[11px] text-slate-500 font-medium">
                 <span>By {siteConfig.company.masterName}</span>
                 <span className="text-slate-300">•</span>
                 <span className="text-sky-600 font-semibold">Desktop + Android</span>
@@ -94,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Apple Frosted Pill Items) */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
             {navItems.map((item) => {
               const isActive = currentPath === item.path;
@@ -102,10 +101,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                 <button
                   key={item.path}
                   onClick={() => handleLinkClick(item.path)}
-                  className={`px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs xl:text-[13px] font-semibold transition-all duration-200 select-none cursor-pointer ${
                     isActive
-                      ? 'text-sky-700 bg-sky-50 font-semibold border border-sky-100 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-slate-950 hover:bg-slate-900/[0.05]'
                   }`}
                 >
                   {item.label}
@@ -245,89 +244,83 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
               )}
             </div>
 
-            <Button
-              variant="ghost"
-              size="sm"
+            <button
               onClick={() => handleLinkClick('/demo')}
-              className="text-slate-700 hover:text-slate-900"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-900/[0.05] transition-all cursor-pointer select-none"
             >
               Try Demo
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              icon={<ArrowRight className="w-4 h-4" />}
-              iconPosition="right"
+            </button>
+            <button
               onClick={() => handleLinkClick('/pricing')}
+              className="group flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 text-white shadow-[0_4px_14px_rgba(14,165,233,0.35)] hover:shadow-[0_6px_20px_rgba(14,165,233,0.5)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer select-none shrink-0"
             >
-              Start Free Trial
-            </Button>
+              <span>Start Free Trial</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </button>
           </div>
 
           {/* Mobile Hamburger Button */}
-          <div className="flex sm:hidden items-center gap-2">
-            <Button
-              variant="primary"
-              size="sm"
+          <div className="flex sm:hidden items-center gap-1.5">
+            <button
               onClick={() => handleLinkClick('/pricing')}
-              className="px-2.5 py-1.5 text-xs"
+              className="px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs cursor-pointer"
             >
-              Free Trial
-            </Button>
+              Trial
+            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
-              className="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
+              className="p-2 rounded-full text-slate-700 hover:text-slate-900 hover:bg-slate-900/[0.05] focus:outline-none transition-colors cursor-pointer"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Apple Frosted Glass Dropdown) */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-white/98 backdrop-blur-2xl border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 shadow-xl">
+        <div className="pointer-events-auto sm:hidden max-w-7xl mx-auto mt-2 rounded-3xl bg-white/95 backdrop-blur-2xl border border-white/90 shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-4 space-y-3 ring-1 ring-slate-900/[0.05] animate-fade-in">
           {/* Software Ecosystem Mobile Selector */}
-          <div className="p-2 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
-            <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-1">
+          <div className="p-2.5 rounded-2xl bg-slate-900 text-white space-y-2">
+            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-1">
               Select Software Product
             </div>
-            <div className="grid grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => handleLinkClick('/')}
-                className="flex items-center gap-1.5 p-2 rounded-lg bg-sky-50 border border-sky-200 text-left cursor-pointer"
+                className="flex items-center gap-2 p-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-left cursor-pointer transition-colors"
               >
                 <span className="text-base">🧾</span>
                 <div>
-                  <div className="text-xs font-bold text-sky-900">1. Full ERP</div>
-                  <div className="text-[9px] text-sky-600">Light Bill ERP</div>
+                  <div className="text-xs font-bold text-white">1. Full ERP</div>
+                  <div className="text-[9px] text-sky-300">Light Bill ERP</div>
                 </div>
               </button>
 
               <button
                 onClick={() => handleLinkClick('/8pm')}
-                className="flex items-center gap-1.5 p-2 rounded-lg bg-amber-50 border border-amber-200 text-left cursor-pointer"
+                className="flex items-center gap-2 p-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/30 text-left cursor-pointer transition-colors"
               >
                 <span className="text-base">🎱</span>
                 <div>
-                  <div className="text-xs font-bold text-amber-900">2. 8PM Pool</div>
-                  <div className="text-[9px] text-amber-600">v2.3 Pro Suite</div>
+                  <div className="text-xs font-bold text-emerald-300">2. 8PM Pool</div>
+                  <div className="text-[9px] text-emerald-200">v2.3 Pro Suite</div>
                 </div>
               </button>
 
-              <div className="flex items-center gap-1.5 p-2 rounded-lg bg-slate-100/60 border border-slate-200 opacity-60 text-left">
+              <div className="flex items-center gap-2 p-2 rounded-xl bg-white/5 border border-white/5 opacity-40 text-left">
                 <span className="text-base">📦</span>
                 <div>
-                  <div className="text-xs font-medium text-slate-700">3. Inventory</div>
+                  <div className="text-xs font-medium text-slate-300">3. Inventory</div>
                   <div className="text-[8.5px] text-slate-400">Coming Soon</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 p-2 rounded-lg bg-slate-100/60 border border-slate-200 opacity-60 text-left">
+              <div className="flex items-center gap-2 p-2 rounded-xl bg-white/5 border border-white/5 opacity-40 text-left">
                 <span className="text-base">🏋️</span>
                 <div>
-                  <div className="text-xs font-medium text-slate-700">4. Gym App</div>
+                  <div className="text-xs font-medium text-slate-300">4. Gym App</div>
                   <div className="text-[8.5px] text-slate-400">Coming Soon</div>
                 </div>
               </div>
@@ -341,10 +334,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                 <button
                   key={item.path}
                   onClick={() => handleLinkClick(item.path)}
-                  className={`block w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-sky-50 text-sky-700 font-semibold border border-sky-100'
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                      ? 'bg-slate-900 text-white font-bold'
+                      : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   {item.label}
@@ -353,7 +346,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
             })}
           </div>
 
-          <div className="pt-2 border-t border-slate-200 space-y-2">
+          <div className="pt-2 border-t border-slate-200/80 space-y-2">
             <div className="px-2 py-1 flex items-center justify-between text-xs text-slate-600">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" /> 35-Day Full Trial
@@ -362,22 +355,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                 <Sparkles className="w-3.5 h-3.5" /> ₹1,999/yr Offer
               </span>
             </div>
-            <Button
-              variant="primary"
-              size="md"
-              fullWidth
+            <button
               onClick={() => handleLinkClick('/pricing')}
+              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold text-sm shadow-md cursor-pointer"
             >
-              Start Free Trial (35 Days)
-            </Button>
-            <Button
-              variant="secondary"
-              size="md"
-              fullWidth
-              onClick={() => handleLinkClick('/demo')}
-            >
-              Explore Interactive Demo
-            </Button>
+              Start Free Trial ➜
+            </button>
           </div>
         </div>
       )}
