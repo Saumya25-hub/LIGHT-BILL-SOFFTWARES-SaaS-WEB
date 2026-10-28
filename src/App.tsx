@@ -10,6 +10,7 @@ import { SupportPage } from './pages/SupportPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { EightPmPoolPage } from './pages/EightPmPoolPage';
 import { CosmicWarpSplash } from './components/cinema/CosmicWarpSplash';
+import { LuxuryCustomCursor } from './components/ui/LuxuryCustomCursor';
 import { siteConfig } from './config/siteConfig';
 
 export function App() {
@@ -103,6 +104,9 @@ export function App() {
 
   return (
     <>
+      {/* Awwwards-grade Luxury Fluid Magnetic Custom Cursor */}
+      <LuxuryCustomCursor />
+
       <Layout currentPath={currentPath} onNavigate={handleNavigate}>
         {renderCurrentPage()}
       </Layout>

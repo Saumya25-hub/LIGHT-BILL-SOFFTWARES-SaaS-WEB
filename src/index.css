@@ -19,6 +19,16 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
+
+  /* Premium Awwwards Custom Cursor: hide default system cursor on fine pointer devices */
+  @media (hover: hover) and (pointer: fine) {
+    body, a, button, [role="button"], .cursor-pointer {
+      cursor: none !important;
+    }
+    input, textarea, select {
+      cursor: text !important;
+    }
+  }
 }
 
 @layer utilities {
