@@ -40,11 +40,15 @@ export const LuxuryCustomCursor: React.FC = () => {
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
 
-      if (!isVisible) setIsVisible(true);
+      if (!isVisible) {
+        setIsVisible(true);
+        ring.current.x = e.clientX;
+        ring.current.y = e.clientY;
+      }
 
-      // Instantly position leading dot with zero latency
+      // Instantly position leading dot with zero latency (exact geometric center)
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
     };
 
@@ -75,13 +79,13 @@ export const LuxuryCustomCursor: React.FC = () => {
 
     // 120 FPS Lerp animation loop for elastic outer ring
     const animate = () => {
-      // 0.18 lerp factor = snappy yet buttery smooth elastic follow
-      const factor = 0.18;
+      // Snappy and exact elastic follow
+      const factor = 0.22;
       ring.current.x += (mouse.current.x - ring.current.x) * factor;
       ring.current.y += (mouse.current.y - ring.current.y) * factor;
 
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0)`;
+        ringRef.current.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0) translate(-50%, -50%)`;
       }
 
       rafId.current = requestAnimationFrame(animate);
@@ -114,7 +118,7 @@ export const LuxuryCustomCursor: React.FC = () => {
       {/* 1. Leading Center Black Dot (Direct Zero-Lag Pinpoint) */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform"
+        className="fixed top-0 left-0 pointer-events-none will-change-transform"
       >
         <div
           className={`rounded-full transition-all duration-150 ${
@@ -132,7 +136,7 @@ export const LuxuryCustomCursor: React.FC = () => {
       {/* 2. Trailing Follower Coral/Red Ring (Fluid Physics Spring) */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform"
+        className="fixed top-0 left-0 pointer-events-none will-change-transform"
       >
         <div
           className={`rounded-full transition-all duration-300 ease-out flex items-center justify-center ${

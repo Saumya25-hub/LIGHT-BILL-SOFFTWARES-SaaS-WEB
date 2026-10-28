@@ -20,12 +20,12 @@
     overflow-x: hidden;
   }
 
-  /* Premium Awwwards Custom Cursor: hide default system cursor on fine pointer devices */
+  /* Premium Awwwards Custom Cursor: hide default system cursor everywhere on desktop */
   @media (hover: hover) and (pointer: fine) {
-    body, a, button, [role="button"], .cursor-pointer {
+    *, *::before, *::after {
       cursor: none !important;
     }
-    input, textarea, select {
+    input, textarea, select, [contenteditable="true"] {
       cursor: text !important;
     }
   }
