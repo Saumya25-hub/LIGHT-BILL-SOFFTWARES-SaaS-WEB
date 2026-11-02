@@ -160,7 +160,7 @@ export const siteConfig: SiteConfig = {
       osSupport: "Windows 10 / 11 (64-bit)",
       directDownloadUrl: "https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/download/v2.1.0/SIGNATURES-BILL-Setup.exe",
       releaseTagUrl: "https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/tag/v2.1.0",
-      sha256Checksum: "8C8A4598499F5397CECBCE6AB2D4FBCAB8F914450072E50097D11687982053AD",
+      sha256Checksum: "DDEEEE30BFC29F9A8EF9B2BFAF2D9C49E4DA719955708A9F0E920BFF54E42D0D",
     },
     android: {
       version: "1.0.0-beta",
