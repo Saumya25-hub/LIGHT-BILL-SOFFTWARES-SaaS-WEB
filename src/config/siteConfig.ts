@@ -7,12 +7,16 @@
 export interface SiteConfig {
   company: {
     masterName: string;
-    legalEntityName: string; // Placeholder marked for owner confirmation
+    parentConglomerate: string;
+    divisionName: string;
+    teamScale: string;
+    legalEntityName: string;
     foundedYear?: string;
-    cinNumber?: string; // Marked for owner confirmation
-    panNumber?: string; // Marked for owner confirmation
-    gstinNumber?: string; // Marked for owner confirmation
-    registeredAddress: string; // Marked for owner confirmation
+    cinNumber?: string;
+    panNumber?: string;
+    gstinNumber?: string;
+    registeredAddress: string;
+    supportSLA?: string;
   };
   brand: {
     productFamily: string;
@@ -72,7 +76,7 @@ export interface SiteConfig {
       fileSizeBytes: number;
       fileSizeFormatted: string;
       osSupport: string;
-      directDownloadUrl: string; // Relative or CDN url
+      directDownloadUrl: string;
       releaseTagUrl: string;
       sha256Checksum: string;
     };
@@ -80,7 +84,7 @@ export interface SiteConfig {
       version: string;
       status: 'coming_soon' | 'live';
       statusLabel: string;
-      playStoreUrl: string; // Empty or placeholder until published
+      playStoreUrl: string;
     };
   };
   social: {
@@ -93,19 +97,23 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   company: {
-    masterName: "S TOM’S",
-    legalEntityName: "S TOM’S Software (Confirm exact legal entity)",
-    registeredAddress: "Surat, Gujarat, India (Confirm official registered address)",
-    cinNumber: "[CONFIRM_CIN]",
-    panNumber: "[CONFIRM_PAN]",
-    gstinNumber: "[CONFIRM_GSTIN]",
+    masterName: "S TOM’S Enterprises",
+    parentConglomerate: "S TOM’S Multi-Industry Umbrella Group",
+    divisionName: "Signatures IT Groups",
+    teamScale: "16-Member Distributed Engineering Team",
+    legalEntityName: "S TOM’S Enterprises (Signatures IT Groups Division)",
+    registeredAddress: "Surat, Gujarat, India",
+    cinNumber: "Commercial Proprietary Entity",
+    panNumber: "Private Registration",
+    gstinNumber: "Private Registration",
+    supportSLA: "Same-Day Issue Resolution Guarantee (Within 24 Hours)",
   },
   brand: {
     productFamily: "SIGNATURES",
     productName: "SIGNATURES LIGHT BILL ERP",
-    productTagline: "Business software, made simple.",
-    productPhilosophy: "Powerful inside. Simple outside.",
-    positioning: "Offline-first desktop billing ERP with companion mobile visibility and secure private cloud sync.",
+    productTagline: "Next-Gen Commercial ERP — 5-Hour Work in 30 Minutes",
+    productPhilosophy: "Anti-VC. Zero Fake Hype. Real Software for Real Business Owners.",
+    positioning: "Offline-first commercial desktop ERP & factory floor operating system engineered by Signatures IT Groups under S TOM'S Enterprises umbrella.",
   },
   contact: {
     supportEmail: "signaturesltda@gmail.com",
@@ -144,11 +152,11 @@ export const siteConfig: SiteConfig = {
     },
     trial: {
       days: 35,
-      headline: "35 DAYS FREE",
-      subline: "Try SIGNATURES LIGHT BILL ERP before choosing a plan. Full features included.",
+      headline: "35 DAYS FULL FREE TRIAL",
+      subline: "Try SIGNATURES LIGHT BILL ERP without restrictions. All features unlocked, zero credit card, 100% data exportable to Excel anytime.",
       noCreditCardRequired: true,
     },
-    taxNote: "All prices in INR. Includes automatic software updates and cloud backups.",
+    taxNote: "All prices in INR. Includes automatic software updates, local offline SQLite, and zero vendor lock-in.",
   },
   download: {
     desktop: {

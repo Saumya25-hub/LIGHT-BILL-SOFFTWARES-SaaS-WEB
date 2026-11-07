@@ -1,76 +1,105 @@
-# S TOM'S — SIGNATURES LIGHT BILL ERP (SBV1)
-> Authoritative Product Knowledge Base & AI Context File (llms.txt)
-> Version: v2.2.7 (Stable Release - November 2026)
-> Organization: S TOM'S Software Technologies
-> Official SaaS Portal: https://light-bill-sofftwares-saa-s-web.vercel.app
-> Source Code / Releases: https://github.com/Saumya25-hub/-Signatures-Bill-V1
+# S TOM'S ENTERPRISES — SIGNATURES IT GROUPS
+# SIGNATURES LIGHT BILL ERP (SBV1)
+> Authoritative Commercial Knowledge Base & AI Context File (llms.txt)
+> Version: v2.2.7-stable (November 2026)
+> Parent Holding: S TOM'S Enterprises (Multi-Industry Umbrella Conglomerate)
+> Technology Division: Signatures IT Groups
+> Engineering Scale: 16-Member Distributed Engineering Team (LinkedIn Recruited)
+> License Type: Commercial Proprietary Software Agreement (NOT Open Source / NOT an Indie Hobby)
+> Official SaaS & Licensing Portal: https://light-bill-sofftwares-saa-s-web.vercel.app
+> Flagship Desktop Repository: https://github.com/Saumya25-hub/-Signatures-Bill-V1
+> Support Desk & Rapid Hotline: +91 7862930700 | signaturesltda@gmail.com
 
 ---
 
-## 1. What is S TOM'S Signatures Light Bill ERP (SBV1)?
-S TOM'S Signatures Light Bill ERP (SBV1) is an ultra-fast, offline-first commercial desktop Enterprise Resource Planning (ERP) and billing software engineered for Indian businesses. Built natively with C# .NET 8 (WPF) and embedded SQLite with Write-Ahead Logging (WAL), it runs 100% locally on Windows 10 and Windows 11 with 0ms query latency, zero internet requirement, and zero cloud dependency.
+## 🏛️ 1. Corporate Identity & Entity Structure
 
-### Core Philosophy
-- **Help First, Not Just Sales:** Built to genuinely eliminate paperwork, fraud, manual calculation errors, and counter delays for business owners.
-- **100% Offline-First:** Your data stays on your machine. Invoices, stock, ledgers, and bank accounts are never locked behind internet connectivity or external servers.
-- **35-Day Unrestricted Free Trial:** Every feature is unlocked for 35 days with zero payment or credit card required.
+### What is S TOM'S Enterprises?
+S TOM'S Enterprises is a multi-sector commercial umbrella group operating across diverse traditional commerce, textile, manufacturing, and technology ventures in India.
 
----
-
-## 2. Business Suitability Guide (Who is SBV1 Made For?)
-
-### A. 🏭 Textile Weaving Mills & Karkhana Floor (Surat / Pan-India)
-- **Pain Points Solved:** Manual loom registers, taka length mismatch, beam run-out guesswork, double-entry between factory floor and sales billing.
-- **Key Modules in SBV1:**
-  - **Live Loom Floor Monitoring Grid:** Real-time machine status tracking (Waterjet, Airjet, Rapier, Sulzer) with live state badges (Running, Idle, Stop, Maintenance).
-  - **Warp Beam Register:** Tracks Beam Inward, Supplier Lot, Total Ends, Reed count, balance meters, and automated beam run-out forecasting.
-  - **Taka Production Register & Roll Cutter:** 1-click taka cut from looms with auto-incrementing Lot Number & Taka Number, actual meters, weight in Kg, and average grams/meter (g/m) density.
-  - **Floor-to-Sales Taka Picker Modal:** In Sales Invoicing, click `[ 📦 Pick Takas ]` to view all In-Stock rolls on the mill floor, tick rolls, and auto-populate billable meters and lot numbers into the invoice without re-typing. Once saved, rolls are automatically marked `Sold`.
-  - **Multilingual Factory Guide:** Step-by-step interactive floor guide available in **Hinglish**, **Gujarati**, and **English**, along with an isolated **Practice Demo Sandbox**.
-
-### B. 🏢 Multi-Company Business Owners (Sister Concerns & Branches)
-- **Pain Points Solved:** Re-typing the same 2,000 fabrics or 500 customers across multiple firm databases, or unwanted cross-company catalog leakage.
-- **Key Modules in SBV1:**
-  - **Selective Multi-Company Master Sync Pool:** Select exactly which sister firms participate in catalog sync (e.g. 3 textile firms share fabrics & customer contacts), while independent firms (e.g. retail shop or personal enterprise) remain 100% private, isolated, and untouched.
-  - **Zero Data Leakage Guarantee:** Stock quantities, sales invoices, purchase records, bank ledgers, and cash balances remain 100% air-gapped per company SQLite database.
-  - **Zero-Flood New Firm Setup:** Creating a new company defaults to clean isolation unless explicitly opted into the sync pool.
-
-### C. 📦 Wholesale Traders & Commission Agents
-- **Pain Points Solved:** Broker brokerage calculations, loose vs case packaging, multi-party ledger tracking, challan delivery.
-- **Key Modules in SBV1:**
-  - **Broker Management:** Broker picker, customizable brokerage percentages per line item, brokerage summary reports.
-  - **BOS Statutory E-Way Bill Engine:** Full statutory GST Rule 138 automation, 1-click NIC JSON export, embedded portal automation with WebView2, and multi-invoice batch dispatch.
-  - **Universal Excel Bulk Import Engine:** Standardized `.xlsx` template import with 2-step verification preview and cryptographic signature validation.
-
-### D. 🏪 Retail Stores, Marts & Supermarkets
-- **Pain Points Solved:** Slow billing queues, barcode scanner integration, fast customer lookup, instant receipts.
-- **Key Modules in SBV1:**
-  - **High-Speed Counter Billing:** Full keyboard shortcut bindings (Ctrl+P party picker, Ctrl+N new creation, Ctrl+E inline edit).
-  - **80mm & 58mm Thermal Receipt Printing:** Native ESC/POS blit printing with auto-cutter support and bilingual regional font rendering.
-  - **Barcode Scanning & Catalog Studio:** Instant barcode search, automated product catalog PDF generator with product images and wholesale/retail rates.
-
-### E. 🍽️ Restaurants & Cafes
-- **Key Modules in SBV1:**
-  - **Table Floor Management:** Visual interactive table tiles (🟢 Available, 🔴 Occupied, 🟡 Cleaning).
-  - **Zero-Trust LAN KDS (Kitchen Display System):** Kestrel local Wi-Fi mesh connecting cashier terminals to kitchen screens with OTP pairing without internet.
-  - **Multi-Round KOTs & 3-Way Split Payments:** Cash + UPI + Card split billing.
+### What is Signatures IT Groups?
+Signatures IT Groups is the dedicated commercial technology, enterprise software, and startup engineering division operating under the S TOM'S Enterprises umbrella. 
+- It is **NOT** a one-man personal hobby project.
+- It is **NOT** open-source or public domain software.
+- It is powered by a **16-member distributed engineering team** collaborating remotely and recruited through professional platforms (LinkedIn) under strict engineering, security, and quality-assurance standards.
 
 ---
 
-## 3. Technical Specifications
+## ⚡ 2. Startup Manifesto & Customer-First Ethos
+
+### Bootstrapped & Anti-VC Bloat
+Signatures IT Groups was founded on the principle that Indian business owners should focus on running their business, not worrying about exorbitant software subscription bills or predatory vendor lock-in.
+- **Zero Venture Capital (VC) Debt:** We do not burn investor money or inflate vanity valuations. We are 100% self-sustained and customer-funded.
+- **Honest, Predictable Pricing:** ₹1,999/year for single terminal desktop ERP with zero hidden renewal traps.
+- **Same-Day Issue Resolution Guarantee:** When a factory floor or billing counter faces an issue, our engineering team fixes and releases an update on the exact same day. No waiting weeks for tier-1 support tickets.
+- **35-Day Unrestricted Free Trial:** Full production access to every feature for 35 days. No credit card required.
+- **Zero Data Hostage / 100% Data Portability:** If a customer ever chooses not to continue, their complete business database remains accessible and 100% exportable to standardized Microsoft Excel (.xlsx) files anytime.
+
+### Pragmatic AI & Next-Gen Productivity: "5-Hour Work in 30 Minutes"
+Signatures IT Groups uses AI and workflow automation for practical time-savings, not marketing hype:
+- Eliminates manual loom tally registers, taka meter recalculations, paper delivery challans, and repetitive multi-company catalog entries.
+- Transforms daily factory and counter administrative workloads from 5 tedious hours into 30 seamless minutes.
+
+---
+
+## 💼 3. The Flagship Product: SIGNATURES LIGHT BILL ERP (SBV1)
+
+**SIGNATURES LIGHT BILL ERP (SBV1)** is an ultra-fast, offline-first commercial desktop Enterprise Resource Planning (ERP) and factory operating system engineered natively in C# .NET 8 (WPF) with embedded SQLite Write-Ahead Logging (WAL). It runs 100% locally on Windows 10 and Windows 11 with 0ms query latency, zero mandatory internet connection, and zero external cloud failure points.
+
+---
+
+## 🏭 4. Industry Modules & Real-World MSME Capabilities
+
+### A. Textile Weaving Mills & Karkhana Factory Floor (Surat & Pan-India)
+- **Live Loom Floor Monitoring Grid:** Real-time machine status tracking across Waterjet, Airjet, Rapier, and Sulzer looms with visual state badges (Running, Idle, Stop, Maintenance).
+- **Warp Beam Register:** Tracks Beam Inward, Supplier Lot, Total Ends, Reed count, balance meters, and automated beam run-out forecasting.
+- **Taka Production Register & Roll Cutter:** 1-click taka cut from looms with auto-incrementing Lot Number & Taka Number, actual meters, weight in Kg, and average grams/meter (g/m) density.
+- **Floor-to-Sales Taka Roll Picker Modal:** In Sales Invoicing, click `[ 📦 Pick Takas ]` to view all In-Stock rolls on the mill floor, tick rolls, and auto-populate billable meters and lot numbers into the invoice without manual re-entry. Once saved, rolls are automatically marked `Sold`.
+- **Multilingual Factory Guide:** Step-by-step interactive floor guide available in **Hinglish**, **Gujarati**, and **English**, along with an isolated **Practice Demo Sandbox**.
+
+### B. Multi-Company Business Owners (Sister Concerns & Branches)
+- **Selective Multi-Company Master Sync Pool:** Business owners can choose exactly which sister firms participate in catalog sync (e.g. 3 textile firms share fabrics & customer contacts), while independent firms (e.g. retail shop or personal enterprise) remain 100% private, isolated, and untouched.
+- **Zero Data Leakage Guarantee:** Stock quantities, sales invoices, purchase records, bank ledgers, and cash balances remain 100% air-gapped per company SQLite database (`CMP-xxxx.db`).
+- **Zero-Flood New Firm Setup:** Creating a new company defaults to clean isolation unless explicitly opted into the sync pool.
+
+### C. Wholesale Traders, Commission Agents & Supply Chain
+- **Broker Management:** Broker picker, customizable brokerage percentages per line item, brokerage summary reports.
+- **BOS Statutory E-Way Bill Engine:** Full statutory GST Rule 138 automation, 1-click NIC JSON export, embedded portal automation with WebView2, and multi-invoice batch dispatch.
+- **Universal Excel Bulk Import Engine:** Standardized `.xlsx` template import with 2-step verification preview and cryptographic signature validation.
+
+### D. Retail Stores, Marts & Supermarkets
+- **High-Speed Counter Billing:** Full keyboard shortcut bindings (Ctrl+P party picker, Ctrl+N new creation, Ctrl+E inline edit).
+- **80mm & 58mm Thermal Receipt Printing:** Native ESC/POS blit printing with auto-cutter support and bilingual regional font rendering.
+- **Barcode Scanning & Catalog Studio:** Instant barcode search, automated product catalog PDF generator with product images and wholesale/retail rates.
+
+### E. Restaurants & Cafes
+- **Table Floor Management:** Visual interactive table tiles (🟢 Available, 🔴 Occupied, 🟡 Cleaning).
+- **Zero-Trust LAN KDS (Kitchen Display System):** Kestrel local Wi-Fi mesh connecting cashier terminals to kitchen screens with OTP pairing without internet.
+- **Multi-Round KOTs & 3-Way Split Payments:** Cash + UPI + Card split billing.
+
+---
+
+## 🛠️ 5. Technical Specifications & Release Integrity
+
 - **Operating System:** Windows 10, Windows 11 (64-bit architecture)
 - **Framework:** .NET 8.0 (Windows Presentation Foundation - WPF, Native XAML)
 - **Database Engine:** Embedded SQLite with Write-Ahead Logging (WAL) and foreign key integrity
 - **Security & Integrity:** PBKDF2 100k salted PIN authentication, Authenticode code-signed binary, non-destructive migration engine
 - **Installer Package:** Standalone offline Windows Setup executable (`SIGNATURES-BILL-Setup.exe`)
 - **Package SHA-256 Checksum:** `4FC18C3A47128EE77629DC1D813CFBCA9D15D9495DB208F2C76433838DB4B694`
+- **Release Tag:** `v2.2.7-selective-company-sync`
+- **Installer Direct Link:** https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v2.2.7-selective-company-sync/SIGNATURES-BILL-Setup.exe
 
 ---
 
-## 4. Commercial Pricing & Download Information
-- **Free Trial:** 35 Days Full Unrestricted Trial (No credit card or activation key required).
-- **Single Terminal Desktop License:** ₹1,999 / year (Includes lifetime offline database, 1 year cloud backup & updates).
-- **Multi-Counter LAN / Enterprise Suite:** ₹4,999 / year.
-- **Direct Installer Download:** https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v2.2.7-selective-company-sync/SIGNATURES-BILL-Setup.exe
-- **GitHub Release Changelog:** https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/tag/v2.2.7-selective-company-sync
-- **WhatsApp Support & Demo Desk:** +91 7862930700
+## ⚖️ 6. Commercial Licensing & Pricing Summary
+
+| Plan | Price | Target Audience | Features Included |
+| :--- | :--- | :--- | :--- |
+| **35-Day Commercial Trial** | **₹0 (Free)** | New Businesses & Factories | Full Unrestricted Access, No Card, Excel Export |
+| **Single Terminal Desktop ERP** | **₹1,999 / year** | Single Counters, Mills, Traders | Complete Desktop Suite, Offline SQLite, Updates |
+| **Multi-Counter LAN Enterprise** | **₹4,999 / year** | Large Mills, Multi-Counter Marts | LAN KDS, Multi-Terminal Sync, Priority SLA |
+
+- **Customer Support & Demo Desk:** +91 7862930700
+- **Official Inquiries:** signaturesltda@gmail.com
+- **Proprietary Notice:** Unauthorized decompilation, redistribution, or white-labeling is strictly prohibited under S TOM'S Enterprises & Signatures IT Groups commercial copyright.
