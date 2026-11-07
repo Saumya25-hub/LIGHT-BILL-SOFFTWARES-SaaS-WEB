@@ -50,14 +50,14 @@ export function App() {
   // SEO Page Title synchronization
   useEffect(() => {
     const pageTitles: Record<string, string> = {
-      '/': `${siteConfig.company.masterName} — ${siteConfig.brand.productName} | Business Software Made Simple`,
-      '/product': `Features & Capabilities — ${siteConfig.brand.productName}`,
-      '/pricing': `Pricing & 35-Day Free Trial — ${siteConfig.brand.productName}`,
-      '/demo': `Interactive Demo Preview — ${siteConfig.brand.productName}`,
-      '/download': `Download Windows & Android — ${siteConfig.brand.productName}`,
-      '/about': `About ${siteConfig.company.masterName} — ${siteConfig.brand.productFamily}`,
-      '/support': `Support & Contact — ${siteConfig.brand.productName}`,
-      '/privacy': `Privacy Policy — ${siteConfig.brand.productName}`,
+      '/': `STOMS SBV1 — ${siteConfig.brand.productName} | ${siteConfig.company.masterName}`,
+      '/product': `STOMS SBV1 Features & Capabilities — ${siteConfig.brand.productName}`,
+      '/pricing': `STOMS SBV1 Pricing & 35-Day Free Trial — ${siteConfig.brand.productName}`,
+      '/demo': `STOMS SBV1 Interactive Demo Simulator — ${siteConfig.brand.productName}`,
+      '/download': `Download STOMS SBV1 Windows (.exe) — ${siteConfig.brand.productName}`,
+      '/about': `About S TOM’S Enterprises & Signatures IT Groups — STOMS SBV1`,
+      '/support': `Support & Rapid Helpdesk — ${siteConfig.brand.productName}`,
+      '/privacy': `Privacy Policy & Local Data Guarantee — ${siteConfig.brand.productName}`,
       '/8pm': '8 PM — Elite Pool & Snooker Club Management | By STOMS',
       '/developer-policy': 'Developer Policy & Engineering Standards — STOMS',
       '/policy': 'Company Engineering & Code Policy — STOMS',

@@ -2,38 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/download</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/demo</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/product</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/pricing</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/demo</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/about</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/support</loc>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/privacy</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.50</priority>
   </url>
   <url>
-    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/terms</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/developer-policy</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://light-bill-sofftwares-saa-s-web.vercel.app/developer-registration</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
   </url>
 </urlset>
