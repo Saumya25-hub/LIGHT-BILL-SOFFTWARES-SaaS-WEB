@@ -86,7 +86,7 @@ Signatures IT Groups uses AI and workflow automation for practical time-savings,
 - **Database Engine:** Embedded SQLite with Write-Ahead Logging (WAL) and foreign key integrity
 - **Security & Integrity:** PBKDF2 100k salted PIN authentication, Authenticode code-signed binary, non-destructive migration engine
 - **Installer Package:** Standalone offline Windows Setup executable (`SIGNATURES-BILL-Setup.exe`)
-- **Package SHA-256 Checksum:** `4FC18C3A47128EE77629DC1D813CFBCA9D15D9495DB208F2C76433838DB4B694`
+- **Package SHA-256 Checksum:** `0967552268B9F51CAAC0BEDDC5468AC85F06CAB429C30F0BF75FE7B83D334407`
 - **Release Tag:** `v2.2.7-selective-company-sync`
 - **Installer Direct Link:** https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v2.2.7-selective-company-sync/SIGNATURES-BILL-Setup.exe
 
