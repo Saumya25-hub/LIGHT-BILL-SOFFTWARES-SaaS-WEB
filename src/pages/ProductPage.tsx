@@ -33,6 +33,30 @@ import { MultiCompanySyncSection } from '../components/product/MultiCompanySyncS
 export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   const verifiedDesktopModules = [
     {
+      title: "🏭 Weaving Mill & Karkhana Factory Floor Engine",
+      desc: "Comprehensive production monitoring for modern textile manufacturing: Real-time Loom machine monitoring (Waterjet, Airjet, Rapier) with live status dashboard (Running, Idle, Stop, Maintenance), Warp Beam inventory register with automated beam run-out forecasting & balance meters, Taka production cutter with auto-incrementing lot numbers, average g/m weight calculations, and multilingual interactive floor guide (Hinglish/Gujarati/English).",
+      icon: <Layers className="w-5 h-5 text-emerald-600" />,
+      tag: "⚡ NEW v2.2.7",
+    },
+    {
+      title: "📦 Floor-to-Sales Taka Roll Picker Modal",
+      desc: "Direct bridge connecting factory floor stock to billing. Open the Taka Picker right inside the Sales invoice, tick completed rolls with exact meters, lot numbers, and roll weights, and auto-populate line items with zero re-typing. Automatically updates roll status to Sold upon saving.",
+      icon: <Package className="w-5 h-5 text-indigo-600" />,
+      tag: "⚡ NEW v2.2.7",
+    },
+    {
+      title: "🏢 Selective Multi-Company Sync Pool & Opt-In Isolation",
+      desc: "Run unlimited business firms with custom catalog sharing. Select exactly which companies participate in the master sync pool (e.g. share products & parties across 3 textile mills) while keeping independent retail shops, kirana stores, or personal firms 100% private, clean, and unflooded.",
+      icon: <Building2 className="w-5 h-5 text-sky-600" />,
+      tag: "⚡ NEW v2.2.7",
+    },
+    {
+      title: "🚀 Smart Business Setup Wizard (4 Industry Packs)",
+      desc: "Instant 1-click enterprise onboarding: Surat Kapad & Textile Advanced, Wholesale Trading & Distribution, Retail & Supermarket, and General Manufacturing. Auto-configures units (Taka, Meters, Bori, PCS), tax profiles, and factory floor navigation.",
+      icon: <Sparkles className="w-5 h-5 text-amber-600" />,
+      tag: "⚡ NEW v2.2.7",
+    },
+    {
       title: "🚚 BOS E-Way Bill & Dispatch Engine",
       desc: "Full statutory Rule 138 automation: 1-click official NIC JSON payload generation, embedded WebView2 portal automation with captcha assistance, cryptographic SHA-256 PDF vault verification, multi-field financial reconciliation, and multi-invoice batch dispatch directly from Sales register.",
       icon: <Truck className="w-5 h-5 text-sky-600" />,

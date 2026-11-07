@@ -62,8 +62,8 @@ export const MultiCompanySyncSection: React.FC<MultiCompanySyncSectionProps> = (
       a: "No! Absolutely never. Universal Master Sync copies the product catalog definition (name, HSN code, tax rate, unit, standard sale rate) to sister companies, but physical stock quantities remain 100% strictly separate. In the other companies, the item is created with 0 opening stock so your inventory counts and physical audits remain perfectly accurate."
     },
     {
-      q: "Can I turn Universal Master Sync OFF if my companies sell completely different items?",
-      a: "Yes, completely! Master Sync is designed for maximum business flexibility. In Settings ➔ Company, you have independent toggle switches for 'Auto-Sync Products' and 'Auto-Sync Parties'. You can keep one or both turned OFF at any time."
+      q: "Can I select ONLY specific companies to sync while keeping other firms completely independent?",
+      a: "Yes, completely! In v2.2.7, we introduced the Selective Company Sync Pool. In Settings ➔ Universal Master Sync, every registered company has its own checkbox. You can check 3 textile sister firms to share products and parties, while keeping retail shops or personal firms unchecked. Unchecked companies stay 100% independent and are never touched or flooded!"
     },
     {
       q: "I already have an existing company with 1,500 products. Do I have to re-enter them in my new company?",
