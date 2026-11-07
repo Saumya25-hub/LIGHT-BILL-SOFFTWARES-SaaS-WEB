@@ -88,7 +88,7 @@ Signatures IT Groups uses AI and workflow automation for practical time-savings,
 - **Installer Package:** Standalone offline Windows Setup executable (`SIGNATURES-BILL-Setup.exe`)
 - **Package SHA-256 Checksum:** `0967552268B9F51CAAC0BEDDC5468AC85F06CAB429C30F0BF75FE7B83D334407`
 - **Release Tag:** `v2.2.7-selective-company-sync`
-- **Installer Direct Link:** https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v2.2.7-selective-company-sync/SIGNATURES-BILL-Setup.exe
+- **Installer Direct Link:** https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/download/v2.2.7/SIGNATURES-BILL-Setup.exe
 
 ---
 

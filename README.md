@@ -1,6 +1,6 @@
 # S TOM’S — SIGNATURES LIGHT BILL ERP (SBV1)
 
-[![Release](https://img.shields.io/badge/Release-v2.2.7-blue.svg)](https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/tag/v2.2.7-selective-company-sync)
+[![Release](https://img.shields.io/badge/Release-v2.2.7-blue.svg)](https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/tag/v2.2.7)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(64--bit)-success.svg)]()
 [![License](https://img.shields.io/badge/License-Commercial%20ERP-orange.svg)]()
 [![Free Trial](https://img.shields.io/badge/Trial-35%20Days%20Free-brightgreen.svg)]()
@@ -12,8 +12,8 @@
 
 ## ⚡ Direct Download & Installation
 
-- **Windows Desktop Installer**: [Download SIGNATURES-BILL-Setup.exe (v2.2.7)](https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v2.2.7-selective-company-sync/SIGNATURES-BILL-Setup.exe)
-- **Latest Stable Tag**: [v2.2.7-selective-company-sync](https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/tag/v2.2.7-selective-company-sync)
+- **Windows Desktop Installer**: [Download SIGNATURES-BILL-Setup.exe (v2.2.7)](https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/download/v2.2.7/SIGNATURES-BILL-Setup.exe)
+- **Latest Stable Tag**: [v2.2.7-selective-company-sync](https://github.com/Saumya25-hub/LIGHT-BILL-SOFFTWARES-SaaS-WEB/releases/tag/v2.2.7)
 - **Trial Period**: 35 Days Unrestricted Full Access (Zero Payment, No Credit Card Required)
 - **Package SHA-256 Checksum**: `4FC18C3A47128EE77629DC1D813CFBCA9D15D9495DB208F2C76433838DB4B694`
 
