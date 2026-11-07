@@ -6,7 +6,8 @@ import {
   ArrowRight, 
   Volume2, 
   VolumeX,
-  Minimize2
+  Minimize2,
+  ExternalLink
 } from 'lucide-react';
 
 interface CuteRobotCopilotProps {
@@ -29,11 +30,25 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [scrollReaction, setScrollReaction] = useState<'idle' | 'down' | 'up'>('idle');
   const [currentSection, setCurrentSection] = useState<'hero' | 'demo' | 'works' | 'process' | 'footer'>('hero');
-  const [speechBubbleText, setSpeechBubbleText] = useState('👋 Hey boss! Need a quick tour?');
+  const [speechBubbleText, setSpeechBubbleText] = useState('👋 Namaste! Need help finding the right software for your business?');
   const [showSpeechBubble, setShowSpeechBubble] = useState(true);
   const [isBlinking, setIsBlinking] = useState(false);
   const [headTilt, setHeadTilt] = useState({ x: 0, y: 0 });
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [hasChromeAI, setHasChromeAI] = useState(false);
+
+  // Check Chrome Gemini Nano built-in AI availability
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).ai?.languageModel) {
+      setHasChromeAI(true);
+    }
+  }, []);
+
+  // Open Brave Search AI Engine query in new tab
+  const openBraveAskQuery = (query: string) => {
+    const encoded = encodeURIComponent(query);
+    window.open(`https://search.brave.com/ask?q=${encoded}&source=web`, '_blank', 'noopener,noreferrer');
+  };
 
   // Chat State
   const [inputText, setInputText] = useState('');
@@ -41,17 +56,24 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
     {
       id: 'm1',
       sender: 'bot',
-      text: '🤖 Beep-boop! I am **Siggy**, your AI Copilot for **Signatures Bill ERP**. How can I help you dominate your wholesale or retail business today?',
+      text: '👋 Namaste! Main **Siggy**, S TOM\'S ka free business helper hoon.\n\nHum yahan software bechne nahi, **aapke business ke hisaab-kitaab aur factory floor ko easy banane me help karne** aaye hain.\n\n💼 **Aapka business kis type ka hai?** Niche select karein ya koi bhi sawal puchein:',
       actions: [
-        { label: '🚀 Test 0ms Simulator', action: () => onLaunchDemo?.() },
-        { label: '💰 Check Pricing', action: () => onNavigate?.('/pricing') },
-        { label: '🖨️ 80mm Thermal Specs', action: () => handleSendPrompt('Tell me about thermal printer support') },
+        { label: '🏭 Textile Weaving Mill / Karkhana', action: () => handleSendPrompt('Tell me about Textile Weaving Mill & Karkhana Floor features') },
+        { label: '🏪 Retail Mart / Supermarket / Kirana', action: () => handleSendPrompt('Tell me about Retail Mart & Barcode Billing') },
+        { label: '📦 Wholesale Trading & Distribution', action: () => handleSendPrompt('Tell me about Wholesale Trading & Brokerage') },
+        { label: '🏢 Multiple Sister Companies (Sync Pool)', action: () => handleSendPrompt('How does Selective Multi-Company Sync work?') },
+        { label: '🦁 Ask Brave AI Engine', action: () => openBraveAskQuery('What is STOMS Signatures Bill V1 software and how does it help my business?') },
       ],
       time: 'Just now',
     },
   ]);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  // Auto scroll to bottom of chat
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isOpen]);
 
   // Synthesize cute sci-fi blip sound using Web Audio API
   const playSciFiBlip = (freq = 620, type: OscillatorType = 'sine') => {
@@ -118,31 +140,31 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
       if (footerEl && scrollPos >= footerEl.offsetTop) {
         if (currentSection !== 'footer') {
           setCurrentSection('footer');
-          setSpeechBubbleText('🚀 Ready to transform your business? Click me to chat!');
+          setSpeechBubbleText('🚀 Need help choosing the best plan? Click me to chat!');
           setShowSpeechBubble(true);
         }
       } else if (processEl && scrollPos >= processEl.offsetTop) {
         if (currentSection !== 'process') {
           setCurrentSection('process');
-          setSpeechBubbleText('⚙️ Built with C# .NET 8 & React 19 architecture!');
+          setSpeechBubbleText('⚙️ Built with C# .NET 8 & SQLite offline architecture!');
           setShowSpeechBubble(true);
         }
       } else if (worksEl && scrollPos >= worksEl.offsetTop) {
         if (currentSection !== 'works') {
           setCurrentSection('works');
-          setSpeechBubbleText('🔥 80mm thermal billing & live GST calculation!');
+          setSpeechBubbleText('🏭 Weaving Mill Loom monitoring & Taka roll cutter live!');
           setShowSpeechBubble(true);
         }
       } else if (demoEl && scrollPos >= demoEl.offsetTop) {
         if (currentSection !== 'demo') {
           setCurrentSection('demo');
-          setSpeechBubbleText('⚡ Click below to try the live 0ms desktop simulator!');
+          setSpeechBubbleText('⚡ Try our 0ms desktop simulator in your browser!');
           setShowSpeechBubble(true);
         }
       } else {
         if (currentSection !== 'hero') {
           setCurrentSection('hero');
-          setSpeechBubbleText('👋 Welcome! Scroll down to explore the 2026 ERP suite.');
+          setSpeechBubbleText('👋 Welcome! Click me to see how SBV1 fits your business.');
           setShowSpeechBubble(true);
         }
       }
@@ -155,8 +177,8 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
     };
   }, [currentSection]);
 
-  // Handle Quick Question Prompt
-  const handleSendPrompt = (text: string) => {
+  // Handle Quick Question Prompt or Free-Form Query
+  const handleSendPrompt = async (text: string) => {
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
       sender: 'user',
@@ -167,73 +189,160 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
     setMessages((prev) => [...prev, userMsg]);
     playSciFiBlip(750);
 
-    setTimeout(() => {
-      let botResponse = '';
-      let actions: { label: string; action: () => void }[] = [];
+    const query = text.toLowerCase();
+    let botResponse = '';
+    let actions: { label: string; action: () => void }[] = [];
 
-      const query = text.toLowerCase();
-      if (query.includes('demo') || query.includes('simulator') || query.includes('try')) {
-        botResponse = '⚡ You can launch our interactive in-browser simulator with 1 click! Experience 0ms SQLite transactions, party ledger lookups, and instant bill generation directly in your browser without downloading.';
-        actions = [{ label: '🚀 Launch Simulator Now', action: () => onLaunchDemo?.() }];
-      } else if (query.includes('pricing') || query.includes('price') || query.includes('cost')) {
-        botResponse = '💰 Signatures Bill offers lifetime offline licenses with 1 year free cloud backup & updates. Starting at just ₹1,999/yr for Single Terminal, or ₹4,999 for Multi-Counter LAN setups. All plans include 35-Day Free Trial!';
-        actions = [{ label: 'View Pricing Matrix', action: () => onNavigate?.('/pricing') }];
-      } else if (query.includes('thermal') || query.includes('print')) {
-        botResponse = '🖨️ Yes! Supports all standard 80mm (3-inch) and 58mm (2-inch) ESC/POS USB, Bluetooth, and LAN thermal receipt printers with instant 0-second auto-cut blit printing and bilingual Indian regional font support.';
-      } else if (query.includes('gst') || query.includes('tax')) {
-        botResponse = '📑 100% compliant with GSTN 2026 rules! Handles CGST/SGST/IGST, reverse charge, HSN auto-lookup, and one-click JSON e-way bill export.';
-      } else if (query.includes('eway') || query.includes('e-way') || query.includes('dispatch') || query.includes('transport')) {
-        botResponse = '🚚 BOS E-Way Engine v2.2.7 is live! Generate statutory E-Way Bills directly from your Sales invoices. Includes 1-click official NIC JSON payload export, embedded WebView2 portal automation, cryptographic SHA-256 PDF vault storage, 7-point financial reconciliation, and batch multi-invoice dispatch!';
-        actions = [
-          { label: '📥 Download Windows Installer v2.2.7', action: () => onNavigate?.('/download') },
-          { label: 'Explore E-Way Features', action: () => onNavigate?.('/product') },
-        ];
-      } else if (query.includes('node') || query.includes('bnve') || query.includes('formula') || query.includes('manufacturing')) {
-        botResponse = '🧠 Visual Node Engine (BNVE): A visual drag-and-drop math & formula computation system! Perfect for manufacturing, textile weaving/dyeing equations, dynamic density-to-weight conversions, and multi-tier pricing workflows with PIN-protected rules!';
-        actions = [
-          { label: 'Explore Node Engine', action: () => onNavigate?.('/product') },
-          { label: '📥 Download v2.2.7', action: () => onNavigate?.('/download') },
-        ];
-      } else if (query.includes('excel') || query.includes('import') || query.includes('bulk')) {
-        botResponse = '📊 Yes! v2.0.0 features our Universal Excel Bulk Import & Verification Engine! Download our standardized branded Excel template, fill your customer or product rows, and click Verify. The software checks the template signature (SIGNATURES-BILL-TEMPLATE-V1), deduplicates against existing GST numbers and product names, and presents a 2-step review modal before saving!';
-        actions = [
-          { label: '📥 Download Windows Installer v2.0.0', action: () => onNavigate?.('/download') },
-          { label: 'Explore All Features', action: () => onNavigate?.('/product') },
-        ];
-      } else if (query.includes('shortcut') || query.includes('keyboard') || query.includes('fast') || query.includes('ctrl')) {
-        botResponse = '⌨️ Rapid Billing Engine: Press Ctrl+P inside Sales/Purchase to open the fast Party Picker, Ctrl+N to add new parties or products, and Ctrl+E to edit them directly inside directory cards. You can also rebind and customize your favorite shortcuts in Settings!';
-      } else if (query.includes('textile') || query.includes('loom') || query.includes('taka') || query.includes('weaving') || query.includes('karkhana') || query.includes('mill')) {
-        botResponse = '🏭 Weaving Mill & Karkhana Floor Engine (v2.2.7) is live! Monitor real-time Loom status (Waterjet, Airjet, Rapier), manage Warp Beams with automated run-out forecasting, cut Taka rolls with auto-incrementing lot numbers, and seamlessly pick finished rolls in Sales invoices with 1 click! Includes a multilingual floor guide in Hinglish, Gujarati, and English with an interactive practice demo sandbox!';
-        actions = [
-          { label: '🏭 Explore Weaving Mill Features', action: () => onNavigate?.('/product') },
-          { label: '📥 Download Windows Installer v2.2.7', action: () => onNavigate?.('/download') },
-        ];
-      } else if (query.includes('multi') || query.includes('company') || query.includes('sync') || query.includes('branch') || query.includes('firm')) {
-        botResponse = '🏢 Signatures Bill features Multi-Company Architecture with Universal Master Sync! Run unlimited sister firms and branches on 1 PC. Select exactly which companies participate in the sync pool (e.g. 3 textile mills), while keeping independent retail shops or kirana stores 100% private and untouched! Stock Quantities, Invoices, and Ledgers remain strictly air-gapped per company.';
-        actions = [
-          { label: '🏢 Explore Multi-Company Sync', action: () => onNavigate?.('/product') },
-          { label: '🚀 Test In Simulator', action: () => onLaunchDemo?.() },
-        ];
-      } else {
-        botResponse = `✨ Thanks for asking! Signatures Bill ERP is engineered for Surat & pan-India textile traders, retail marts, and manufacturers. Let me know if you want to explore the live demo or download installer.`;
-        actions = [
-          { label: '🚀 Test Interactive Demo', action: () => onLaunchDemo?.() },
-          { label: '📥 Download Windows Installer', action: () => onNavigate?.('/download') },
-        ];
+    // 1. TEXTILE WEAVING MILL & KARKHANA ADVICE
+    if (query.includes('textile') || query.includes('weaving') || query.includes('loom') || query.includes('taka') || query.includes('karkhana') || query.includes('mill') || query.includes('kapad')) {
+      botResponse = `🏭 **Aapke Textile Weaving Mill & Karkhana ke liye Signatures Bill 100% Best Fit hai!**
+
+Humne factory floor ki ground reality dekh kar ye engine banaya hai:
+• **Live Loom Monitoring Grid:** Waterjet, Airjet, Rapier ya Sulzer machines ka live status (Running, Idle, Stop, Maintenance) ek screen par dikhta hai.
+• **Warp Beam Register:** Beam Inward, Supplier Lot, Total Ends aur automated beam khatam hone ka meters forecast.
+• **Taka Production & Roll Cutter:** 1-Click me Loom se Taka cut karein. Auto Lot No + Taka No, actual meters aur average weight (g/m) density turant calculate hoti hai.
+• **Floor-to-Sales Taka Roll Picker:** Bill banate waqt Floor ke ready roll par tick lagao, roll ke meters aur lot number direct bill me aa jayenge bina dubara type kiye! Roll sell hote hi floor stock se automatically reduce ho jayega.
+• **Multilingual Floor Guide:** Hinglish, Gujarati aur English me step-by-step guidance + Practice Demo Sandbox.
+
+💡 **Zero Risk Guarantee:** 35 Din ka 100% Free Trial hai. Koi credit card ya payment nahi mangte. Data aapke computer par 100% safe rahega!`;
+      actions = [
+        { label: '📥 Download Windows Installer (Free)', action: () => onNavigate?.('/download') },
+        { label: '🚀 Test Interactive Simulator', action: () => onLaunchDemo?.() },
+        { label: '🦁 Ask Brave AI about Textile Mill', action: () => openBraveAskQuery('How does STOMS Signatures Bill help Textile Weaving Mills in Surat?') },
+      ];
+    }
+    // 2. RETAIL & KIRANA STORES
+    else if (query.includes('retail') || query.includes('kirana') || query.includes('mart') || query.includes('supermarket') || query.includes('counter')) {
+      botResponse = `🏪 **Retail Stores & Kirana Marts ke liye:**
+
+Counter par bheed aur lambi line ko khatam karne ke liye:
+• **3-Second Counter Billing:** Full keyboard shortcuts (Ctrl+P se party picker, Ctrl+N se new item creation).
+• **Barcode Scanner Support:** Koi bhi handheld barcode scanner plug-and-play chalta hai.
+• **Thermal Receipt Printing:** 80mm aur 58mm thermal printers par instant 0-second auto-cut print.
+• **100% Offline SQLite:** Internet band hone par bhi billing 1 second ke liye bhi nahi rukegi!
+
+💡 **Zero Risk:** 35 Din ka unrestricted free trial included hai.`;
+      actions = [
+        { label: '📥 Download Windows Installer', action: () => onNavigate?.('/download') },
+        { label: '🚀 Test In-Browser Simulator', action: () => onLaunchDemo?.() },
+      ];
+    }
+    // 3. WHOLESALE & DISTRIBUTION
+    else if (query.includes('wholesale') || query.includes('trading') || query.includes('broker') || query.includes('distribution') || query.includes('trader')) {
+      botResponse = `📦 **Wholesale Traders & Distributors ke liye:**
+
+• **Broker Management:** Broker assign karein aur per-item brokerage commission calculate karein.
+• **Statutory BOS E-Way Bill Engine:** 1-Click me NIC official JSON banayein aur batch dispatch karein.
+• **Universal Excel Bulk Import:** Apni 1,500 parties aur products 1 minute me Excel se import karein.
+• **Outstanding Balances & Ledgers:** Payment terms, due dates aur WhatsApp payment reminders.
+
+💡 **Zero Risk:** 35 Din ka unrestricted free access shuru karein.`;
+      actions = [
+        { label: '📥 Download Windows Installer', action: () => onNavigate?.('/download') },
+        { label: '🚚 Explore E-Way Bill & Dispatch', action: () => onNavigate?.('/product') },
+      ];
+    }
+    // 4. MULTI-COMPANY SISTER CONCERNS
+    else if (query.includes('multi') || query.includes('company') || query.includes('sync') || query.includes('branch') || query.includes('sister') || query.includes('firm')) {
+      botResponse = `🏢 **Multiple Sister Companies / Firms ke liye:**
+
+Aapki ek se zyada firms hain toh aapke liye sabse bada relief:
+• **Selective Master Sync Pool:** 5 me se sirf unhi 3 companies ko select karein jo products & parties share karengi. Baki independent firms 100% private aur clean rahengi!
+• **Zero Data Leakage:** Invoices, stock quantities, aur bank ledgers har company ke SQLite database me 100% separate rahte hain.
+• **Instant 0ms Switcher:** Top dropdown se bina software restart kiye instant switch karein.
+
+💡 **Zero Risk:** 35 Din ka unrestricted free trial included hai.`;
+      actions = [
+        { label: '📥 Download Windows Installer', action: () => onNavigate?.('/download') },
+        { label: '🏢 Explore Multi-Company Architecture', action: () => onNavigate?.('/product') },
+      ];
+    }
+    // 5. PRICING & TRUST
+    else if (query.includes('pricing') || query.includes('price') || query.includes('cost') || query.includes('free') || query.includes('trial')) {
+      botResponse = `💰 **Honest & Transparent Pricing (Paisa banana nahi, value dena maksad hai!):**
+
+• **35 Days Full Free Trial:** Software ke sabhi features bina kisi restriction ke 35 din bilkul free chalte hain. Koi credit card ya payment info nahi mangte!
+• **Single Terminal Desktop License:** ₹1,999 / year (Lifetime local database + 1 year free cloud backup & updates).
+• **Multi-Counter LAN / Enterprise:** ₹4,999 / year.
+
+Aap pehle 35 din maze se use karein, jab aapko lage ki isne aapka time aur paisa bachaya hai, tabhi license lein!`;
+      actions = [
+        { label: '📥 Download Windows Installer (Free)', action: () => onNavigate?.('/download') },
+        { label: 'View Pricing Table', action: () => onNavigate?.('/pricing') },
+      ];
+    }
+    // 6. E-WAY BILL
+    else if (query.includes('eway') || query.includes('e-way') || query.includes('transport') || query.includes('dispatch')) {
+      botResponse = `🚚 **BOS Statutory E-Way Bill Engine (v2.2.7):**
+
+Government GST Rule 138 ke anusar statutory E-Way bills banayein:
+• 1-Click official NIC JSON payload export.
+• Embedded WebView2 portal automation with captcha assistance.
+• Cryptographic SHA-256 PDF vault storage.
+• Multi-invoice batch dispatch directly from Sales register.`;
+      actions = [
+        { label: '📥 Download Windows Installer v2.2.7', action: () => onNavigate?.('/download') },
+        { label: 'Explore E-Way Features', action: () => onNavigate?.('/product') },
+      ];
+    }
+    // 7. THERMAL BILLING
+    else if (query.includes('thermal') || query.includes('print')) {
+      botResponse = `🖨️ **Thermal Receipt Printing:**
+
+Sabhi standard 80mm (3-inch) aur 58mm (2-inch) ESC/POS USB, Bluetooth, aur LAN printers support hote hain. Instant 0-second auto-cut blit printing aur regional font support ke sath!`;
+      actions = [
+        { label: '🚀 Test in Simulator', action: () => onLaunchDemo?.() },
+        { label: '📥 Download Windows Installer', action: () => onNavigate?.('/download') },
+      ];
+    }
+    // 8. FREE-FORM / CUSTOM QUERY: ATTEMPT CHROME BUILT-IN AI (GEMINI NANO)
+    else {
+      let usedChromeAI = false;
+      if (typeof window !== 'undefined' && (window as any).ai?.languageModel) {
+        try {
+          const session = await (window as any).ai.languageModel.create({
+            systemPrompt: "You are Siggy, a warm, honest, and humble business helper for S TOM\'S Signatures Light Bill ERP (SBV1 v2.2.7). The software is 100% offline desktop billing ERP with Textile Weaving Mill Looms & Taka Cutter, Selective Multi-Company Sync, BOS E-Way Bill, and 80mm thermal receipts. We offer a 35-day unrestricted free trial with zero credit card needed. Keep answers concise, helpful, and never pushy."
+          });
+          const nanoReply = await session.prompt(text);
+          if (nanoReply && nanoReply.trim()) {
+            botResponse = `🤖 **Chrome Gemini Nano (On-Device AI):**\n\n${nanoReply}`;
+            usedChromeAI = true;
+          }
+        } catch {
+          usedChromeAI = false;
+        }
       }
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          sender: 'bot',
-          text: botResponse,
-          actions,
-          time: 'Just now',
-        },
-      ]);
-      playSciFiBlip(920);
-    }, 450);
+      if (!usedChromeAI) {
+        botResponse = `✨ **Main yahan aapki help ke liye hoon!**
+
+S TOM\'S Signatures Bill ERP (v2.2.7) har tarah ke business ke liye customized hai:
+• **Textile Weaving Mill:** Looms, Beam register, Taka roll cutter & Sales picker.
+• **Retail / Kirana:** Barcode scanner, 3-second counter billing & 80mm thermal print.
+• **Wholesale:** Brokerage, Statutory E-Way bill & Excel bulk import.
+• **Multi-Firm:** Selective company sync pool (100% air-gapped stock & ledgers).
+
+Aap chahein toh directly **Brave AI** se bhi hamare software ke baare me pooch sakte hain!`;
+      }
+
+      actions = [
+        { label: '🦁 Ask Brave AI Engine', action: () => openBraveAskQuery(`What is STOMS Signatures Bill V1 and: ${text}`) },
+        { label: '🚀 Test Interactive Demo', action: () => onLaunchDemo?.() },
+        { label: '📥 Download Windows Installer', action: () => onNavigate?.('/download') },
+      ];
+    }
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: (Date.now() + 1).toString(),
+        sender: 'bot',
+        text: botResponse,
+        actions,
+        time: 'Just now',
+      },
+    ]);
+    playSciFiBlip(920);
   };
 
   const handleUserSubmit = (e: React.FormEvent) => {
@@ -287,7 +396,7 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
             setShowSpeechBubble(false);
           }}
           className="group relative cursor-pointer flex items-center gap-2 sm:gap-3.5 p-2 sm:pl-3.5 sm:pr-6 sm:py-2.5 rounded-full bg-[#110e0b]/98 hover:bg-[#1a1611] border border-amber-500/50 shadow-[0_15px_45px_rgba(0,0,0,0.95),0_0_30px_rgba(245,158,11,0.25)] hover:border-amber-400 hover:shadow-[0_15px_50px_rgba(0,0,0,0.98),0_0_40px_rgba(245,158,11,0.45)] transition-all duration-300 backdrop-blur-2xl"
-          title="Signatures AI Copilot"
+          title="Signatures AI Copilot & Business Advisor"
         >
           {/* Ambient Dark Levitation Under-Shield that blankets the watermark */}
           <div className="absolute -inset-4 rounded-full bg-black/95 blur-md pointer-events-none -z-10" />
@@ -346,11 +455,11 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
             </div>
           </div>
 
-          {/* Text Info Inside Capsule Dock (Hidden on mobile to preserve screen width, visible on sm+) */}
+          {/* Text Info Inside Capsule Dock */}
           <div className="hidden sm:flex flex-col pr-1">
             <div className="flex items-center gap-2">
               <span className="font-grotesk font-bold text-xs text-white tracking-wide group-hover:text-amber-300 transition-colors">
-                Siggy Copilot
+                Siggy Advisor
               </span>
               <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30">
                 AI
@@ -358,7 +467,7 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
             </div>
             <div className="flex items-center gap-1.5 text-[10px] font-mono text-neutral-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Ask anything // 0ms</span>
+              <span>Ask anything // Free Help</span>
             </div>
           </div>
         </div>
@@ -369,27 +478,37 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
       {/* ========================================================================= */}
       {isOpen && (
         <div 
-          className="fixed bottom-20 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-28 z-50 w-auto sm:w-[380px] max-w-[380px] h-[480px] sm:h-[520px] max-h-[80vh] rounded-3xl bg-[#0f0d0a]/95 backdrop-blur-xl border border-amber-500/40 shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(245,158,11,0.2)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 select-none font-grotesk text-white"
+          className="fixed bottom-20 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-28 z-50 w-auto sm:w-[410px] max-w-[410px] h-[520px] sm:h-[560px] max-h-[82vh] rounded-3xl bg-[#0f0d0a]/95 backdrop-blur-xl border border-amber-500/40 shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_40px_rgba(245,158,11,0.2)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200 select-none font-grotesk text-white"
         >
           {/* Header */}
-          <div className="p-4 border-b border-amber-500/20 bg-gradient-to-r from-amber-950/40 via-[#18140f] to-amber-950/40 flex items-center justify-between">
+          <div className="p-3.5 border-b border-amber-500/20 bg-gradient-to-r from-amber-950/40 via-[#18140f] to-amber-950/40 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-400 flex items-center justify-center text-black shadow-[0_0_15px_rgba(245,158,11,0.4)]">
                 <Bot className="w-4 h-4 fill-black" />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-sm text-white">Siggy Bot</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30">V1</span>
+                  <span className="font-bold text-sm text-white">Siggy Business Helper</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30">v2.2.7</span>
                 </div>
                 <p className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  0MS ERP KERNEL ACTIVE
+                  {hasChromeAI ? 'CHROME GEMINI NANO ACTIVE' : '100% FREE BUSINESS ADVISOR'}
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-1">
+              {/* Quick Brave Search AI Launcher */}
+              <button
+                onClick={() => openBraveAskQuery('What is S TOMS Signatures Bill V1 software?')}
+                className="p-1.5 rounded-lg border border-amber-500/30 text-amber-300 hover:text-white bg-amber-950/30 hover:bg-amber-900/40 transition-colors cursor-pointer text-[10px] font-mono flex items-center gap-1"
+                title="Ask Brave Search AI about STOMS"
+              >
+                <span>🦁 Brave Ask</span>
+                <ExternalLink className="w-3 h-3" />
+              </button>
+
               <button 
                 onClick={() => setSoundEnabled(!soundEnabled)}
                 className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
@@ -405,7 +524,7 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
               <button 
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 rounded-lg border border-white/10 text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                title="Minimize Copilot"
+                title="Minimize Helper"
               >
                 <Minimize2 className="w-4 h-4" />
               </button>
@@ -413,14 +532,14 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
           </div>
 
           {/* Messages Body */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-4 text-xs">
+          <div className="flex-1 p-3.5 overflow-y-auto space-y-4 text-xs">
             {messages.map((m) => (
               <div 
                 key={m.id}
                 className={`flex flex-col ${m.sender === 'user' ? 'items-end' : 'items-start'} space-y-1.5`}
               >
                 <div 
-                  className={`max-w-[85%] p-3.5 rounded-2xl leading-relaxed ${
+                  className={`max-w-[88%] p-3.5 rounded-2xl leading-relaxed ${
                     m.sender === 'user'
                       ? 'bg-amber-500 text-black font-medium rounded-br-none shadow-[0_4px_15px_rgba(245,158,11,0.3)]'
                       : 'bg-white/5 border border-white/10 text-neutral-200 rounded-bl-none shadow-md backdrop-blur-md'
@@ -451,31 +570,37 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Prompt Suggestions */}
-          <div className="px-3 py-2 border-t border-white/5 flex gap-1.5 overflow-x-auto no-scrollbar">
+          {/* Quick Business Selector Chips */}
+          <div className="px-3 py-2 border-t border-white/5 bg-[#14100c] flex gap-1.5 overflow-x-auto no-scrollbar">
             <button 
-              onClick={() => handleSendPrompt('Launch in-browser simulator')}
-              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer"
+              onClick={() => handleSendPrompt('Tell me about Textile Weaving Mill & Karkhana Floor features')}
+              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer flex items-center gap-1"
             >
-              🚀 Free Simulator
+              <span>🏭 Textile Mill</span>
             </button>
             <button 
-              onClick={() => handleSendPrompt('Tell me about pricing plans')}
-              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer"
+              onClick={() => handleSendPrompt('Tell me about Retail Mart & Barcode Billing')}
+              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer flex items-center gap-1"
             >
-              💰 Pricing
+              <span>🏪 Retail / Kirana</span>
             </button>
             <button 
-              onClick={() => handleSendPrompt('How does Multi-Company & Universal Master Sync work?')}
-              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer"
+              onClick={() => handleSendPrompt('Tell me about Wholesale Trading & Brokerage')}
+              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer flex items-center gap-1"
             >
-              🏢 Multi-Company Sync
+              <span>📦 Wholesale</span>
             </button>
             <button 
-              onClick={() => handleSendPrompt('Explain GST and thermal printer features')}
-              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer"
+              onClick={() => handleSendPrompt('How does Selective Multi-Company Sync work?')}
+              className="shrink-0 px-2.5 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 text-neutral-300 hover:text-amber-200 border border-white/10 text-[10px] font-mono transition-colors cursor-pointer flex items-center gap-1"
             >
-              🖨️ Thermal Print
+              <span>🏢 Multi-Firm</span>
+            </button>
+            <button 
+              onClick={() => openBraveAskQuery('What features are included in Signatures Bill v2.2.7 ERP?')}
+              className="shrink-0 px-2.5 py-1 rounded-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 hover:text-white border border-amber-500/40 text-[10px] font-mono transition-colors cursor-pointer flex items-center gap-1"
+            >
+              <span>🦁 Ask Brave</span>
             </button>
           </div>
 
@@ -488,7 +613,7 @@ export const CuteRobotCopilot: React.FC<CuteRobotCopilotProps> = ({
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Ask anything about Signatures Bill..."
+              placeholder="Ask anything about how SBV1 helps your business..."
               className="flex-1 bg-white/5 border border-white/15 focus:border-amber-400/60 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-neutral-500 outline-none transition-colors"
             />
             <button

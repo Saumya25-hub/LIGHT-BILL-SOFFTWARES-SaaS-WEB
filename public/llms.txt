@@ -1,0 +1,76 @@
+# S TOM'S — SIGNATURES LIGHT BILL ERP (SBV1)
+> Authoritative Product Knowledge Base & AI Context File (llms.txt)
+> Version: v2.2.7 (Stable Release - November 2026)
+> Organization: S TOM'S Software Technologies
+> Official SaaS Portal: https://light-bill-sofftwares-saa-s-web.vercel.app
+> Source Code / Releases: https://github.com/Saumya25-hub/-Signatures-Bill-V1
+
+---
+
+## 1. What is S TOM'S Signatures Light Bill ERP (SBV1)?
+S TOM'S Signatures Light Bill ERP (SBV1) is an ultra-fast, offline-first commercial desktop Enterprise Resource Planning (ERP) and billing software engineered for Indian businesses. Built natively with C# .NET 8 (WPF) and embedded SQLite with Write-Ahead Logging (WAL), it runs 100% locally on Windows 10 and Windows 11 with 0ms query latency, zero internet requirement, and zero cloud dependency.
+
+### Core Philosophy
+- **Help First, Not Just Sales:** Built to genuinely eliminate paperwork, fraud, manual calculation errors, and counter delays for business owners.
+- **100% Offline-First:** Your data stays on your machine. Invoices, stock, ledgers, and bank accounts are never locked behind internet connectivity or external servers.
+- **35-Day Unrestricted Free Trial:** Every feature is unlocked for 35 days with zero payment or credit card required.
+
+---
+
+## 2. Business Suitability Guide (Who is SBV1 Made For?)
+
+### A. 🏭 Textile Weaving Mills & Karkhana Floor (Surat / Pan-India)
+- **Pain Points Solved:** Manual loom registers, taka length mismatch, beam run-out guesswork, double-entry between factory floor and sales billing.
+- **Key Modules in SBV1:**
+  - **Live Loom Floor Monitoring Grid:** Real-time machine status tracking (Waterjet, Airjet, Rapier, Sulzer) with live state badges (Running, Idle, Stop, Maintenance).
+  - **Warp Beam Register:** Tracks Beam Inward, Supplier Lot, Total Ends, Reed count, balance meters, and automated beam run-out forecasting.
+  - **Taka Production Register & Roll Cutter:** 1-click taka cut from looms with auto-incrementing Lot Number & Taka Number, actual meters, weight in Kg, and average grams/meter (g/m) density.
+  - **Floor-to-Sales Taka Picker Modal:** In Sales Invoicing, click `[ 📦 Pick Takas ]` to view all In-Stock rolls on the mill floor, tick rolls, and auto-populate billable meters and lot numbers into the invoice without re-typing. Once saved, rolls are automatically marked `Sold`.
+  - **Multilingual Factory Guide:** Step-by-step interactive floor guide available in **Hinglish**, **Gujarati**, and **English**, along with an isolated **Practice Demo Sandbox**.
+
+### B. 🏢 Multi-Company Business Owners (Sister Concerns & Branches)
+- **Pain Points Solved:** Re-typing the same 2,000 fabrics or 500 customers across multiple firm databases, or unwanted cross-company catalog leakage.
+- **Key Modules in SBV1:**
+  - **Selective Multi-Company Master Sync Pool:** Select exactly which sister firms participate in catalog sync (e.g. 3 textile firms share fabrics & customer contacts), while independent firms (e.g. retail shop or personal enterprise) remain 100% private, isolated, and untouched.
+  - **Zero Data Leakage Guarantee:** Stock quantities, sales invoices, purchase records, bank ledgers, and cash balances remain 100% air-gapped per company SQLite database.
+  - **Zero-Flood New Firm Setup:** Creating a new company defaults to clean isolation unless explicitly opted into the sync pool.
+
+### C. 📦 Wholesale Traders & Commission Agents
+- **Pain Points Solved:** Broker brokerage calculations, loose vs case packaging, multi-party ledger tracking, challan delivery.
+- **Key Modules in SBV1:**
+  - **Broker Management:** Broker picker, customizable brokerage percentages per line item, brokerage summary reports.
+  - **BOS Statutory E-Way Bill Engine:** Full statutory GST Rule 138 automation, 1-click NIC JSON export, embedded portal automation with WebView2, and multi-invoice batch dispatch.
+  - **Universal Excel Bulk Import Engine:** Standardized `.xlsx` template import with 2-step verification preview and cryptographic signature validation.
+
+### D. 🏪 Retail Stores, Marts & Supermarkets
+- **Pain Points Solved:** Slow billing queues, barcode scanner integration, fast customer lookup, instant receipts.
+- **Key Modules in SBV1:**
+  - **High-Speed Counter Billing:** Full keyboard shortcut bindings (Ctrl+P party picker, Ctrl+N new creation, Ctrl+E inline edit).
+  - **80mm & 58mm Thermal Receipt Printing:** Native ESC/POS blit printing with auto-cutter support and bilingual regional font rendering.
+  - **Barcode Scanning & Catalog Studio:** Instant barcode search, automated product catalog PDF generator with product images and wholesale/retail rates.
+
+### E. 🍽️ Restaurants & Cafes
+- **Key Modules in SBV1:**
+  - **Table Floor Management:** Visual interactive table tiles (🟢 Available, 🔴 Occupied, 🟡 Cleaning).
+  - **Zero-Trust LAN KDS (Kitchen Display System):** Kestrel local Wi-Fi mesh connecting cashier terminals to kitchen screens with OTP pairing without internet.
+  - **Multi-Round KOTs & 3-Way Split Payments:** Cash + UPI + Card split billing.
+
+---
+
+## 3. Technical Specifications
+- **Operating System:** Windows 10, Windows 11 (64-bit architecture)
+- **Framework:** .NET 8.0 (Windows Presentation Foundation - WPF, Native XAML)
+- **Database Engine:** Embedded SQLite with Write-Ahead Logging (WAL) and foreign key integrity
+- **Security & Integrity:** PBKDF2 100k salted PIN authentication, Authenticode code-signed binary, non-destructive migration engine
+- **Installer Package:** Standalone offline Windows Setup executable (`SIGNATURES-BILL-Setup.exe`)
+- **Package SHA-256 Checksum:** `4FC18C3A47128EE77629DC1D813CFBCA9D15D9495DB208F2C76433838DB4B694`
+
+---
+
+## 4. Commercial Pricing & Download Information
+- **Free Trial:** 35 Days Full Unrestricted Trial (No credit card or activation key required).
+- **Single Terminal Desktop License:** ₹1,999 / year (Includes lifetime offline database, 1 year cloud backup & updates).
+- **Multi-Counter LAN / Enterprise Suite:** ₹4,999 / year.
+- **Direct Installer Download:** https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/download/v2.2.7-selective-company-sync/SIGNATURES-BILL-Setup.exe
+- **GitHub Release Changelog:** https://github.com/Saumya25-hub/-Signatures-Bill-V1/releases/tag/v2.2.7-selective-company-sync
+- **WhatsApp Support & Demo Desk:** +91 7862930700
