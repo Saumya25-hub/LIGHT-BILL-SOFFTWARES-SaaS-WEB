@@ -109,33 +109,36 @@ const FireworksCanvas: React.FC = () => {
     };
 
     const explodeSkyshot = (x: number, y: number, palette: string[]) => {
-      // 1. Sky illumination flash
+      // 1. Soft sky illumination flash at moment of burst
       flashes.push({
         x,
         y,
-        radius: 10,
-        maxRadius: 100 + Math.random() * 60,
-        alpha: 0.5,
+        radius: 15,
+        maxRadius: 130 + Math.random() * 50,
+        alpha: 0.45,
         color: palette[0]
       });
 
-      // 2. Burst particles (chrysanthemum / weeping willow)
-      const isWillow = Math.random() > 0.4;
-      const count = isWillow ? 130 + Math.floor(Math.random() * 40) : 90 + Math.floor(Math.random() * 30);
+      // 2. Burst particles: Authentic Slow-Blooming Pyrotechnic Stars
+      const isWillow = Math.random() > 0.35;
+      const count = isWillow ? 140 + Math.floor(Math.random() * 40) : 100 + Math.floor(Math.random() * 30);
 
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = isWillow ? (1.5 + Math.random() * 7.0) : (1.2 + Math.random() * 5.5);
+        // Natural spherical shell ejection speed
+        const speed = isWillow ? (2.0 + Math.random() * 6.5) : (1.8 + Math.random() * 5.2);
         particles.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           alpha: 1,
-          decay: isWillow ? (0.010 + Math.random() * 0.014) : (0.014 + Math.random() * 0.018),
+          // Slow burn: 2.5 to 3.5 seconds hang time!
+          decay: isWillow ? (0.005 + Math.random() * 0.004) : (0.007 + Math.random() * 0.005),
           color: palette[Math.floor(Math.random() * palette.length)],
-          radius: 1.4 + Math.random() * 1.8,
-          gravity: isWillow ? 0.055 : 0.04,
+          radius: isWillow ? (1.5 + Math.random() * 1.5) : (1.3 + Math.random() * 1.4),
+          // Gentle floating gravity
+          gravity: isWillow ? 0.022 : 0.016,
           flicker: Math.random() * 10,
           isWillow,
           trail: []
@@ -148,16 +151,15 @@ const FireworksCanvas: React.FC = () => {
       const rect = canvas.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;
-      spawnSkyshot(clickX, Math.min(clickY, height * 0.40));
+      spawnSkyshot(clickX, Math.min(clickY, height * 0.32));
     };
     window.addEventListener('click', handleCanvasClick);
 
     // Initial festive burst
-    setTimeout(() => spawnSkyshot(width * 0.25, height * 0.20), 100);
-    setTimeout(() => spawnSkyshot(width * 0.75, height * 0.18), 350);
+    setTimeout(() => spawnSkyshot(width * 0.28, height * 0.16), 200);
 
     let lastLaunchTime = 0;
-    const cadence = 850; // Launch a rocket every ~850ms
+    const cadence = 2400; // Realistic cadence: 1 grand skyshot every ~2.4s
 
     const render = (time: number) => {
       ctx.clearRect(0, 0, width, height);
@@ -165,9 +167,6 @@ const FireworksCanvas: React.FC = () => {
       // Auto-launch periodic skyshots
       if (time - lastLaunchTime > cadence) {
         spawnSkyshot();
-        if (Math.random() > 0.65) {
-          setTimeout(() => spawnSkyshot(), 220);
-        }
         lastLaunchTime = time;
       }
 
@@ -235,33 +234,37 @@ const FireworksCanvas: React.FC = () => {
         }
       }
 
-      // 3. Update & Draw Fireworks Sparks
+      // 3. Update & Draw Fireworks Sparks (Realistic Willow & Brocade Physics)
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.trail.push({ x: p.x, y: p.y, a: p.alpha });
-        if (p.trail.length > (p.isWillow ? 7 : 4)) p.trail.shift();
+        const maxTrail = p.isWillow ? 16 : 8;
+        if (p.trail.length > maxTrail) p.trail.shift();
 
         p.x += p.vx;
         p.y += p.vy;
         p.vy += p.gravity;
-        p.vx *= 0.982;
-        p.vy *= 0.982;
+        // Natural air resistance
+        p.vx *= 0.968;
+        p.vy *= 0.968;
         p.alpha -= p.decay;
-        p.flicker += 0.25;
+        p.flicker += 0.22;
 
         if (p.alpha <= 0) {
           particles.splice(i, 1);
           continue;
         }
 
-        const currentAlpha = Math.max(0, p.alpha * (0.8 + 0.2 * Math.sin(p.flicker)));
+        // Strobe twinkle effect in the last half of particle life
+        const twinkle = p.alpha > 0.4 ? 1.0 : (0.6 + 0.4 * Math.sin(p.flicker));
+        const currentAlpha = Math.max(0, p.alpha * twinkle);
 
-        // Spark tail
+        // Long cascading spark tail
         for (let t = 0; t < p.trail.length; t++) {
           const tr = p.trail[t];
-          const trA = (t / p.trail.length) * currentAlpha * 0.45;
+          const trA = (t / p.trail.length) * currentAlpha * 0.55;
           ctx.beginPath();
-          ctx.arc(tr.x, tr.y, p.radius * 0.7, 0, Math.PI * 2);
+          ctx.arc(tr.x, tr.y, p.radius * 0.75, 0, Math.PI * 2);
           ctx.fillStyle = p.color;
           ctx.globalAlpha = trA;
           ctx.fill();
