@@ -82,13 +82,13 @@ const FireworksCanvas: React.FC = () => {
     ];
 
     const spawnSkyshot = (targetX?: number, targetY?: number) => {
-      // Skyshots burst in the upper night sky (10% to 35% height)
-      const tx = targetX ?? (width * 0.12 + Math.random() * width * 0.76);
-      const ty = targetY ?? (height * 0.10 + Math.random() * height * 0.28);
+      // Skyshots burst in the upper open night sky (6% to 26% height)
+      const tx = targetX ?? (width * 0.10 + Math.random() * width * 0.80);
+      const ty = targetY ?? (height * 0.06 + Math.random() * height * 0.20);
       
-      // Launch from behind the city skyline & horizon (45% to 55% height)
-      const sx = tx + (Math.random() - 0.5) * 60;
-      const sy = height * 0.55 + Math.random() * 40;
+      // Launch from behind the city skyline & horizon (46% to 54% height)
+      const sx = tx + (Math.random() - 0.5) * 80;
+      const sy = height * 0.50 + Math.random() * 35;
 
       const palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
       const color = palette[0];
@@ -307,7 +307,7 @@ export const ComponineHero: React.FC<ComponineHeroProps> = ({
   return (
     <section className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#070605] text-white select-none pt-24 sm:pt-28">
       
-      {/* 0. Authentic Surat Highway Light Trails & Night Sky Video Background */}
+      {/* 0. Authentic Wide Surat Highway Light Trails & Night Sky Video Background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
         <video
           autoPlay
@@ -315,21 +315,21 @@ export const ComponineHero: React.FC<ComponineHeroProps> = ({
           muted
           playsInline
           poster="/assets/diwali_sbv1.jpg"
-          className="w-full h-full object-cover opacity-80 scale-100 transition-opacity duration-1000"
+          className="w-full h-full object-cover object-top opacity-90 scale-100 transition-opacity duration-1000"
         >
           <source src="/assets/diwali_sbv1.mp4" type="video/mp4" />
         </video>
 
-        {/* Cinematic Vignette Overlay: Highlights the SURAT neon, Indian Flag, and light trails while providing contrast for typography */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#070605]/85 via-[#070605]/25 to-[#070605]/90 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_30%,#070605_95%)] pointer-events-none" />
+        {/* Cinematic Vignette Overlay: Preserves the entire upper sky, Indian Flag, and moon while highlighting light trails */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#070605]/40 via-transparent to-[#070605]/85 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,#070605_95%)] pointer-events-none" />
       </div>
 
       {/* 1. Real-Time Skyshot Fireworks Layer (Sky Shoots & Bursting Crackers Over Surat) */}
       <FireworksCanvas />
 
       {/* 2. Main Hero Content Stage (Open, Breathable, Ultra-Luxury Presentation) */}
-      <div className="relative z-20 w-full max-w-5xl mx-auto px-6 sm:px-10 lg:px-14 flex-1 flex flex-col justify-center items-center text-center py-10 sm:py-14 space-y-7">
+      <div className="relative z-20 w-full max-w-5xl mx-auto px-6 sm:px-10 lg:px-14 flex-1 flex flex-col justify-center items-center text-center py-6 sm:py-9 space-y-6">
         
         {/* Top Status Capsule Pill Badges (Happy Diwali Special Edition + 2-Counter Sync) */}
         <div className="flex flex-wrap items-center justify-center gap-3">
