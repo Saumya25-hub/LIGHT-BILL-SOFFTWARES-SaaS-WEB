@@ -76,6 +76,7 @@ export const CinematicFooter: React.FC<CinematicFooterProps> = ({ onNavigate }) 
               {onNavigate && (
                 <>
                   <li><button onClick={() => onNavigate('/product')} className="hover:text-purple-300 transition-colors">Software Features</button></li>
+                  <li><button onClick={() => onNavigate('/multi-counter')} className="hover:text-amber-300 transition-colors text-amber-400 font-semibold flex items-center gap-1.5"><span>2-Counter LAN Sync</span><span className="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-1.5 py-0.2 rounded-full">New</span></button></li>
                   <li><button onClick={() => onNavigate('/pricing')} className="hover:text-purple-300 transition-colors">Commercial Plans</button></li>
                 </>
               )}

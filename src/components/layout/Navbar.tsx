@@ -40,6 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
   const navItems = [
     { label: 'Home', path: '/' },
     { label: 'Product', path: '/product' },
+    { label: '2-Counter Sync', path: '/multi-counter' },
     { label: 'Pricing', path: '/pricing' },
     { label: 'Demo', path: '/demo' },
     { label: 'Download', path: '/download' },

@@ -11,6 +11,7 @@ import { PrivacyPage } from './pages/PrivacyPage';
 import { EightPmPoolPage } from './pages/EightPmPoolPage';
 import { DeveloperPolicyPage } from './pages/DeveloperPolicyPage';
 import { DeveloperRegistrationPage } from './pages/DeveloperRegistrationPage';
+import { MultiCounterPage } from './pages/MultiCounterPage';
 import { CosmicWarpSplash } from './components/cinema/CosmicWarpSplash';
 import { LuxuryCustomCursor } from './components/ui/LuxuryCustomCursor';
 import { siteConfig } from './config/siteConfig';
@@ -58,6 +59,9 @@ export function App() {
       '/about': `About S TOM’S Enterprises & Signatures IT Groups — STOMS SBV1`,
       '/support': `Support & Rapid Helpdesk — ${siteConfig.brand.productName}`,
       '/privacy': `Privacy Policy & Local Data Guarantee — ${siteConfig.brand.productName}`,
+      '/multi-counter': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
+      '/dual-counter': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
+      '/multi-pc': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
       '/8pm': '8 PM — Elite Pool & Snooker Club Management | By STOMS',
       '/developer-policy': 'Developer Policy & Engineering Standards — STOMS',
       '/policy': 'Company Engineering & Code Policy — STOMS',
@@ -96,6 +100,15 @@ export function App() {
         return <AboutPage onNavigate={handleNavigate} />;
       case '/support':
         return <SupportPage onNavigate={handleNavigate} />;
+      case '/multi-counter':
+      case '/dual-counter':
+      case '/multi-pc':
+        return (
+          <MultiCounterPage 
+            onNavigate={handleNavigate} 
+            onLaunchDemo={() => triggerWarpToDemo('/demo')} 
+          />
+        );
       case '/privacy':
         return <PrivacyPage onNavigate={handleNavigate} />;
       case '/8pm':

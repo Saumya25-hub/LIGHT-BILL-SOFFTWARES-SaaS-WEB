@@ -92,6 +92,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
+                <button onClick={() => handleNav('/multi-counter')} className="hover:text-sky-600 font-semibold transition-colors flex items-center gap-1">
+                  <span>2-Counter LAN Sync</span>
+                  <span className="text-[10px] bg-sky-100 text-sky-700 font-bold px-1.5 py-0.2 rounded-full">New</span>
+                </button>
+              </li>
+              <li>
                 <button onClick={() => handleNav('/demo')} className="hover:text-slate-900 transition-colors">
                   Interactive Demo
                 </button>

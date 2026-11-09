@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Layers, Box, Zap, CreditCard, MessageSquare, MoreVertical, Disc } from 'lucide-react';
+import { Home, Layers, Box, Zap, CreditCard, MessageSquare, MoreVertical, Disc, Monitor } from 'lucide-react';
 import { RollingText } from '../ui/RollingText';
 
 interface ComponineNavbarProps {
@@ -32,6 +32,7 @@ export const ComponineNavbar: React.FC<ComponineNavbarProps> = ({
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     } },
     { id: 'modules', label: 'Modules', icon: Box, action: () => { setActiveSection('modules'); onNavigate('/product'); } },
+    { id: 'multi-counter', label: '2-Counter Sync', icon: Monitor, isSpecial: true, action: () => { onNavigate('/multi-counter'); } },
     { id: '8pm', label: '8PM Pool', icon: Disc, isSpecial: true, isPool: true, action: () => { onNavigate('/8pm'); } },
     { id: 'demo', label: 'Live Demo', icon: Zap, isSpecial: true, action: () => { 
       if (onLaunchDemo) onLaunchDemo();
