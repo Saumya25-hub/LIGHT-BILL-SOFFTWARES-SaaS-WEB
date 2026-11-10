@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { 
   Play, 
   Pause,
@@ -6,7 +6,6 @@ import {
   VolumeX,
   Dumbbell, 
   ShieldCheck, 
-  Sparkles, 
   CheckCircle2, 
   ArrowRight, 
   ChevronDown, 
@@ -30,14 +29,30 @@ interface OnyxGymPageProps {
 }
 
 export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
-  const [showSplash, setShowSplash] = useState(false);
+  // Splash screen opens on initial page load as requested
+  const [showSplash, setShowSplash] = useState(true);
   const [softwareDropdownOpen, setSoftwareDropdownOpen] = useState(false);
   const [selectedScreenshotIndex, setSelectedScreenshotIndex] = useState<number | null>(null);
 
   // Video Player state
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+
+  // Auto-play video on initial page load
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        // Fallback if browser requires muted state
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+          videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+        }
+      });
+    }
+  }, []);
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -154,9 +169,9 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#040608] text-slate-100 relative selection:bg-amber-500 selection:text-black font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#06080D] text-slate-100 relative selection:bg-amber-500 selection:text-black font-sans overflow-x-hidden">
       
-      {/* ONYX Splash Screen Modal */}
+      {/* Fullscreen Seamless Athletic Splash on Initial Page Load */}
       <OnyxGymSplash
         isOpen={showSplash}
         onComplete={() => setShowSplash(false)}
@@ -164,30 +179,27 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
       />
 
       {/* ========================================================= */}
-      {/* GLOBAL CINEMATIC ATHLETIC BACKGROUND WITH USER'S PHOTO     */}
+      {/* GLOBAL CINEMATIC ATHLETIC BACKGROUND (PROUDLY VISIBLE)    */}
       {/* ========================================================= */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#040608]">
-        {/* User's Uploaded Gym Hero Photo with Slow Camera Drift */}
-        <div className="absolute -inset-4 will-change-transform opacity-30 transform scale-105">
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#06080D]">
+        {/* User's Uploaded Gym Hero Photo with Clear Visibility */}
+        <div className="absolute inset-0 will-change-transform">
           <img
             src="/assets/onyx_gym/hero_bg.jpg"
             alt="ONYX Gym Elite Training Facility"
-            className="w-full h-full object-cover object-center filter brightness-[0.45] contrast-[1.25] saturate-[1.1]"
+            className="w-full h-full object-cover object-center filter brightness-[0.70] contrast-[1.12]"
           />
         </div>
         
-        {/* Deep Obsidian Dark Radial Vignettes for Maximum Readability */}
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#040608]/80 to-[#040608]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080B12]/90 via-[#040608]/75 to-[#040608]" />
-
-        {/* Ambient Top Golden-Orange Light Ray */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-500/15 via-orange-500/5 to-transparent blur-[140px]" />
+        {/* Subtle Dark Vignette & Linear Gradients for Crystal Clear Text */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06080D]/85 via-black/40 to-[#06080D]/95" />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* ========================================================= */}
-      {/* 1. TOP STICKY NAVIGATION BAR                              */}
+      {/* 1. TOP STICKY NAVIGATION BAR (CLEAN, NO REPLAY BUTTON)    */}
       {/* ========================================================= */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-[#080B12]/90 backdrop-blur-2xl border-b border-amber-500/20 py-3 transition-all">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-[#080B12]/92 backdrop-blur-2xl border-b border-amber-500/20 py-3 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           
           {/* Brand Logo & Title */}
@@ -195,15 +207,14 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
             className="flex items-center gap-3 cursor-pointer select-none group" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            {/* Dumbbell Icon Badge with Spinning Effect on Hover */}
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/25 via-orange-600/20 to-black border border-amber-500/40 p-2 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:scale-105 group-hover:border-amber-400 transition-all">
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/25 via-amber-600/20 to-black border border-amber-500/40 p-2 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:scale-105 group-hover:border-amber-400 transition-all">
               <Dumbbell className="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform duration-300" />
             </div>
 
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="font-black text-xl tracking-tight bg-gradient-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent">
-                  ONYX GYM
+                <span className="font-black text-xl tracking-tight text-white">
+                  ONYX <span className="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">GYM</span>
                 </span>
                 <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/40">
                   v1.0 PRO
@@ -232,13 +243,6 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
             </button>
             <button onClick={() => scrollToSection('pricing')} className="px-3 py-1.5 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors cursor-pointer">
               License Pricing
-            </button>
-            <button 
-              onClick={() => setShowSplash(true)} 
-              className="px-3 py-1.5 rounded-lg text-amber-400 hover:bg-amber-400/10 border border-amber-500/40 transition-colors flex items-center gap-1.5 font-bold cursor-pointer"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Replay Splash</span>
             </button>
           </nav>
 
@@ -326,14 +330,14 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
       </header>
 
       {/* ========================================================= */}
-      {/* 2. HERO SECTION                                           */}
+      {/* 2. HERO SECTION (STANDARD LUXURY ATHLETIC AESTHETIC)      */}
       {/* ========================================================= */}
       <section className="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-4xl mx-auto space-y-6">
           
           {/* Top Athletic Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 border border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-            <Sparkles className="w-4 h-4 text-amber-400 animate-spin-slow" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+            <Dumbbell className="w-4 h-4 text-amber-400" />
             <span className="text-xs font-black uppercase tracking-widest text-amber-300">
               Kotlin Jetpack Compose • Air-Gapped Room SQLite • WhatsApp Invoicing
             </span>
@@ -341,43 +345,36 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
 
           {/* Main Title */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white uppercase leading-[1.08]">
-            Built for <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-orange-500 bg-clip-text text-transparent">Powerhouse</span> Gyms &amp; Fitness Clubs
+            Built for <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">Powerhouse</span> Gyms &amp; Fitness Clubs
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
             The high-performance Android operating system for modern gym owners. Algorithmic macro diet generation, recurring memberships, biometric check-in, and instant WhatsApp PDF invoices.
           </p>
 
           {/* ========================================================= */}
-          {/* USER'S EXACT REQUESTED MOTIVATION QUOTE CARD WITH DUMBBELLS */}
+          {/* USER'S EXACT MOTIVATION QUOTE CARD WITH FLOATING DUMBBELLS */}
           {/* ========================================================= */}
-          <div className="relative max-w-3xl mx-auto my-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/10 via-[#121624] to-orange-500/10 border-2 border-amber-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(245,158,11,0.2)] overflow-hidden">
+          <div className="relative max-w-3xl mx-auto my-8 p-8 rounded-3xl bg-[#0A0E18]/85 border border-amber-500/40 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(245,158,11,0.15)] overflow-hidden">
             
-            {/* Spinning Dumbbells on Left & Right */}
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 opacity-25 hidden md:block">
-              <div className="animate-[spin_8s_linear_infinite]">
-                <Dumbbell className="w-16 h-16 text-amber-400" />
-              </div>
+            {/* Left Floating Dumbbell */}
+            <div className="absolute left-6 top-1/2 -translate-y-1/2 opacity-35 hidden md:block animate-bounce duration-[3500ms]">
+              <Dumbbell className="w-14 h-14 text-amber-400 rotate-45" />
             </div>
 
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-25 hidden md:block">
-              <div className="animate-[spin_8s_linear_infinite]">
-                <Dumbbell className="w-16 h-16 text-orange-400" />
-              </div>
+            {/* Right Floating Dumbbell */}
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-35 hidden md:block animate-bounce duration-[4000ms]">
+              <Dumbbell className="w-14 h-14 text-amber-500 -rotate-45" />
             </div>
-
-            {/* Glowing Accent Lines */}
-            <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
-            <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-orange-400 to-transparent" />
 
             <div className="relative z-10 flex flex-col items-center text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-black uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-black uppercase tracking-widest">
                 <Dumbbell className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
                 <span>The Athlete's Creed</span>
               </div>
 
               {/* Exact user requested quote */}
-              <blockquote className="text-xl sm:text-2xl lg:text-3xl font-black italic tracking-tight text-white drop-shadow-md">
+              <blockquote className="text-xl sm:text-2xl lg:text-3xl font-black italic tracking-tight text-amber-200 drop-shadow-md">
                 “Motivation doesn't mean results, it means your answer.”
               </blockquote>
 
@@ -393,7 +390,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <button
               onClick={() => scrollToSection('video-demo')}
-              className="flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_35px_rgba(245,158,11,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_35px_rgba(245,158,11,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
               <Play className="w-5 h-5 fill-black" />
               <span>Watch 60FPS Video Demo</span>
@@ -401,7 +398,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
 
             <button
               onClick={() => scrollToSection('diet-calculator')}
-              className="flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-[#141A28] hover:bg-[#1C2438] border border-amber-500/40 text-amber-300 font-extrabold text-sm uppercase tracking-wider transition-all cursor-pointer hover:border-amber-400"
+              className="flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-[#121622] hover:bg-[#1A2030] border border-amber-500/40 text-amber-300 font-extrabold text-sm uppercase tracking-wider transition-all cursor-pointer hover:border-amber-400"
             >
               <Flame className="w-5 h-5 text-amber-400 fill-amber-400" />
               <span>Test Live Diet Simulator</span>
@@ -416,21 +413,21 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
             </button>
           </div>
 
-          {/* Telemetry Highlights Pills */}
+          {/* Telemetry Highlights */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto pt-8">
-            <div className="p-3.5 rounded-2xl bg-[#0A0E18]/80 border border-white/10 text-center">
+            <div className="p-3.5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 text-center">
               <div className="font-mono font-black text-lg text-amber-400">0 ms</div>
               <div className="text-[11px] font-semibold text-slate-400 mt-0.5">Local SQLite Latency</div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#0A0E18]/80 border border-white/10 text-center">
+            <div className="p-3.5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 text-center">
               <div className="font-mono font-black text-lg text-emerald-400">100%</div>
               <div className="text-[11px] font-semibold text-slate-400 mt-0.5">Air-Gapped Privacy</div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#0A0E18]/80 border border-white/10 text-center">
-              <div className="font-mono font-black text-lg text-orange-400">BMR+TDEE</div>
+            <div className="p-3.5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 text-center">
+              <div className="font-mono font-black text-lg text-amber-300">BMR+TDEE</div>
               <div className="text-[11px] font-semibold text-slate-400 mt-0.5">Algorithmic Diet Engine</div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#0A0E18]/80 border border-white/10 text-center">
+            <div className="p-3.5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 text-center">
               <div className="font-mono font-black text-lg text-sky-400">1-Tap</div>
               <div className="text-[11px] font-semibold text-slate-400 mt-0.5">WhatsApp Bill Delivery</div>
             </div>
@@ -440,7 +437,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ========================================================= */}
-      {/* 3. INTERACTIVE VIDEO DEMO (VERTICAL SMARTPHONE MOCKUP)    */}
+      {/* 3. INTERACTIVE VIDEO DEMO (CLEAN ROUND NOTCH & AUTOPLAY)  */}
       {/* ========================================================= */}
       <section id="video-demo" className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -459,64 +456,83 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
         {/* Video Mockup Frame */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
           
-          {/* Left: Interactive Vertical Phone Mockup */}
+          {/* Left: Clean Android Flagship Phone Frame (Gol Notch, Video Starts Below Status Bar) */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-[300px] sm:w-[320px] rounded-[42px] bg-[#121622] p-3 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_40px_rgba(245,158,11,0.25)] border-4 border-slate-700/80">
+            <div className="relative w-[300px] sm:w-[325px] rounded-[44px] bg-[#0E121A] p-2.5 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_40px_rgba(245,158,11,0.2)] border-2 border-slate-700/80">
               
-              {/* Phone Speaker & Camera Notch */}
-              <div className="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-30 flex items-center justify-center">
-                <div className="w-3 h-3 rounded-full bg-slate-900 border border-slate-800" />
-                <div className="w-2 h-2 rounded-full bg-sky-950 ml-3" />
-              </div>
-
-              {/* Screen Area */}
-              <div className="relative w-full aspect-[9/19] rounded-[32px] overflow-hidden bg-black">
-                <video
-                  ref={videoRef}
-                  src="/assets/onyx_gym/gym_demo.mp4"
-                  poster="/assets/onyx_gym/video_frame_15s.jpg"
-                  playsInline
-                  loop
-                  muted={isMuted}
-                  className="w-full h-full object-cover cursor-pointer"
-                  onClick={togglePlay}
-                />
-
-                {/* Overlaid Play/Pause Overlay Button */}
-                {!isPlaying && (
-                  <div 
-                    onClick={togglePlay}
-                    className="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex flex-col items-center justify-center cursor-pointer group"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-amber-500/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.8)] group-hover:scale-110 transition-transform">
-                      <Play className="w-8 h-8 fill-black translate-x-0.5" />
-                    </div>
-                    <span className="text-xs font-black uppercase tracking-wider text-amber-300 mt-3 drop-shadow">
-                      Click to Play 60FPS Video
-                    </span>
+              {/* Inner Titanium Trim */}
+              <div className="relative w-full rounded-[36px] overflow-hidden bg-black flex flex-col border border-white/10 shadow-inner">
+                
+                {/* Modern Android Status Bar with Centered Circular (GOL) Punch-Hole Camera */}
+                <div className="h-7 w-full bg-black flex items-center justify-between px-5 text-[10px] font-mono text-slate-400 select-none shrink-0 z-20">
+                  <span className="font-bold text-slate-300">09:41</span>
+                  
+                  {/* Round (Gol) Camera Punch Hole */}
+                  <div className="w-3.5 h-3.5 rounded-full bg-slate-950 border border-slate-700/80 flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#051525]" />
                   </div>
-                )}
 
-                {/* Floating Bottom Video Controls Bar */}
-                <div className="absolute bottom-3 left-3 right-3 p-2 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between text-xs text-white z-20">
-                  <button 
-                    onClick={togglePlay} 
-                    className="p-1 hover:text-amber-400 transition-colors"
-                  >
-                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-white" />}
-                  </button>
-
-                  <span className="font-mono text-[11px] text-amber-400 font-bold">
-                    60 FPS KOTLIN CAPTURE
-                  </span>
-
-                  <button 
-                    onClick={toggleMute} 
-                    className="p-1 hover:text-amber-400 transition-colors"
-                  >
-                    {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-amber-400" />}
-                  </button>
+                  <div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
+                    <span>5G</span>
+                    <div className="w-4 h-2 rounded-xs border border-slate-400 p-0.2 flex items-center">
+                      <div className="h-full w-3/4 bg-amber-400 rounded-2xs" />
+                    </div>
+                  </div>
                 </div>
+
+                {/* Video Container Directly Below the Status Bar (No Overlap with Video Title!) */}
+                <div className="relative w-full aspect-[9/18.5] bg-black overflow-hidden flex-1">
+                  <video
+                    ref={videoRef}
+                    src="/assets/onyx_gym/gym_demo.mp4"
+                    poster="/assets/onyx_gym/video_frame_15s.jpg"
+                    autoPlay
+                    playsInline
+                    loop
+                    muted={isMuted}
+                    className="w-full h-full object-cover cursor-pointer"
+                    onClick={togglePlay}
+                  />
+
+                  {/* Play Overlay if paused */}
+                  {!isPlaying && (
+                    <div 
+                      onClick={togglePlay}
+                      className="absolute inset-0 bg-black/40 backdrop-blur-[1px] flex flex-col items-center justify-center cursor-pointer group"
+                    >
+                      <div className="w-14 h-14 rounded-full bg-amber-500 text-black flex items-center justify-center shadow-[0_0_25px_rgba(245,158,11,0.7)] group-hover:scale-110 transition-transform">
+                        <Play className="w-7 h-7 fill-black translate-x-0.5" />
+                      </div>
+                      <span className="text-[11px] font-black uppercase tracking-wider text-amber-300 mt-2.5 drop-shadow">
+                        Tap to Play 60FPS Video
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Floating Bottom Video Controls Bar */}
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 p-2 rounded-xl bg-black/85 backdrop-blur-md border border-white/10 flex items-center justify-between text-xs text-white z-20">
+                    <button 
+                      onClick={togglePlay} 
+                      className="p-1 hover:text-amber-400 transition-colors cursor-pointer"
+                      title={isPlaying ? 'Pause' : 'Play'}
+                    >
+                      {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-white" />}
+                    </button>
+
+                    <span className="font-mono text-[10px] text-amber-400 font-extrabold tracking-wider">
+                      60 FPS ANDROID
+                    </span>
+
+                    <button 
+                      onClick={toggleMute} 
+                      className="p-1 hover:text-amber-400 transition-colors cursor-pointer"
+                      title={isMuted ? 'Unmute' : 'Mute'}
+                    >
+                      {isMuted ? <VolumeX className="w-4 h-4 text-slate-400" /> : <Volume2 className="w-4 h-4 text-amber-400" />}
+                    </button>
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -524,7 +540,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
 
           {/* Right: Key Video Walkthrough Features */}
           <div className="lg:col-span-7 space-y-5">
-            <div className="p-5 rounded-2xl bg-[#0C101A] border border-amber-500/20 hover:border-amber-500/40 transition-colors">
+            <div className="p-5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 hover:border-amber-500/40 transition-colors">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 text-amber-400">
                   <Zap className="w-5 h-5" />
@@ -538,9 +554,9 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#0C101A] border border-emerald-500/20 hover:border-emerald-500/40 transition-colors">
+            <div className="p-5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 hover:border-amber-500/40 transition-colors">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0 text-emerald-400">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 text-amber-400">
                   <Apple className="w-5 h-5" />
                 </div>
                 <div>
@@ -552,9 +568,9 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#0C101A] border border-orange-500/20 hover:border-orange-500/40 transition-colors">
+            <div className="p-5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 hover:border-amber-500/40 transition-colors">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center shrink-0 text-orange-400">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 text-amber-400">
                   <Share2 className="w-5 h-5" />
                 </div>
                 <div>
@@ -566,9 +582,9 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#0C101A] border border-sky-500/20 hover:border-sky-500/40 transition-colors">
+            <div className="p-5 rounded-2xl bg-[#0B0E17]/85 border border-white/10 hover:border-amber-500/40 transition-colors">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center shrink-0 text-sky-400">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center shrink-0 text-amber-400">
                   <Lock className="w-5 h-5" />
                 </div>
                 <div>
@@ -585,10 +601,10 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ========================================================= */}
-      {/* 4. INTERACTIVE LIVE DIET ENGINE SIMULATOR (TRY IT HERE)   */}
+      {/* 4. INTERACTIVE LIVE DIET ENGINE SIMULATOR                */}
       {/* ========================================================= */}
       <section id="diet-calculator" className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-gradient-to-b from-[#141A28] via-[#0C101A] to-[#070A10] border border-amber-500/30 p-6 sm:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.9)] overflow-hidden">
+        <div className="rounded-3xl bg-[#090D16]/90 border border-amber-500/30 p-6 sm:p-10 shadow-[0_25px_80px_rgba(0,0,0,0.9)] overflow-hidden">
           
           <div className="text-center max-w-3xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-black uppercase tracking-wider mb-2">
@@ -606,7 +622,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Input Controls */}
-            <div className="lg:col-span-6 space-y-4 bg-black/40 p-6 rounded-2xl border border-white/10">
+            <div className="lg:col-span-6 space-y-4 bg-black/50 p-6 rounded-2xl border border-white/10">
               <h3 className="text-sm font-black text-amber-400 uppercase tracking-wider flex items-center gap-2">
                 <Scale className="w-4 h-4" />
                 <span>Athlete Biometrics</span>
@@ -710,7 +726,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                     onClick={() => setCalcGoal('fat_loss')}
                     className={`py-2 px-1 text-center rounded-lg text-[11px] font-extrabold uppercase transition-all cursor-pointer ${
                       calcGoal === 'fat_loss'
-                        ? 'bg-orange-500 text-black shadow-md'
+                        ? 'bg-amber-500 text-black shadow-md'
                         : 'bg-white/5 text-slate-300 hover:bg-white/10'
                     }`}
                   >
@@ -730,7 +746,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                     onClick={() => setCalcGoal('muscle_gain')}
                     className={`py-2 px-1 text-center rounded-lg text-[11px] font-extrabold uppercase transition-all cursor-pointer ${
                       calcGoal === 'muscle_gain'
-                        ? 'bg-emerald-500 text-black shadow-md'
+                        ? 'bg-amber-500 text-black shadow-md'
                         : 'bg-white/5 text-slate-300 hover:bg-white/10'
                     }`}
                   >
@@ -747,7 +763,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                     onClick={() => setCalcDietType('veg')}
                     className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       calcDietType === 'veg'
-                        ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
+                        ? 'bg-amber-500/20 border border-amber-400 text-amber-300'
                         : 'bg-white/5 text-slate-400 border border-transparent'
                     }`}
                   >
@@ -758,11 +774,11 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                     onClick={() => setCalcDietType('non_veg')}
                     className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                       calcDietType === 'non_veg'
-                        ? 'bg-orange-500/20 border border-orange-400 text-orange-300'
+                        ? 'bg-amber-500/20 border border-amber-400 text-amber-300'
                         : 'bg-white/5 text-slate-400 border border-transparent'
                     }`}
                   >
-                    <span className="w-2 h-2 rounded-full bg-orange-400" />
+                    <span className="w-2 h-2 rounded-full bg-amber-400" />
                     <span>Non-Vegetarian</span>
                   </button>
                 </div>
@@ -779,7 +795,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                     Calculated Nutrition Protocol
                   </span>
                 </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
                   Target: {dietResults.targetCalories} kcal / day
                 </span>
               </div>
@@ -803,20 +819,20 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                 </span>
 
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-center">
-                    <span className="text-[11px] text-emerald-400 font-bold block">Protein</span>
+                  <div className="p-3 rounded-xl bg-black/50 border border-amber-500/30 text-center">
+                    <span className="text-[11px] text-amber-400 font-bold block">Protein</span>
                     <span className="text-2xl font-black font-mono text-white mt-1 block">{dietResults.proteinGrams}g</span>
                     <span className="text-[10px] text-slate-400">{Math.round((dietResults.proteinGrams * 4 / dietResults.targetCalories) * 100)}% cals</span>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 text-center">
-                    <span className="text-[11px] text-amber-400 font-bold block">Carbohydrates</span>
+                  <div className="p-3 rounded-xl bg-black/50 border border-white/10 text-center">
+                    <span className="text-[11px] text-slate-300 font-bold block">Carbohydrates</span>
                     <span className="text-2xl font-black font-mono text-white mt-1 block">{dietResults.carbGrams}g</span>
                     <span className="text-[10px] text-slate-400">{Math.round((dietResults.carbGrams * 4 / dietResults.targetCalories) * 100)}% cals</span>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-orange-950/30 border border-orange-500/30 text-center">
-                    <span className="text-[11px] text-orange-400 font-bold block">Healthy Fats</span>
+                  <div className="p-3 rounded-xl bg-black/50 border border-white/10 text-center">
+                    <span className="text-[11px] text-slate-300 font-bold block">Healthy Fats</span>
                     <span className="text-2xl font-black font-mono text-white mt-1 block">{dietResults.fatGrams}g</span>
                     <span className="text-[10px] text-slate-400">{Math.round((dietResults.fatGrams * 9 / dietResults.targetCalories) * 100)}% cals</span>
                   </div>
@@ -852,7 +868,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
               <div className="pt-2">
                 <button
                   onClick={() => alert(`In ONYX GYM App, this exact diet plan is dispatched directly to the member's WhatsApp (+91) with 1 tap as an encrypted PDF!`)}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(16,185,129,0.35)] cursor-pointer transition-all"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(245,158,11,0.35)] cursor-pointer transition-all"
                 >
                   <Share2 className="w-4 h-4 text-black" />
                   <span>Dispatch WhatsApp Diet PDF (App Feature)</span>
@@ -889,7 +905,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
             <div
               key={idx}
               onClick={() => setSelectedScreenshotIndex(idx)}
-              className="group relative rounded-2xl bg-[#0D111C] border border-white/10 hover:border-amber-400/60 p-2.5 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:scale-[1.02] cursor-pointer"
+              className="group relative rounded-2xl bg-[#0B0E17]/90 border border-white/10 hover:border-amber-400/60 p-2.5 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(245,158,11,0.25)] hover:scale-[1.02] cursor-pointer"
             >
               <div className="aspect-[9/16] rounded-xl overflow-hidden bg-black relative">
                 <img
@@ -926,7 +942,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
             >
               <button
                 onClick={() => setSelectedScreenshotIndex(null)}
-                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/80 text-white hover:text-amber-400 border border-white/20 transition-colors"
+                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/80 text-white hover:text-amber-400 border border-white/20 transition-colors cursor-pointer"
               >
                 ✕
               </button>
@@ -957,7 +973,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                         (selectedScreenshotIndex - 1 + screenshots.length) % screenshots.length
                       );
                     }}
-                    className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-colors"
+                    className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-colors cursor-pointer"
                   >
                     ← Previous
                   </button>
@@ -967,7 +983,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                         (selectedScreenshotIndex + 1) % screenshots.length
                       );
                     }}
-                    className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-xs font-black text-black transition-colors"
+                    className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-xs font-black text-black transition-colors cursor-pointer"
                   >
                     Next Screen →
                   </button>
@@ -979,7 +995,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ========================================================= */}
-      {/* 6. DETAILED FEATURE MATRIX & ARCHITECTURAL COMPARISON     */}
+      {/* 6. DETAILED FEATURE MATRIX                                */}
       {/* ========================================================= */}
       <section id="features" className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
@@ -996,7 +1012,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* Feature Comparison Table */}
-        <div className="overflow-x-auto rounded-3xl border border-white/10 bg-[#090C14] shadow-2xl">
+        <div className="overflow-x-auto rounded-3xl border border-white/10 bg-[#0B0E17]/90 shadow-2xl">
           <table className="w-full text-left text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-white/10 bg-black/60 text-slate-400 uppercase tracking-wider text-[11px]">
@@ -1074,7 +1090,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
               <tr>
                 <td className="py-4 px-6 font-bold text-white flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-amber-400 shrink-0" />
-                  <span>Recurring Pricing Structure</span>
+                  <span>Pricing Structure</span>
                 </td>
                 <td className="py-4 px-6 font-semibold text-amber-300">
                   ✓ Flat ₹499/mo OR ₹4,999 One-Time Lifetime License
@@ -1093,8 +1109,8 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
       {/* ========================================================= */}
       <section id="pricing" className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">
-            <Zap className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider mb-3">
+            <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
             <span>Honest, Predictable Pricing</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
@@ -1108,7 +1124,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           
           {/* Card 1: Flex Monthly */}
-          <div className="rounded-3xl bg-[#090C14] border border-white/10 p-8 flex flex-col justify-between hover:border-white/20 transition-all">
+          <div className="rounded-3xl bg-[#0B0E17]/90 border border-white/10 p-8 flex flex-col justify-between hover:border-white/20 transition-all">
             <div>
               <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400 block mb-2">
                 Monthly Flex Plan
@@ -1131,7 +1147,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                   'Export JSON Database Backups',
                 ].map((feat, i) => (
                   <div key={i} className="flex items-center gap-2.5 text-xs text-slate-200">
-                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <Check className="w-4 h-4 text-amber-400 shrink-0" />
                     <span>{feat}</span>
                   </div>
                 ))}
@@ -1143,7 +1159,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                 href="https://wa.me/919409055866?text=Hi%20STOMS,%20I%20want%20to%20activate%20ONYX%20GYM%20Monthly%20Plan%20(Rs%20499/mo)"
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
               >
                 <PhoneCall className="w-4 h-4 text-amber-400" />
                 <span>Activate Monthly (WhatsApp)</span>
@@ -1152,9 +1168,9 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Card 2: Sovereign Lifetime (Recommended) */}
-          <div className="relative rounded-3xl bg-gradient-to-b from-[#141A28] via-[#0D121F] to-[#070A12] border-2 border-amber-500/60 p-8 flex flex-col justify-between shadow-[0_20px_60px_rgba(245,158,11,0.2)]">
+          <div className="relative rounded-3xl bg-gradient-to-b from-[#121622] via-[#0E121B] to-[#080B12] border-2 border-amber-500/60 p-8 flex flex-col justify-between shadow-[0_20px_60px_rgba(245,158,11,0.2)]">
             
-            <div className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-black text-[10px] font-black uppercase tracking-wider shadow-lg">
+            <div className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 text-black text-[10px] font-black uppercase tracking-wider shadow-lg">
               Most Popular • One-Time Buy
             </div>
 
@@ -1192,7 +1208,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
                 href="https://wa.me/919409055866?text=Hi%20STOMS,%20I%20want%20to%20purchase%20ONYX%20GYM%20Lifetime%20License%20(Rs%204,999)"
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.5)] transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.5)] transition-all cursor-pointer"
               >
                 <Dumbbell className="w-4 h-4 fill-black" />
                 <span>Claim Lifetime License Now</span>
@@ -1206,7 +1222,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
       {/* ========================================================= */}
       {/* 8. FOOTER                                                 */}
       {/* ========================================================= */}
-      <footer className="relative z-10 border-t border-white/10 bg-[#030508] py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="relative z-10 border-t border-white/10 bg-[#04060A] py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           
           <div className="flex items-center gap-3">
@@ -1224,15 +1240,15 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-400">
-            <button onClick={() => onNavigate('/')} className="hover:text-amber-400 transition-colors">
+            <button onClick={() => onNavigate('/')} className="hover:text-amber-400 transition-colors cursor-pointer">
               Signatures Light Bill ERP
             </button>
             <span>•</span>
-            <button onClick={() => onNavigate('/8pm')} className="hover:text-emerald-400 transition-colors">
+            <button onClick={() => onNavigate('/8pm')} className="hover:text-emerald-400 transition-colors cursor-pointer">
               8 PM Pool Software
             </button>
             <span>•</span>
-            <button onClick={() => onNavigate('/pricing')} className="hover:text-white transition-colors">
+            <button onClick={() => onNavigate('/pricing')} className="hover:text-white transition-colors cursor-pointer">
               ERP Pricing
             </button>
             <span>•</span>
