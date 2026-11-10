@@ -1156,7 +1156,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
 
             <div className="pt-8 mt-6 border-t border-white/10">
               <a
-                href="https://wa.me/919409055866?text=Hi%20STOMS,%20I%20want%20to%20activate%20ONYX%20GYM%20Monthly%20Plan%20(Rs%20499/mo)"
+                href="https://wa.me/917862930700?text=Hi%20STOMS,%20I%20want%20to%20activate%20ONYX%20GYM%20Monthly%20Plan%20(Rs%20499/mo)"
                 target="_blank"
                 rel="noreferrer"
                 className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
@@ -1205,7 +1205,7 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
 
             <div className="pt-8 mt-6 border-t border-amber-500/20">
               <a
-                href="https://wa.me/919409055866?text=Hi%20STOMS,%20I%20want%20to%20purchase%20ONYX%20GYM%20Lifetime%20License%20(Rs%204,999)"
+                href="https://wa.me/917862930700?text=Hi%20STOMS,%20I%20want%20to%20purchase%20ONYX%20GYM%20Lifetime%20License%20(Rs%204,999)"
                 target="_blank"
                 rel="noreferrer"
                 className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.5)] transition-all cursor-pointer"
@@ -1252,8 +1252,8 @@ export const OnyxGymPage: React.FC<OnyxGymPageProps> = ({ onNavigate }) => {
               ERP Pricing
             </button>
             <span>•</span>
-            <a href="https://wa.me/919409055866" target="_blank" rel="noreferrer" className="text-amber-400 hover:underline">
-              Support: +91 94090 55866
+            <a href="https://wa.me/917862930700" target="_blank" rel="noreferrer" className="text-amber-400 hover:underline">
+              Support: +91 78629 30700
             </a>
           </div>
 
