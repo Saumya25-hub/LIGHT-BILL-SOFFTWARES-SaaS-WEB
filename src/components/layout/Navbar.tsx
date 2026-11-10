@@ -152,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                           STOMS Software Suite
                         </span>
                         <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                          2 Active Apps
+                          3 Active Apps
                         </span>
                       </div>
                     </div>
@@ -224,19 +224,29 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                         </span>
                       </div>
 
-                      {/* 4. Gym App */}
-                      <div className="flex items-center justify-between p-2.5 rounded-xl opacity-50 cursor-not-allowed bg-slate-900/60 border border-dashed border-slate-800">
+                      {/* 4. ONYX Gym App */}
+                      <div
+                        onClick={() => handleLinkClick('/onyx-gym')}
+                        className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
+                          currentPath === '/onyx-gym'
+                            ? 'bg-amber-500/20 border border-amber-400/60 shadow-sm'
+                            : 'hover:bg-amber-950/40 border border-transparent hover:border-amber-500/30'
+                        }`}
+                      >
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-slate-800/60 flex items-center justify-center text-base shrink-0">
-                            🏋️
+                          <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-base shrink-0">
+                            🏋️‍♂️
                           </div>
                           <div>
-                            <div className="text-xs font-medium text-slate-300">4. Gym App</div>
-                            <div className="text-[10.5px] text-slate-500">Fitness Members &amp; Turnstile</div>
+                            <div className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                              <span>4. ONYX Gym App</span>
+                              <span className="text-[9px] font-extrabold px-1.5 py-0.2 rounded bg-amber-500/30 text-amber-200 border border-amber-500/40">v1.0 Pro</span>
+                            </div>
+                            <div className="text-[10.5px] text-slate-400 font-medium">Diet Engine &amp; Athletic OS</div>
                           </div>
                         </div>
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 shrink-0">
-                          Coming Soon
+                        <span className="text-[10px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded-md border border-amber-500/40 shrink-0">
+                          Open ➜
                         </span>
                       </div>
                     </div>

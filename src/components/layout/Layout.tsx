@@ -11,10 +11,11 @@ export interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ currentPath, onNavigate, children }) => {
   const isCinemaHome = currentPath === '/';
   const is8PmPage = currentPath === '/8pm';
+  const isGymPage = currentPath === '/onyx-gym' || currentPath === '/gym' || currentPath === '/onyx';
 
-  if (isCinemaHome || is8PmPage) {
+  if (isCinemaHome || is8PmPage || isGymPage) {
     return (
-      <div className="min-h-screen w-full bg-black text-white relative selection:bg-emerald-500 selection:text-white">
+      <div className="min-h-screen w-full bg-black text-white relative selection:bg-amber-500 selection:text-black">
         <main className="w-full relative z-10">
           {children}
         </main>

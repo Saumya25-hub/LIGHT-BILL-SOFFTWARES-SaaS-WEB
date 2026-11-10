@@ -76,22 +76,24 @@ export const SoftwareSuiteListBox: React.FC<SoftwareSuiteListBoxProps> = ({
     },
     {
       id: 'gym' as const,
-      name: 'STOMS Gym & Fitness Club Manager',
-      shortName: 'Gym App',
-      tagline: 'Biometric Access, Member Subscriptions & Trainer Allocation',
-      icon: '🏋️',
-      status: 'Coming Soon',
-      statusColor: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+      name: 'ONYX GYM — Elite Fitness & Health Club OS',
+      shortName: 'ONYX Gym App',
+      tagline: 'Algorithmic Macro Diet Builder, Recurring Subscriptions & WhatsApp Invoicing',
+      icon: '🏋️‍♂️',
+      status: 'v1.0 Pro Mobile Release',
+      statusColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
       description:
-        'Complete fitness center management: RFID turnstile integration, monthly recurring membership plans, diet chart planner, and member attendance logs.',
+        'Engineered for fitness center owners and personal trainers. Features offline-first Room SQLite architecture, algorithmic vegetarian & non-veg macro diet creator (BMR/TDEE calculation), 1, 3, 6, 12-month memberships, body measurement tracking, and 1-tap WhatsApp PDF invoice dispatch.',
       highlights: [
-        'Biometric & RFID Turnstile Control',
-        'Automated Monthly Renewal Reminders',
-        'Personal Trainer Slot Scheduling',
-        'WhatsApp Payment Links & Receipts',
+        'Algorithmic BMR & Macro Diet Engine',
+        '1, 3, 6 & 12 Month Membership Tiers',
+        'Chest, Arms & Waist Body Progression',
+        '1-Tap WhatsApp Invoicing & 4-Digit PIN Vault',
       ],
-      primaryActionLabel: 'In Development',
-      primaryAction: () => {},
+      primaryActionLabel: 'Open ONYX GYM Portal ➜',
+      primaryAction: () => onNavigate('/onyx-gym'),
+      secondaryActionLabel: 'Watch 60FPS Video Demo',
+      secondaryAction: () => onNavigate('/onyx-gym'),
     },
   ];
 
@@ -224,6 +226,23 @@ export const SoftwareSuiteListBox: React.FC<SoftwareSuiteListBoxProps> = ({
                     Special Price: ₹399/mo
                   </button>
                 </>
+              ) : current.id === 'gym' ? (
+                <>
+                  <button
+                    onClick={() => onNavigate('/onyx-gym')}
+                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  >
+                    <span>Open ONYX GYM Portal ➜</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    onClick={() => onNavigate('/onyx-gym')}
+                    className="px-5 py-3 rounded-xl bg-[#141A28] hover:bg-[#1C2438] border border-amber-500/40 text-amber-300 font-bold text-xs transition-colors cursor-pointer"
+                  >
+                    Watch 60FPS Video Demo (₹499/mo)
+                  </button>
+                </>
               ) : current.id === 'erp' ? (
                 <>
                   <button
@@ -270,6 +289,30 @@ export const SoftwareSuiteListBox: React.FC<SoftwareSuiteListBoxProps> = ({
                   </div>
                   <p className="text-[11px] text-emerald-300 mt-1">
                     Click here to enter the dedicated 3D VIP club portal ➜
+                  </p>
+                </div>
+              </div>
+            ) : current.id === 'gym' ? (
+              <div
+                onClick={() => onNavigate('/onyx-gym')}
+                className="relative w-full rounded-2xl overflow-hidden border border-amber-500/40 shadow-[0_15px_40px_rgba(0,0,0,0.8)] cursor-pointer group"
+              >
+                <img
+                  src="/assets/onyx_gym/hero_bg.jpg"
+                  alt="ONYX GYM Elite Fitness OS"
+                  className="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-[0.75] contrast-[1.15]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex flex-col justify-end p-5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">🏋️‍♂️</span>
+                    <span className="font-black text-lg text-white">ONYX GYM OS</span>
+                    <span className="text-[10px] font-extrabold px-1.5 py-0.2 rounded bg-amber-500/30 text-amber-300 border border-amber-500/50">v1.0 PRO</span>
+                  </div>
+                  <p className="text-[11px] text-amber-300 font-bold italic mt-1 line-clamp-1">
+                    “Motivation doesn't mean results, it means your answer.”
+                  </p>
+                  <p className="text-[10.5px] text-slate-300 mt-0.5">
+                    Click here to enter the dedicated ONYX GYM portal ➜
                   </p>
                 </div>
               </div>

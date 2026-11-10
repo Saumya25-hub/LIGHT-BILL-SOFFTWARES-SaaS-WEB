@@ -9,6 +9,7 @@ import { AboutPage } from './pages/AboutPage';
 import { SupportPage } from './pages/SupportPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { EightPmPoolPage } from './pages/EightPmPoolPage';
+import { OnyxGymPage } from './pages/OnyxGymPage';
 import { DeveloperPolicyPage } from './pages/DeveloperPolicyPage';
 import { DeveloperRegistrationPage } from './pages/DeveloperRegistrationPage';
 import { MultiCounterPage } from './pages/MultiCounterPage';
@@ -63,6 +64,9 @@ export function App() {
       '/dual-counter': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
       '/multi-pc': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
       '/8pm': '8 PM — Elite Pool & Snooker Club Management | By STOMS',
+      '/onyx-gym': 'ONYX GYM — Elite Fitness & Athletic Club OS | STOMS',
+      '/gym': 'ONYX GYM — Elite Fitness & Athletic Club OS | STOMS',
+      '/onyx': 'ONYX GYM — Elite Fitness & Athletic Club OS | STOMS',
       '/developer-policy': 'Developer Policy & Engineering Standards — STOMS',
       '/policy': 'Company Engineering & Code Policy — STOMS',
       '/engineering-policy': 'Engineering Standards & IP Protection — STOMS',
@@ -113,6 +117,10 @@ export function App() {
         return <PrivacyPage onNavigate={handleNavigate} />;
       case '/8pm':
         return <EightPmPoolPage onNavigate={handleNavigate} />;
+      case '/onyx-gym':
+      case '/gym':
+      case '/onyx':
+        return <OnyxGymPage onNavigate={handleNavigate} />;
       case '/developer-policy':
       case '/policy':
       case '/engineering-policy':
