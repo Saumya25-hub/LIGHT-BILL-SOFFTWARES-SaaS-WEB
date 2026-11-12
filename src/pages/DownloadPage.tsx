@@ -60,13 +60,14 @@ export const DownloadPage: React.FC<PageProps> = () => {
 
             <div className="p-3 bg-emerald-50/70 rounded-lg border border-emerald-200/60 text-[11px] text-emerald-900 space-y-1">
               <span className="font-semibold flex items-center gap-1.5 text-emerald-800">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> What's New in v2.2.7:
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Latest Highlights (v2.2.7 – v2.2.9):
               </span>
               <ul className="list-disc list-inside space-y-0.5 text-emerald-700">
+                <li>📧 1-Click "Send to CA": Auto-export GSTR-1, GSTR-2/2B &amp; GSTR-3B (JSON + Excel) &amp; send via Gmail / Outlook browser connect or Mail app fallback</li>
+                <li>🔄 Legacy ERP → SBV1 A-to-Z XML Migration: Automated import from old Access/DBF/SQLite ERPs + 1-Click Tally Prime XML CA Pack</li>
                 <li>🏭 Weaving Mill &amp; Factory Floor: Real-time Loom monitoring (Waterjet, Airjet, Rapier), Warp Beam math &amp; Taka roll cutter</li>
                 <li>📦 Floor-to-Sales Taka Roll Picker: 1-Click roll selection in Sales invoices with automated lot numbers &amp; billable meters</li>
                 <li>🏢 Selective Multi-Company Sync Pool: Custom company opt-in sync with 100% private isolated stores</li>
-                <li>🎓 Multilingual Karkhana Floor Guide: Step-by-step guidance in Hinglish, Gujarati &amp; English with practice sandbox</li>
                 <li>🚚 BOS E-Way Bill Engine &amp; BNVE: Rule 138 NIC portal automation &amp; drag-and-drop formula graph execution</li>
                 <li>🔒 Safe In-Place Upgrade: 100% zero data loss guarantee for existing SQLite DB, invoices &amp; ledger balances</li>
               </ul>

@@ -62,7 +62,9 @@ Signatures IT Groups uses AI and workflow automation for practical time-savings,
 - **Zero Data Leakage Guarantee:** Stock quantities, sales invoices, purchase records, bank ledgers, and cash balances remain 100% air-gapped per company SQLite database (`CMP-xxxx.db`).
 - **Zero-Flood New Firm Setup:** Creating a new company defaults to clean isolation unless explicitly opted into the sync pool.
 
-### C. Wholesale Traders, Commission Agents & Supply Chain
+### C. Wholesale Traders, CA Automation & Supply Chain
+- **1-Click "Send to CA" (GSTR-1, GSTR-2/2B & GSTR-3B):** Generates GST Portal JSON + formatted Excel spreadsheets into `Documents\SBV1_CA_Exports` and dispatches directly via 1-click Gmail / Outlook browser OAuth (or zero-jargon App Password presets / desktop Mail app fallback).
+- **Legacy ERP → SBV1 A-to-Z XML Migration & Tally Pack:** Imports Parties, Products, Sales, Purchases, Credit/Debit Notes, and Ledgers from older billing software or XML packs cleanly — plus 1-Click Tally Prime XML CA Export Pack.
 - **Broker Management:** Broker picker, customizable brokerage percentages per line item, brokerage summary reports.
 - **BOS Statutory E-Way Bill Engine:** Full statutory GST Rule 138 automation, 1-click NIC JSON export, embedded portal automation with WebView2, and multi-invoice batch dispatch.
 - **Universal Excel Bulk Import Engine:** Standardized `.xlsx` template import with 2-step verification preview and cryptographic signature validation.

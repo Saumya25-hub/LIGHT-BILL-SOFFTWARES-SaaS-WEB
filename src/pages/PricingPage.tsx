@@ -11,6 +11,8 @@ export const PricingPage: React.FC<PageProps> = ({ onNavigate }) => {
 
   const coreBillingFeatures = [
     "Complete GST Sales Invoicing (CGST, SGST, IGST)",
+    "1-Click \"Send to CA\" (GSTR-1, GSTR-2/2B & GSTR-3B JSON + Excel via Gmail / Outlook OAuth)",
+    "Legacy ERP → SBV1 A-to-Z XML Migration Engine + Tally Prime XML CA Export Pack",
     "Multi-Company & Universal Master Sync (Shared Catalogs, Isolated Stock & Ledgers)",
     "1-Click Master Catch-Up & 0ms Company Switcher",
     "Restaurant POS Counter with Live Interactive Table Layout",

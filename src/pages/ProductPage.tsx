@@ -25,13 +25,27 @@ import {
   Table,
   Keyboard,
   Truck,
-  Cpu
+  Cpu,
+  Mail,
+  FileCode2
 } from 'lucide-react';
 
 import { MultiCompanySyncSection } from '../components/product/MultiCompanySyncSection';
 
 export const ProductPage: React.FC<PageProps> = ({ onNavigate, onLaunchDemo }) => {
   const verifiedDesktopModules = [
+    {
+      title: "📧 1-Click \"Send to CA\" (GSTR-1, 2B & 3B + Gmail/Outlook API)",
+      desc: "Send monthly GSTR-1, GSTR-2/2B reconciliation, and GSTR-3B returns directly to your Chartered Accountant in one click. Auto-generates both GST Portal JSON and formatted Excel (.xlsx), connects with Gmail or Outlook via 1-click browser sign-in (or zero-jargon App Password presets), and automatically falls back to Outlook Desktop or Mail app.",
+      icon: <Mail className="w-5 h-5 text-emerald-600" />,
+      tag: "⚡ NEW v2.2.9",
+    },
+    {
+      title: "🔄 Legacy ERP → SBV1 A-to-Z XML Migration & Tally Pack",
+      desc: "Switch from old billing software without losing a single rupee or bill. Automatically scans Access (.mdb), DBF, SQLite, Excel, or SBV1 Full XML packages to import Parties, Products, Sales, Purchases, Credit/Debit Notes, and opening ledgers — plus 1-Click Tally Prime XML export for your CA.",
+      icon: <FileCode2 className="w-5 h-5 text-sky-600" />,
+      tag: "⚡ NEW v2.2.9",
+    },
     {
       title: "🏭 Weaving Mill & Karkhana Factory Floor Engine",
       desc: "Comprehensive production monitoring for modern textile manufacturing: Real-time Loom machine monitoring (Waterjet, Airjet, Rapier) with live status dashboard (Running, Idle, Stop, Maintenance), Warp Beam inventory register with automated beam run-out forecasting & balance meters, Taka production cutter with auto-incrementing lot numbers, average g/m weight calculations, and multilingual interactive floor guide (Hinglish/Gujarati/English).",

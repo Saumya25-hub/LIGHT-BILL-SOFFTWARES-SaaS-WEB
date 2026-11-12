@@ -23,9 +23,39 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
   onLaunchDemo,
   onNavigate,
 }) => {
-  const [activeTab, setActiveTab] = useState<'all' | '8pm' | 'eway' | 'excelbulk' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | '8pm' | 'sendtoca' | 'migration' | 'eway' | 'excelbulk' | 'billing' | 'aibill' | 'restaurant' | 'multicompany' | 'ems' | 'catalog' | 'panchang'>('all');
 
   const projects: ProjectItem[] = [
+    {
+      id: 'sendtoca',
+      category: 'GST RETURNS & CA AUTOMATION',
+      title: '📧 1-Click "Send to CA" (GSTR-1, GSTR-2B & GSTR-3B)',
+      tagline: 'Auto-export GST Portal JSON + formatted Excel and email your CA via Gmail/Outlook in 1 click',
+      description: 'Built for busy Indian business owners — zero technical SMTP setup needed. Connect Gmail or Outlook via 1-click browser sign-in (or simple App Password presets), click Send to CA on GSTR-1, GSTR-2/2B, or GSTR-3B, and deliver compliant JSON + formatted Excel workbooks straight to your Chartered Accountant with instant summary preview.',
+      badge: 'NEW v2.2.9 FEATURE',
+      image: '/assets/desktop-reports-hub.png',
+      metrics: [
+        { label: 'Bundle Export', value: 'JSON + Excel (.xlsx)' },
+        { label: 'Direct Dispatch', value: 'Gmail & Outlook API' },
+        { label: 'Zero-Config Mode', value: 'Mail App Fallback' },
+      ],
+      actionLabel: 'Explore CA Automation',
+    },
+    {
+      id: 'migration',
+      category: 'ZERO-LOSS DATA SWITCHOVER',
+      title: '🔄 Legacy ERP → SBV1 A-to-Z XML Migration & Tally Pack',
+      tagline: 'Bring every Party, Product, Sale, Purchase, Credit/Debit Note & Ledger into SBV1 cleanly',
+      description: 'Switching from an older billing software? Drop your legacy folder (Access .mdb, DBF, SQLite, Excel, or SBV1 Full XML) and let the deterministic discovery engine migrate your entire accounting history cleanly — plus 1-Click Tally Prime XML CA Export Pack for effortless tax audits.',
+      badge: 'NEW v2.2.9 ENGINE',
+      image: '/assets/desktop-reports-hub.png',
+      metrics: [
+        { label: 'Scope Migrated', value: 'A-to-Z Full Ledger' },
+        { label: 'Tally Bridge', value: 'XML Master + Vouchers' },
+        { label: 'Data Integrity', value: '100% Air-Gapped' },
+      ],
+      actionLabel: 'Explore Migration Engine',
+    },
     {
       id: '8pm',
       category: 'SPORTS & BILLIARD CLUB AUTOMATION',
@@ -214,6 +244,8 @@ export const ComponineProjectShowcase: React.FC<ComponineProjectShowcaseProps> =
           <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-[#121110] border border-amber-500/25">
             {[
               { id: 'all', label: 'All Modules' },
+              { id: 'sendtoca', label: '📧 Send to CA' },
+              { id: 'migration', label: '🔄 XML Migration' },
               { id: 'eway', label: '🚚 E-Way Bill' },
               { id: 'excelbulk', label: '📊 Excel Import' },
               { id: 'aibill', label: '⚡ AI Bill Import' },
