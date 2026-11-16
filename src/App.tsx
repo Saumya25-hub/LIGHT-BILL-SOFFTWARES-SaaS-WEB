@@ -13,6 +13,7 @@ import { OnyxGymPage } from './pages/OnyxGymPage';
 import { DeveloperPolicyPage } from './pages/DeveloperPolicyPage';
 import { DeveloperRegistrationPage } from './pages/DeveloperRegistrationPage';
 import { MultiCounterPage } from './pages/MultiCounterPage';
+import { RestaurantHotelPage } from './pages/RestaurantHotelPage';
 import { CosmicWarpSplash } from './components/cinema/CosmicWarpSplash';
 import { LuxuryCustomCursor } from './components/ui/LuxuryCustomCursor';
 import { siteConfig } from './config/siteConfig';
@@ -63,6 +64,10 @@ export function App() {
       '/multi-counter': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
       '/dual-counter': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
       '/multi-pc': `1 Shop 2 Counter PCs — Real-Time Local LAN Sync | ${siteConfig.brand.productName}`,
+      '/restaurant': 'Restaurant & Hotel OS — Real-Time 3-Device Sync: POS + Mobile + KDS | STOMS',
+      '/hotel': 'Restaurant & Hotel OS — Real-Time 3-Device Sync: POS + Mobile + KDS | STOMS',
+      '/restaurant-pos': 'Restaurant & Hotel OS — Real-Time 3-Device Sync: POS + Mobile + KDS | STOMS',
+      '/hotel-restaurant': 'Restaurant & Hotel OS — Real-Time 3-Device Sync: POS + Mobile + KDS | STOMS',
       '/8pm': '8 PM — Elite Pool & Snooker Club Management | By STOMS',
       '/onyx-gym': 'ONYX GYM — Elite Fitness & Athletic Club OS | STOMS',
       '/gym': 'ONYX GYM — Elite Fitness & Athletic Club OS | STOMS',
@@ -109,6 +114,16 @@ export function App() {
       case '/multi-pc':
         return (
           <MultiCounterPage 
+            onNavigate={handleNavigate} 
+            onLaunchDemo={() => triggerWarpToDemo('/demo')} 
+          />
+        );
+      case '/restaurant':
+      case '/hotel':
+      case '/restaurant-pos':
+      case '/hotel-restaurant':
+        return (
+          <RestaurantHotelPage 
             onNavigate={handleNavigate} 
             onLaunchDemo={() => triggerWarpToDemo('/demo')} 
           />

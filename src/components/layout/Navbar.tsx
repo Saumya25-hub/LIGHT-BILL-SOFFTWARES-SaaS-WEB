@@ -40,6 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
   const navItems = [
     { label: 'Home', path: '/' },
     { label: 'Product', path: '/product' },
+    { label: 'Restaurant & Hotel', path: '/restaurant' },
     { label: '2-Counter Sync', path: '/multi-counter' },
     { label: 'Pricing', path: '/pricing' },
     { label: 'Demo', path: '/demo' },
@@ -129,8 +130,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                 </span>
                 <span className="text-slate-300 font-medium">Software:</span>
                 <span className="text-amber-400 font-extrabold flex items-center gap-1">
-                  <span>{currentPath === '/8pm' ? '🎱' : '🧾'}</span>
-                  <span>{currentPath === '/8pm' ? '8PM Pool' : 'Full ERP'}</span>
+                  <span>
+                    {currentPath === '/8pm'
+                      ? '🎱'
+                      : currentPath === '/restaurant' || currentPath === '/hotel' || currentPath === '/restaurant-pos' || currentPath === '/hotel-restaurant'
+                      ? '🍽️'
+                      : currentPath === '/onyx-gym' || currentPath === '/gym' || currentPath === '/onyx'
+                      ? '🏋️‍♂️'
+                      : '🧾'}
+                  </span>
+                  <span>
+                    {currentPath === '/8pm'
+                      ? '8PM Pool'
+                      : currentPath === '/restaurant' || currentPath === '/hotel' || currentPath === '/restaurant-pos' || currentPath === '/hotel-restaurant'
+                      ? 'Restaurant OS'
+                      : currentPath === '/onyx-gym' || currentPath === '/gym' || currentPath === '/onyx'
+                      ? 'ONYX Gym'
+                      : 'Full ERP'}
+                  </span>
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 shrink-0 ${softwareDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -152,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                           STOMS Software Suite
                         </span>
                         <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                          3 Active Apps
+                          4 Active Apps
                         </span>
                       </div>
                     </div>
@@ -162,7 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                       <div
                         onClick={() => handleLinkClick('/')}
                         className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
-                          currentPath !== '/8pm'
+                          currentPath === '/' || currentPath === '/product'
                             ? 'bg-sky-500/15 border border-sky-400/50 shadow-sm'
                             : 'hover:bg-slate-800/60 border border-transparent'
                         }`}
@@ -208,19 +225,29 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                         </span>
                       </div>
 
-                      {/* 3. Inventory */}
-                      <div className="flex items-center justify-between p-2.5 rounded-xl opacity-50 cursor-not-allowed bg-slate-900/60 border border-dashed border-slate-800">
+                      {/* 3. Restaurant & Hotel OS */}
+                      <div
+                        onClick={() => handleLinkClick('/restaurant')}
+                        className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
+                          currentPath === '/restaurant' || currentPath === '/hotel' || currentPath === '/restaurant-pos' || currentPath === '/hotel-restaurant'
+                            ? 'bg-sky-500/20 border border-sky-400/60 shadow-sm'
+                            : 'hover:bg-slate-800/60 border border-transparent hover:border-sky-500/30'
+                        }`}
+                      >
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-slate-800/60 flex items-center justify-center text-base shrink-0">
-                            📦
+                          <div className="w-8 h-8 rounded-lg bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-base shrink-0">
+                            🍽️
                           </div>
                           <div>
-                            <div className="text-xs font-medium text-slate-300">3. Inventory Pro</div>
-                            <div className="text-[10.5px] text-slate-500">Warehouse Stock &amp; Barcode</div>
+                            <div className="text-xs font-bold text-sky-300 flex items-center gap-1.5">
+                              <span>3. Restaurant &amp; Hotel OS</span>
+                              <span className="text-[9px] font-extrabold px-1.5 py-0.2 rounded bg-sky-500/30 text-sky-200 border border-sky-500/40">3-Screen</span>
+                            </div>
+                            <div className="text-[10.5px] text-slate-400 font-medium">POS + Mobile + KDS Sync</div>
                           </div>
                         </div>
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 shrink-0">
-                          Coming Soon
+                        <span className="text-[10px] font-bold text-sky-300 bg-sky-500/20 px-2 py-0.5 rounded-md border border-sky-500/40 shrink-0">
+                          Open ➜
                         </span>
                       </div>
 
@@ -228,7 +255,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                       <div
                         onClick={() => handleLinkClick('/onyx-gym')}
                         className={`flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
-                          currentPath === '/onyx-gym'
+                          currentPath === '/onyx-gym' || currentPath === '/gym' || currentPath === '/onyx'
                             ? 'bg-amber-500/20 border border-amber-400/60 shadow-sm'
                             : 'hover:bg-amber-950/40 border border-transparent hover:border-amber-500/30'
                         }`}
@@ -247,6 +274,22 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                         </div>
                         <span className="text-[10px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded-md border border-amber-500/40 shrink-0">
                           Open ➜
+                        </span>
+                      </div>
+
+                      {/* 5. Inventory */}
+                      <div className="flex items-center justify-between p-2.5 rounded-xl opacity-50 cursor-not-allowed bg-slate-900/60 border border-dashed border-slate-800">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-slate-800/60 flex items-center justify-center text-base shrink-0">
+                            📦
+                          </div>
+                          <div>
+                            <div className="text-xs font-medium text-slate-300">5. Inventory Pro</div>
+                            <div className="text-[10.5px] text-slate-500">Warehouse Stock &amp; Barcode</div>
+                          </div>
+                        </div>
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 shrink-0">
+                          Coming Soon
                         </span>
                       </div>
                     </div>
@@ -320,21 +363,27 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                 </div>
               </button>
 
-              <div className="flex items-center gap-2 p-2 rounded-xl bg-white/5 border border-white/5 opacity-40 text-left">
-                <span className="text-base">📦</span>
+              <button
+                onClick={() => handleLinkClick('/restaurant')}
+                className="flex items-center gap-2 p-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/30 text-left cursor-pointer transition-colors"
+              >
+                <span className="text-base">🍽️</span>
                 <div>
-                  <div className="text-xs font-medium text-slate-300">3. Inventory</div>
-                  <div className="text-[8.5px] text-slate-400">Coming Soon</div>
+                  <div className="text-xs font-bold text-sky-300">3. Restaurant OS</div>
+                  <div className="text-[9px] text-sky-200">3-Screen Sync</div>
                 </div>
-              </div>
+              </button>
 
-              <div className="flex items-center gap-2 p-2 rounded-xl bg-white/5 border border-white/5 opacity-40 text-left">
+              <button
+                onClick={() => handleLinkClick('/onyx-gym')}
+                className="flex items-center gap-2 p-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/30 text-left cursor-pointer transition-colors"
+              >
                 <span className="text-base">🏋️</span>
                 <div>
-                  <div className="text-xs font-medium text-slate-300">4. Gym App</div>
-                  <div className="text-[8.5px] text-slate-400">Coming Soon</div>
+                  <div className="text-xs font-bold text-amber-300">4. ONYX Gym</div>
+                  <div className="text-[9px] text-amber-200">Athletic OS</div>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
 
